@@ -1,4 +1,4 @@
-## next
+## 1.1.0 (09-09-2019)
 
 - Reduced time of build by excluding libraries from a processing (up to x10)
 - Fixed hanging requests on server that occur when response generation error

@@ -1,6 +1,6 @@
 {
   "name": "@discoveryjs/cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CLI tools to serve & build projects based on Discovery.js",
   "author": "Roman Dvornov <rdvornov@gmail.com> (https://github.com/lahmatiy)",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "node": ">=8.0.0"
   },
   "peerDependencies": {
-    "@discovery/discovery": "^1.0.0-beta.19"
+    "@discovery/discovery": "^1.0.0-beta.18"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
