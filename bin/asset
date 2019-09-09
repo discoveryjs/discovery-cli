@@ -9,7 +9,8 @@ const genAsset = require('../lib/asset');
 const command = clap.create('asset', '[config]')
     .option('-c, --config <filename>', 'Path to config (JavaScript or JSON file)')
     .option('-m, --model <name>', 'Specify a model (multi-model mode only)')
-    .option('-t, --type <type>', 'Specify a type of asset (js or css)')
+    .option('-t, --type <type>', 'Specify a type of asset (prepare, js, css, libs-js or libs-css)')
+    .option('--es5-libs-js', 'Use ES5 (CommonJS) to wrap libs-js code in a module')
     .option('-o, --output <filename>', 'Output file',
         (value = '') => path.resolve(process.cwd(), value)
     )
@@ -19,10 +20,12 @@ const command = clap.create('asset', '[config]')
         const modelName = this.values.model || args[1];
         const outputFile = this.values.output || null;
         const type = this.values.type;
+        const es5LibsJs = this.values.es5LibsJs;
         const options = {
             configFile,
             modelName,
-            type
+            type,
+            es5LibsJs
         };
 
         genAsset(options).then(asset => {
