@@ -1,0 +1,40 @@
+{
+  "name": "@discoveryjs/cli",
+  "version": "0.0.0",
+  "description": "CLI tools to serve & build projects based on Discovery.js",
+  "author": "Roman Dvornov <rdvornov@gmail.com> (https://github.com/lahmatiy)",
+  "license": "MIT",
+  "repository": "discoveryjs/discovery-cli",
+  "keywords": [],
+  "bin": {
+    "discovery": "./bin/serve",
+    "discovery-build": "./bin/build"
+  },
+  "scripts": {
+    "lint": "eslint bin/* lib"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "peerDependencies": {
+    "@discovery/discovery": "^1.0.0-beta.17"
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
+    "clap": "^1.2.3",
+    "css-tree": "^1.0.0-alpha.34",
+    "express": "^4.17.1",
+    "mime": "^2.4.4",
+    "resolve": "^1.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ]
+}

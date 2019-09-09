@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const clap = require('clap');
+const path = require('path');
+const build = require('../lib/build');
+
+// define command
+const command = clap.create('discovery-build', '[config]')
+    .option('-c, --config <filename>', 'Path to config (JavaScript or JSON file)')
+    .option('-m, --model <name>', 'Specify a model (multi-model mode only)')
+    .option('-o, --output <path>', 'Path for a build result',
+        (value = '') => path.resolve(process.cwd(), value),
+        'build'
+    )
+    .option('-s, --single-file', 'Output a model build as a single file')
+    .option('--pretty-data [indent]', 'Pretty print of data.json', (value = 4) => Number(value) || false, false)
+    .option('--cleanup', 'Delete all files of output path before saving a result to it')
+    .version(require('../package.json').version)
+    .action(function(args) {
+        const configFile = this.values.config || args[0];
+        const options = Object.assign({}, this.values, {
+            configFile
+        });
+
+        build(options);
+    });
+
+// run command
+try {
+    command.run();
+} catch (e) {
+    // output user frendly message if cli error
+    if (e instanceof clap.Error) {
+        console.error(e.message || e);
+        process.exit(2);
+    }
+
+    // otherwise re-throw exception
+    throw e;
+}
