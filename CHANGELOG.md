@@ -1,3 +1,7 @@
+## 1.1.1 (16-09-2019)
+
+- Fixed peer dependency reference (`@discoveryjs/discovery`)
+
 ## 1.1.0 (09-09-2019)
 
 - Reduced time of build by excluding libraries from a processing (up to x10)
