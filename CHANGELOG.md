@@ -1,6 +1,7 @@
 ## next
 
 - Exposed index module with command handlers
+- Fixed discovery path resolving
 
 ## 1.1.1 (16-09-2019)
 
