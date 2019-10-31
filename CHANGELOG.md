@@ -1,7 +1,7 @@
-## next
+## 1.2.0 (31-10-2019)
 
 - Exposed index module with command handlers
-- Fixed discovery path resolving
+- Fixed resolving of path to `@discoveryjs/discovery`
 
 ## 1.1.1 (16-09-2019)
 
