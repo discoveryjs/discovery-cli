@@ -1,3 +1,7 @@
+## next
+
+- Exposed index module with command handlers
+
 ## 1.1.1 (16-09-2019)
 
 - Fixed peer dependency reference (`@discoveryjs/discovery`)

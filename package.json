@@ -17,6 +17,7 @@
     "discovery": "./bin/serve",
     "discovery-build": "./bin/build"
   },
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint bin/* lib"
   },
