@@ -1,3 +1,7 @@
+## next
+
+- Added support for new dist filenames in `@discoveryjs/discovery` (i.e. `dist/discovery.*`)
+
 ## 1.2.0 (31-10-2019)
 
 - Exposed index module with command handlers
