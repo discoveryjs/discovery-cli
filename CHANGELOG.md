@@ -1,6 +1,7 @@
 ## next
 
 - Added support for new dist filenames in `@discoveryjs/discovery` (i.e. `dist/discovery.*`)
+- Fixed modelfree build in singlefile mode, when no `data.json` file is available
 
 ## 1.2.0 (31-10-2019)
 
