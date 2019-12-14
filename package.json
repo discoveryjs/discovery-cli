@@ -33,7 +33,7 @@
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
     "clap": "^1.2.3",
-    "css-tree": "^1.0.0-alpha.34",
+    "css-tree": "^1.0.0-alpha.39",
     "express": "^4.17.1",
     "mime": "^2.4.4",
     "resolve": "^1.12.0"
