@@ -3,12 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 const clap = require('clap');
+const commonOptions = require('../lib/cli');
 const genAsset = require('../lib/asset');
 
 // define command
-const command = clap.create('asset', '[config]')
-    .option('-c, --config <filename>', 'Path to config (JavaScript or JSON file)')
-    .option('-m, --model <name>', 'Specify a model (multi-model mode only)')
+const command = clap.command('asset', '[config]')
+    .option(...commonOptions.config)
+    .option(...commonOptions.model)
     .option('-t, --type <type>', 'Specify a type of asset (prepare, js, css, libs-js or libs-css)')
     .option('--es5-libs-js', 'Use ES5 (CommonJS) to wrap libs-js code in a module')
     .option('-o, --output <filename>', 'Output file',

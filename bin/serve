@@ -1,22 +1,20 @@
 #!/usr/bin/env node
 
 const clap = require('clap');
-const path = require('path');
+const commonOptions = require('../lib/cli');
 const createServer = require('../lib/serve');
 const DEFAULT_PORT = 8123;
 
 // define command
-const command = clap.create('discovery', '[config]')
-    .option('-c, --config <filename>', 'Path to config (JavaScript or JSON file)')
-    .option('-m, --model <name>', 'Specify a model (multi-model mode only)')
-    .option('--cache [dir]', 'Enable data caching and specify path for cache files, use working directory when is not set',
-        (value = '') => path.resolve(process.cwd(), value)
-    )
+const command = clap.command('discovery', '[config]')
+    .option(...commonOptions.config)
+    .option(...commonOptions.model)
+    .option(...commonOptions.cache)
     .option('--dev', 'Enable developer mode')
     .option('--no-warmup', 'Disable warm up model data cache on server start')
-    .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')', function(value) {
-        return isNaN(value) ? 0 : Number(value);
-    })
+    .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
+        value => isNaN(value) ? 0 : Number(value)
+    )
     .version(require('../package.json').version)
     .action(function(args) {
         const configFile = this.values.config || args[0];

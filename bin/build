@@ -2,13 +2,14 @@
 
 const clap = require('clap');
 const path = require('path');
+const commonOptions = require('../lib/cli');
 const build = require('../lib/build');
 
 // define command
-const command = clap.create('discovery-build', '[config]')
-    .option('-c, --config <filename>', 'Path to config (JavaScript or JSON file)')
-    .option('-m, --model <name>', 'Specify a model (multi-model mode only)')
-    .option('-o, --output <path>', 'Path for a build result',
+const command = clap.command('discovery-build', '[config]')
+    .option(...commonOptions.config)
+    .option(...commonOptions.model)
+    .option('-o, --output <path>', 'Path for a build result (`build` by default)',
         (value = '') => path.resolve(process.cwd(), value),
         'build'
     )

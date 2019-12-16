@@ -3,15 +3,14 @@
 const path = require('path');
 const fs = require('fs');
 const clap = require('clap');
+const commonOptions = require('../lib/cli');
 const getData = require('../lib/data');
 
 // define command
-const command = clap.create('data', '[config] [model]')
-    .option('-c, --config <filename>', 'Specify path to config (JavaScript or JSON file)')
-    .option('-m, --model <name>', 'Specify the model id (slug)')
-    .option('--cache [dir]', 'Enable data caching and specify path to store cache files (using a working directory if dir is not set)',
-        (value = '') => path.resolve(process.cwd(), value)
-    )
+const command = clap.command('data', '[config] [model]')
+    .option(...commonOptions.config)
+    .option(...commonOptions.model)
+    .option(...commonOptions.cache)
     .option('--rewrite-cache', 'Ignore existing cache')
     .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default)', (value = 4) => Number(value) || false, false)
     .option('-o, --output <filename>', 'Output file',
