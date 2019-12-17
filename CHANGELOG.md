@@ -1,4 +1,4 @@
-## next
+## 1.4.1 (17-12-2019)
 
 - Fixed exception on server start in modelfree mode
 
