@@ -1,3 +1,7 @@
+## next
+
+- Fixed exception on server start in modelfree mode
+
 ## 1.4.0 (16-12-2019)
 
 - Added support for `plugins` option in config, a set of paths relative to config file or npm package names (and optional path to a module inside the package)
