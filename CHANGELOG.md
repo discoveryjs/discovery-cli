@@ -1,6 +1,6 @@
-## next
+## 1.4.0 (16-12-2019)
 
-- Added support for `plugins` option in config, a path relative to config file or npm package name (and optional path to a module inside the package)
+- Added support for `plugins` option in config, a set of paths relative to config file or npm package names (and optional path to a module inside the package)
 
 ## 1.3.0 (13-12-2019)
 
