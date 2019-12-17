@@ -17,11 +17,11 @@ CLI tools to serve & build projects based on [Discovery.js](https://github.com/d
     - [discovery-build (build)](#discovery-build-build)
 - [Modes](#modes)
     - [Model-free](#model-free)
-    - [Multiple models](#multiple-models)
     - [Single model](#single-model)
+    - [Multiple models](#multiple-models)
 - [Configuration](#configuration)
-    - [Multi-model config](#multi-model-config)
     - [Model config](#model-config)
+    - [Multi-model config](#multi-model-config)
 - [License](#license)
 
 <!-- /TOC -->
@@ -39,19 +39,21 @@ npm install @discoveryjs/cli
 ```
 Usage:
 
-  discovery [config] [options]
+    discovery [config] [options]
 
 Options:
 
-      --cache [dir]        Enable data caching and specify path for cache files, use working directory when
-                           is not set
-  -c, --config <filename>  Path to config (JavaScript or JSON file)
-      --dev                Enable developer mode
-  -h, --help               Output usage information
-  -m, --model <name>       Specify a model (multi-model mode only)
-      --no-warmup          Disable warm up model data cache on server start
-  -p, --port <n>           Listening port (default: 8123)
-  -v, --version            Output version
+        --cache [dir]          Enable data caching and specify path to store cache files (using a
+                               working directory if dir is not set)
+    -c, --config <filename>    Path to config (JavaScript or JSON file), if not specified then
+                               looking for .discoveryrc.js, .discoveryrc.json, .discoveryrc or
+                               "discovery" section in package.json in the listed order
+        --dev                  Enable developer mode
+    -h, --help                 Output usage information
+    -m, --model <name>         Specify a model (multi-model mode only)
+        --no-warmup            Disable warm up model data cache on server start
+    -p, --port <n>             Listening port (default: 8123)
+    -v, --version              Output version
 ```
 
 ### discovery-build (build)
@@ -59,39 +61,41 @@ Options:
 ```
 Usage:
 
-  discovery-build [config] [options]
+    discovery-build [config] [options]
 
 Options:
 
-      --cleanup               Delete all files of output path before saving a result to it
-  -c, --config <filename>     Path to config (JavaScript or JSON file)
-  -h, --help                  Output usage information
-  -m, --model <name>          Specify a model (multi-model mode only)
-  -o, --output <path>         Path for a build result
-      --pretty-data [indent]  Pretty print of data.json
-  -s, --single-file           Output a model build as a single file
-  -v, --version               Output version
+        --cleanup                 Delete all files of output path before saving a result to it
+    -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then
+                                  looking for .discoveryrc.js, .discoveryrc.json, .discoveryrc or
+                                  "discovery" section in package.json in the listed order
+    -h, --help                    Output usage information
+    -m, --model <name>            Specify a model (multi-model mode only)
+    -o, --output <path>           Path for a build result (`build` by default)
+        --pretty-data [indent]    Pretty print of data.json
+    -s, --single-file             Output a model build as a single file
+    -v, --version                 Output version
 ```
 
 ## Modes
 
 Discovery can work in following modes:
 
-* Model-free (when no any model specified)
+* Model-free, when no any model is specified
 * Single model
-* Multiple models
+* Multiple models – a batch of models and index page that lists models
 
 ### Model-free
 
-In this mode you can upload any data by clicking "Load data" button, or drag'n'drop file right into the browser.
-
-### Multiple models
-
-In this mode discovery will start with model selection page. Every model will have own route namespace, and you can switch models and reports at any time.
+This mode has no any predefined configurations. However, you can upload any data by clicking "Load data" button, or drag'n'drop file right into the browser and discover it.
 
 ### Single model
 
-If you want only one model, you should start discovery with `--model %modelName%`. In this mode index page will represent your model default page.
+Most common If you want only one model, you should start discovery with `--model %modelName%`. In this mode index page will represent your model default page.
+
+### Multiple models
+
+In case you need that discovery powers more than one model at once, your can use multi-model mode. In this mode discovery will show model selection page as index page. Every model will have own route namespace (slug), and you can switch between models and index page at any time.
 
 ## Configuration
 
@@ -103,25 +107,6 @@ To configure discovery you should specify one of config files:
 
 Or you can add a section in your `package.json` file with `discovery` as a key.
 
-### Multi-model config
-
-Config should provide JSON or exports an object with following properties:
-
-* `name` - name of discovery instance (used in page title)
-* `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
-
-Example:
-
-```js
-module.exports = {
-    name: 'My cool dashboards',
-    models: {
-        one: <modelConfig>,
-        two: <modelConfig>
-    }
-};
-```
-
 ### Model config
 
 Model config may consists of the following fields (all fields are optional):
@@ -129,10 +114,13 @@ Model config may consists of the following fields (all fields are optional):
 * `name` – name of model (used in title)
 * `data` – function which returns `any|Promise<any>`. Result of this function must be JSON serializable
 * `prepare` – path to a script with additional initialization logic (e.g. add cyclic links and relations, extensions for query engine etc)
+* `plugins` – list of plugins (paths to `.js` and `.css` files); relative paths or package name and path are supported; concating to parent's plugin list
+* `favicon` – path to favicon image; inherits from parent config when not set
+* `viewport` – value for `<meta name="viewport">`; inherits from parent config when not set
 * `view` – object with following fields:
     * `basedir` – directory to resolve relative path in `assets` and `libs`
-    * `libs` – path to libs, where key is local name available in asset's scope and value is a path to library file or an array of files (`.js` or `.css`)
-    * `assets` – path to `.js` and `.css` files
+    * `libs` – path to libs, where key is a local name available in asset's scope and value is a path to library file or an array of files (`.js` or `.css`)
+    * `assets` – array of path to `.js` and `.css` files
     > js files has own scope (as modules) with a reference `discovery` that points to discovery instance
 * `extendRouter` – `function(router, modelConfig, options)`
 * `cache`
@@ -148,6 +136,12 @@ module.exports = {
     name: 'Model config',
     data: () => ({ hello: 'world' }),
     prepare: path.join(__dirname, 'path/to/prepare.js'),
+    favicon: 'path/to/favicon.png',
+    plugins: [
+        '@discoveryjs/view-plugin-highcharts',
+        '@discoveryjs/view-plugin-highcharts/index.css',
+        './relative-path-to-plugin.js'
+    ],
     view: {
         basedir: __dirname,
         assets: [
@@ -158,6 +152,35 @@ module.exports = {
             'ui/sidebar.js'
         ]
     }
+};
+```
+
+### Multi-model config
+
+Config should provide JSON or exports an object with following properties:
+
+* `name` - name of discovery instance (used in page title)
+* `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
+* `favicon` – path to favicon image
+* `viewport` – value for `<meta name="viewport">`
+* `plugins` – a list of plugin files for every model; list is prepending to a list defined in a model
+* `cache`
+
+Example:
+
+```js
+module.exports = {
+    name: 'My cool dashboards',
+    models: {
+        one: 'path/to/model/config',
+        two: { /* model config */ }
+    },
+    favicon: 'path/to/favicon.png',
+    plugins: [
+        '@discoveryjs/view-plugin-highcharts',
+        '@discoveryjs/view-plugin-highcharts/index.css',
+        './relative-path-to-plugin.js'
+    ]
 };
 ```
 
