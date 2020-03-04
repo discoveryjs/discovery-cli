@@ -1,3 +1,7 @@
+## next
+
+- Change server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
+
 ## 1.4.1 (17-12-2019)
 
 - Fixed exception on server start in modelfree mode
