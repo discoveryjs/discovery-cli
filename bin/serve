@@ -11,7 +11,7 @@ const command = clap.command('discovery', '[config]')
     .option(...commonOptions.model)
     .option(...commonOptions.cache)
     .option('--dev', 'Enable developer mode')
-    .option('--no-warmup', 'Disable warm up model data cache on server start')
+    .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
     )
