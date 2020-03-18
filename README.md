@@ -161,6 +161,7 @@ Config should provide JSON or exports an object with following properties:
 
 * `name` - name of discovery instance (used in page title)
 * `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
+* `extendRouter` - array with additional router customization settings
 * `favicon` – path to favicon image
 * `viewport` – value for `<meta name="viewport">`
 * `plugins` – a list of plugin files for every model; list is prepending to a list defined in a model
@@ -175,6 +176,12 @@ module.exports = {
         one: 'path/to/model/config',
         two: { /* model config */ }
     },
+    extendRouter: [
+        {
+            path: 'auth', // Path relative to root
+            handler: require('./auth-router') // Express router
+        }
+    ]
     favicon: 'path/to/favicon.png',
     plugins: [
         '@discoveryjs/view-plugin-highcharts',
