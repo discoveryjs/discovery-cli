@@ -1,6 +1,8 @@
 ## next
 
-- Change server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
+- Changed server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
+- Improved child process error output in server, now it returns stderr output if any
+- Tweaked server log output
 
 ## 1.4.1 (17-12-2019)
 
