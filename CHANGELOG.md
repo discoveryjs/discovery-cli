@@ -1,4 +1,4 @@
-## next
+## 1.5.0 (25-03-2020)
 
 - Changed server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
 - Improved child process error output in server, now it returns stderr output if any
