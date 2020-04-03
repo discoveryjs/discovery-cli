@@ -46,7 +46,6 @@ const command = clap.command('data', '[config] [model]')
                 // FIXME: temporary solution
                 if (background) {
                     process.send('');
-                    process.exit();
                     return;
                 }
 
