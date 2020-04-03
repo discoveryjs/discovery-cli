@@ -19,7 +19,8 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint bin/* lib"
+    "lint": "eslint bin/* lib",
+    "test": "mocha test"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -40,7 +41,8 @@
     "resolve": "^1.12.0"
   },
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "mocha": "^7.1.1"
   },
   "files": [
     "bin",
