@@ -1,3 +1,9 @@
+## 1.6.0 (03-04-2020)
+
+- Reworked data fetching to use streams between processes.
+- Added support for Promise and Readable streams as values in generated data
+- Fixed libs asset generation in ES5 mode to parity ES6 mode
+
 ## 1.5.0 (25-03-2020)
 
 - Changed server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
