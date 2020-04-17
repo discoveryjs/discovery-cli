@@ -1,6 +1,11 @@
+## next
+
+- Server adds random style isolation marker to avoid mixing with style of other builds, e.g. JsonDiscovery browser plugin
+- Fixed JSON stringifing of streams in object mode
+
 ## 1.6.0 (03-04-2020)
 
-- Reworked data fetching to use streams between processes.
+- Reworked data fetching to use streams between processes
 - Added support for Promise and Readable streams as values in generated data
 - Fixed libs asset generation in ES5 mode to parity ES6 mode
 
