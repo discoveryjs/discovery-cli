@@ -229,6 +229,13 @@ describe('createJsonStringifyStream()', () => {
     describe('Stream', () => {
         it('ReadableStream(1) should be [1]', createTest(ReadableStream(1), '[1]'));
 
+        it('ReadableStream({ foo: 1, bar: 2 }, { baz: 3 }) should be [{"foo":1,"bar":2},{"baz":3}]',
+            createTest(
+                ReadableStream({ foo: 1, bar: 2 }, { baz: 3 }),
+                '[{"foo":1,"bar":2},{"baz":3}]'
+            )
+        );
+
         it.skip('fs.createReadStream(path) should be content of file (fixture.json)',
             createTest(
                 fs.createReadStream(__dirname + '/fixture.json'),
