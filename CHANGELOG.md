@@ -2,6 +2,7 @@
 
 - Server adds random style isolation marker to avoid mixing with style of other builds, e.g. JsonDiscovery browser plugin
 - Fixed JSON stringifing of streams in object mode
+- Added output in console about cache file writing time
 
 ## 1.6.0 (03-04-2020)
 
