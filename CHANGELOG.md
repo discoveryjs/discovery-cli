@@ -1,4 +1,4 @@
-## next
+## 1.6.1 (17-04-2020)
 
 - Server adds random style isolation marker to avoid mixing with style of other builds, e.g. JsonDiscovery browser plugin
 - Fixed JSON stringifing of streams in object mode
