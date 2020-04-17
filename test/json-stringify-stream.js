@@ -1,7 +1,7 @@
 // Fork of https://github.com/Faleij/json-stream-stringify
+const assert = require('assert');
 const fs = require('fs');
 const { Readable } = require('stream');
-const assert = require('assert');
 const createJsonStringifyStream = require('../lib/shared/create-json-stringify-stream');
 
 function createTest(input, expected, ...args) {
@@ -43,7 +43,7 @@ function ReadableStream(...args) {
     return stream;
 }
 
-describe('JsonStreamStringify', () => {
+describe('createJsonStringifyStream()', () => {
     const date = new Date();
 
     it('null should be null', createTest(null, 'null'));
