@@ -26,19 +26,31 @@ function createTest(input, expected, ...args) {
     });
 }
 
+const streamRead = (stream, args) => () => {
+    if (!args.length) {
+        return stream.push(null);
+    }
+    const v = args.shift();
+    if (v instanceof Error) {
+        return stream.emit('error', v);
+    }
+    return stream.push(v);
+};
+
 function ReadableStream(...args) {
     const stream = new Readable({
         objectMode: args.some(v => typeof v !== 'string')
     });
+    stream._read = streamRead(stream, args);
+    return stream;
+}
+
+function ReadableStreamTimeout(...args) {
+    const stream = new Readable({
+        objectMode: args.some(v => typeof v !== 'string')
+    });
     stream._read = () => {
-        if (!args.length) {
-            return stream.push(null);
-        }
-        const v = args.shift();
-        if (v instanceof Error) {
-            return stream.emit('error', v);
-        }
-        return stream.push(v);
+        setTimeout(streamRead(stream, args), 300);
     };
     return stream;
 }
@@ -333,6 +345,9 @@ describe('createJsonStringifyStream()', () => {
                 date
             })
         }, `{"a":[{"name":"name","arr":[],"obj":{},"date":"${date.toJSON()}"}]}`));
+
+        it('It should not finish stream if source stream is pending',
+            createTest(ReadableStreamTimeout({ foo: 1 }, { bar: 1 }, { baz: 1 }), '[{"foo": 1},{"bar":2},{"baz":3}]'));
     });
 
     describe('space option', () => {
