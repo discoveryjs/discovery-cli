@@ -249,13 +249,13 @@ describe('createJsonStringifyStream()', () => {
             )
         );
 
-        it.skip('fs.createReadStream(path) should be content of file (fixture.json)',
+        it('fs.createReadStream(path) should be content of file (fixture.json)',
             createTest(
                 fs.createReadStream(__dirname + '/fixture.json'),
                 fs.readFileSync(__dirname + '/fixture.json', 'utf8')
             )
         );
-        it.skip('fs.createReadStream(path) should be content of file (fixture2.json)',
+        it('fs.createReadStream(path) should be content of file (fixture2.json)',
             createTest(
                 fs.createReadStream(__dirname + '/fixture2.json'),
                 fs.readFileSync(__dirname + '/fixture2.json', 'utf8')
@@ -309,23 +309,7 @@ describe('createJsonStringifyStream()', () => {
         );
 
         it('ReadableStream(\'{\', \'"b":1\', \'}\') should be "{"b":1}"', () => {
-            const stream = new Readable();
-            const args = ['{', '"b":1', '}'];
-            Object.assign(stream, {
-                firstRead: true,
-                _read() {
-                    setTimeout(() => {
-                        if (!args.length) {
-                            return stream.push(null);
-                        }
-                        const v = args.shift();
-                        if (v instanceof Error) {
-                            return stream.emit('error', v);
-                        }
-                        return stream.push(v);
-                    }, 1);
-                }
-            });
+            const stream = ReadableStreamTimeout('{', '"b":1', '}');
             return createTest(stream, '{"b":1}')();
         });
 
