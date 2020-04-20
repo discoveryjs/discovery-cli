@@ -52,7 +52,7 @@ function ReadableStreamTimeout(...args) {
     const stream = new Readable({
         objectMode: args.some(v => typeof v !== 'string')
     });
-    stream._read = streamRead(stream, args, 300);
+    stream._read = streamRead(stream, args, 1);
     return stream;
 }
 
@@ -347,8 +347,12 @@ describe('createJsonStringifyStream()', () => {
             })
         }, `{"a":[{"name":"name","arr":[],"obj":{},"date":"${date.toJSON()}"}]}`));
 
-        it.only('It should not finish stream if source stream is pending',
-            createTest(ReadableStreamTimeout({ foo: 1 }, { bar: 2 }, { baz: 3 }), '[{"foo":1},{"bar":2},{"baz":3}]'));
+        it('It should not finish stream if source stream is pending',
+            createTest(
+                ReadableStreamTimeout({ foo: 1 }, { bar: 2 }, { baz: 3 }),
+                '[{"foo":1},{"bar":2},{"baz":3}]'
+            )
+        );
     });
 
     describe('space option', () => {
