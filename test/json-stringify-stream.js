@@ -26,7 +26,7 @@ function createTest(input, expected, ...args) {
     });
 }
 
-const streamRead = (stream, args) => () => {
+const streamRead = (stream, args, timeout) => async () => {
     if (!args.length) {
         return stream.push(null);
     }
@@ -34,7 +34,10 @@ const streamRead = (stream, args) => () => {
     if (v instanceof Error) {
         return stream.emit('error', v);
     }
-    return stream.push(v);
+
+    return timeout
+        ? stream.push(await new Promise((resolve) => setTimeout(() => resolve(v), timeout)))
+        : stream.push(v);
 };
 
 function ReadableStream(...args) {
@@ -49,9 +52,7 @@ function ReadableStreamTimeout(...args) {
     const stream = new Readable({
         objectMode: args.some(v => typeof v !== 'string')
     });
-    stream._read = () => {
-        setTimeout(streamRead(stream, args), 300);
-    };
+    stream._read = streamRead(stream, args, 300);
     return stream;
 }
 
@@ -346,8 +347,8 @@ describe('createJsonStringifyStream()', () => {
             })
         }, `{"a":[{"name":"name","arr":[],"obj":{},"date":"${date.toJSON()}"}]}`));
 
-        it('It should not finish stream if source stream is pending',
-            createTest(ReadableStreamTimeout({ foo: 1 }, { bar: 1 }, { baz: 1 }), '[{"foo": 1},{"bar":2},{"baz":3}]'));
+        it.only('It should not finish stream if source stream is pending',
+            createTest(ReadableStreamTimeout({ foo: 1 }, { bar: 2 }, { baz: 3 }), '[{"foo":1},{"bar":2},{"baz":3}]'));
     });
 
     describe('space option', () => {
