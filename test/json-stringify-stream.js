@@ -1,8 +1,11 @@
 // Fork of https://github.com/Faleij/json-stream-stringify
 const assert = require('assert');
 const fs = require('fs');
-const { Readable } = require('stream');
+const { Readable, Transform } = require('stream');
+const { inspect } = require('util');
 const createJsonStringifyStream = require('../lib/shared/create-json-stringify-stream');
+
+inspect.defaultOptions.breakLength = Infinity;
 
 function createTest(input, expected, ...args) {
     return () => new Promise((resolve, reject) => {
@@ -26,228 +29,169 @@ function createTest(input, expected, ...args) {
     });
 }
 
-const streamRead = (stream, args, timeout) => async () => {
+const streamRead = (args, timeout) => async function() {
     if (!args.length) {
-        return stream.push(null);
+        return this.push(null);
     }
+
     const v = args.shift();
     if (v instanceof Error) {
-        return stream.emit('error', v);
+        return this.emit('error', v);
     }
 
     return timeout
-        ? stream.push(await new Promise((resolve) => setTimeout(() => resolve(v), timeout)))
-        : stream.push(v);
+        ? this.push(await new Promise((resolve) => setTimeout(() => resolve(v), timeout)))
+        : this.push(v);
 };
 
-function ReadableStream(...args) {
-    const stream = new Readable({
-        objectMode: args.some(v => typeof v !== 'string')
-    });
-    stream._read = streamRead(stream, args);
-    return stream;
+class TestStream extends Readable {
+    constructor(...args) {
+        super({
+            objectMode: args.some(v => typeof v !== 'string'),
+            read: streamRead(args)
+        });
+        this[inspect.custom] = () => {
+            return `ReadableStream(${args.map(inspect).join(', ')})`;
+        };
+    }
 }
 
-function ReadableStreamTimeout(...args) {
-    const stream = new Readable({
-        objectMode: args.some(v => typeof v !== 'string')
-    });
-    stream._read = streamRead(stream, args, 1);
-    return stream;
+class TestStreamTimeout extends Readable {
+    constructor(...args) {
+        super({
+            objectMode: args.some(v => typeof v !== 'string'),
+            read: streamRead(args, 1)
+        });
+        this[inspect.custom] = () => {
+            return `ReadableStreamTimeout(${args.map(inspect).join(', ')})`;
+        };
+    }
 }
 
 describe('createJsonStringifyStream()', () => {
     const date = new Date();
 
-    it('null should be null', createTest(null, 'null'));
+    describe('simple', () => {
+        const values = [
+            // scalar
+            null, // null
+            true,
+            false,
+            1,
+            123,
+            12.34,
+            '\n', // "\n"
+            '漢字',
+            '\u009f', // "\u009f"
 
-    it('Infinity should be null', createTest(Infinity, 'null'));
+            // object
+            {},
+            { a: undefined }, // {}
+            { a: null }, // {"a":null}
+            { a: undefined, b: undefined }, // {}
+            { a: undefined, b: 1 }, // {"b":1}
+            { a: 1, b: undefined },
+            { a: 1, b: undefined, c: 2 },
+            { a: 1 },
+            { a: 1, b: { c: 2 } },
+            { a: [1], b: 2 },
+            { a() {}, b: 'b' },
 
-    it('date should be date.toJSON()', createTest(date, `"${date.toJSON()}"`));
+            // array
+            [],
+            [[[]],[[]]],
+            [function a() {}],
+            [function a() {}, undefined],
+            [1, undefined, 2],
+            [1, , 2],
+            [1, 'a'],
+            [{}, [], { a: [], o: {} }],
 
-    it('true should be true', createTest(true, 'true'));
+            // special cases
+            /regex/gi, // {}
+            date, // date.toJSON()
+            NaN, // null
+            Infinity // null
+            // undefined, // JSON.stringify() returns undefined instead of 'undefined'
+            // Symbol('test') // JSON.stringify() returns undefined instead of 'null'
+        ];
 
-    it('Symbol should be ""', createTest(Symbol('test'), 'null'));
-
-    it('1 should be 1', createTest(1, '1'));
-
-    it('1 should be 2', createTest(1, '2', () => 2));
-
-    it('"\\n" should be "\\\\n"', createTest('\n', '"\\n"'));
-
-    it('"漢字" should be "漢字"', createTest('漢字', '"漢字"'));
-
-    it.skip('"\\u009f" should be "\\\\u009f"', createTest('\u009f', '"\\u009f"'));
-
-    it('{} should be {}', createTest({}, '{}'));
-
-    it('/regex/gi should be {}', createTest(/regex/gi, '{}'));
-
-    it('{a:undefined} should be {}', createTest({
-        a: undefined
-    }, '{}'));
-
-    it('{a:null} should be {"a":null}', createTest({
-        a: null
-    }, '{"a":null}'));
-
-    it('{a:1} should be {"a":1}', createTest({
-        a: 1
-    }, '{"a":1}'));
-
-    it('{a:undefined,b:undefined} should be {}', createTest({
-        a: undefined,
-        b: undefined
-    }, '{}'));
-    it('{a:undefined,b:1} should be {"b":1}', createTest({
-        a: undefined,
-        b: 1
-    }, '{"b":1}'));
-    it('{a:1,b:undefined} should be {"a":1}', createTest({
-        a: 1,
-        b: undefined
-    }, '{"a":1}'));
-    it('{a:1,b:undefined,c:2} should be {"a":1,"c":2}', createTest({
-        a: 1,
-        b: undefined,
-        c: 2
-    }, '{"a":1,"c":2}'));
-
-    it('{a:function(){}, b: "b"} should be {"b": "b"}', createTest({
-        a() {},
-        b: 'b'
-    }, '{"b":"b"}'));
-
-    it('[function(){}] should be [null]', createTest([function a() {}], '[null]'));
-
-    it('[function(){}, undefined] should be [null,null]', createTest([function a() {}, undefined], '[null,null]'));
-
-    it('({a:1,b:{c:2}}) should be {"a":1,"b":{"c":2}}', createTest(({
-        a: 1,
-        b: {
-            c: 2
+        for (const value of values) {
+            const expected = JSON.stringify(value);
+            it(`${inspect(value)} should be ${expected}`, createTest(value, expected));
         }
-    }), '{"a":1,"b":{"c":2}}'));
 
-    it('{a:[1], "b": 2} should be {"a":[1],"b":2}', createTest({
-        a: [1],
-        b: 2
-    }, '{"a":[1],"b":2}'));
-
-    it('[] should be []', createTest([], '[]'));
-
-    it('[[[]],[[]]] should be [[[]],[[]]]', createTest([
-        [
-            []
-        ],
-        [
-            []
-        ]
-    ], '[[[]],[[]]]'));
-
-    it('[1, undefined, 2] should be [1,null,2]', createTest([1, undefined, 2], '[1,null,2]'));
-
-    it('[1, , 2] should be [1,null,2]', createTest([1, , 2], '[1,null,2]'));
-
-    it('[1,\'a\'] should be [1,"a"]', createTest([1, 'a'], '[1,"a"]'));
-    it('[{},[],{a:[],o:{}}] should be [{},[],{"a":[],"o":{}}]', createTest([{}, [], { a: [], o: {} }], '[{},[],{"a":[],"o":{}}]'));
-
-    describe('toJSON()', () => {
-        it('{a:date} should be {"a":date.toJSON()}', createTest({
-            a: date
-        }, `{"a":"${date.toJSON()}"}`));
+        // exceptions
+        it('Symbol("test") should be null', createTest(Symbol('test'), 'null'));
+        it('undefined should be null', createTest(undefined, 'null'));
     });
 
-    describe('replacer', () => {
-        it('{a:undefined} should be {"a":1}', createTest({
-            a: undefined
-        }, '{"a":1}', (k, v) => {
-            if (k) {
-                assert.strictEqual(k, 'a');
-                assert.strictEqual(v, undefined);
-                return 1;
-            }
-            return v;
-        }));
+    describe('toJSON()', () => {
+        const values = [
+            date,
+            { toJSON: () => 123 },
+            { a: date, b: { a: 1, toJSON: () => 'ok' } }
+        ];
 
-        it('{a:1, b:2} should be {"a":1}', createTest({
-            a: 1,
-            b: 2
-        }, '{"a":1}', (k, v) => {
-            if (k === 'a' && v === 1) {
-                return v;
-            }
-            if (k === 'b' && v === 2) {
-                return undefined;
-            }
-            return v;
-        }));
-
-        it('array as replacer', createTest({
-            a: 1,
-            b: 2
-        }, '{"b":2}', ['b']));
-
-        it('toJSON/replacer order', createTest({
-            status: 'fail',
-            toJSON() {
-                return { status: 'ok' };
-            }
-        }, '"ok"', (key, value) => value.status));
+        for (const value of values) {
+            const expected = JSON.stringify(value);
+            it(`${inspect(value)} should be ${expected}`, createTest(value, expected));
+        }
     });
 
     describe('Promise', () => {
-        it('Promise(1) should be 1', createTest(Promise.resolve(1), '1'));
+        const entries = [
+            [Promise.resolve(1), '1'],
+            [Promise.resolve(Promise.resolve(1)), '1'],
 
-        it('Promise(Promise(1)) should be 1', createTest(Promise.resolve(Promise.resolve(1)), '1'));
+            // inside objects
+            [{ a: Promise.resolve(1) }, '{"a":1}'],
+            [{ a: 1, b: Promise.resolve(undefined) }, '{"a":1}'],
+            [{ a: Promise.resolve(undefined), b: 2 }, '{"b":2}'],
+            [{ a: Promise.resolve(undefined), b: Promise.resolve(undefined) }, '{}'],
 
-        it('{a:1,b:Promise(undefined)} should be {"a":1}', createTest({
-            a: 1,
-            b: Promise.resolve(undefined)
-        }, '{"a":1}'));
-        it('{a:Promise(undefined),b:2} should be {"b":2}', createTest({
-            a: Promise.resolve(undefined),
-            b: 2
-        }, '{"b":2}'));
-        it('{a:Promise(undefined),b:Promise(undefined)} should be {}', createTest({
-            a: Promise.resolve(undefined),
-            b: Promise.resolve(undefined)
-        }, '{}'));
+            // inside arrays
+            [[Promise.resolve(1)], '[1]'],
+            [[1, Promise.resolve(2), Promise.resolve(), 3], '[1,2,null,3]'],
 
-        it('Promise(fakePromise(Promise.resolve(1))) should be 1', createTest(({
-            then(fn) {
-                return Promise.resolve(1).then(fn);
-            }
-        }), '1'));
+            // fake promise
+            [{ then: fn => Promise.resolve(1).then(fn) }, '1'],
+            [{ then: fn => fn(2) }, '2']
+        ];
+
+        for (const [value, expected] of entries) {
+            it(`${inspect(value)} should be ${expected}`, createTest(value, expected));
+        }
 
         it('Promise.reject(Error) should emit Error', () => {
             const err = new Error('should emit error');
             return assert.rejects(
-                createTest(new Promise((resolve, reject) => reject(err)), '')(),
+                createTest(Promise.reject(err), '')(),
                 err1 => {
                     assert.strictEqual(err1, err);
                     return true;
                 }
             );
         });
-
-        it('{a:Promise(1)} should be {"a":1}', createTest({
-            a: Promise.resolve(1)
-        }, '{"a":1}'));
-
-        it('[Promise(1)] should be [1]', createTest([Promise.resolve(1)], '[1]'));
-        it('[1,Promise(2),Promise(undefined),3] should be [1,2,null,3]', createTest([1, Promise.resolve(2), Promise.resolve(), 3], '[1,2,null,3]'));
     });
 
     describe('Stream', () => {
-        it('ReadableStream(1) should be [1]', createTest(ReadableStream(1), '[1]'));
+        const entries = [
+            [new TestStream(1), '[1]'],
+            [new TestStream({ foo: 1, bar: 2 }, { baz: 3 }), '[{"foo":1,"bar":2},{"baz":3}]'],
+            [new TestStream('{', '"b":1', '}'), '{"b":1}'],
+            [new TestStreamTimeout('{', '"b":1', '}'), '{"b":1}'],
+            [new TestStream({}, 'a', undefined, 'c'), '[{},"a",null,"c"]'],
+            [new TestStreamTimeout({ foo: 1 }, { bar: 2 }, { baz: 3 }), '[{"foo":1},{"bar":2},{"baz":3}]'],
+            [{ a: new TestStream(1, 2, 3) }, '{"a":[1,2,3]}'],
+            [{ a: new TestStream({ name: 'name', date }) }, `{"a":[{"name":"name","date":"${date.toJSON()}"}]}`],
+            [{ a: new TestStream({ name: 'name', arr: [], obj: {}, date }) }, `{"a":[{"name":"name","arr":[],"obj":{},"date":"${date.toJSON()}"}]}`],
+            [Promise.resolve(new TestStream(1)), '[1]']
+        ];
 
-        it('ReadableStream({ foo: 1, bar: 2 }, { baz: 3 }) should be [{"foo":1,"bar":2},{"baz":3}]',
-            createTest(
-                ReadableStream({ foo: 1, bar: 2 }, { baz: 3 }),
-                '[{"foo":1,"bar":2},{"baz":3}]'
-            )
-        );
+        for (const [value, expected] of entries) {
+            it(`${inspect(value)} should be ${expected}`, createTest(value, expected));
+        }
 
         it('fs.createReadStream(path) should be content of file (fixture.json)',
             createTest(
@@ -262,13 +206,23 @@ describe('createJsonStringifyStream()', () => {
             )
         );
 
-        it('Promise(ReadableStream(1)) should be [1]', createTest(Promise.resolve(ReadableStream(1)), '[1]'));
+        it('Non push(null) stream',
+            createTest(
+                new Transform({
+                    read() {
+                        this.push('[123]');
+                        this.end();
+                    }
+                }),
+                '[123]'
+            )
+        );
 
         it('{a:[ReadableStream(1, Error, 2)]} should emit Error', () => {
             const err = new Error('should emit error');
             return assert.rejects(
                 createTest({
-                    a: [ReadableStream(1, err, 2)]
+                    a: [new TestStream(1, err, 2)]
                 }, '')(),
                 (err1) => {
                     // expect(err.jsonStream.stack).to.eql(['a', 0]);
@@ -280,7 +234,7 @@ describe('createJsonStringifyStream()', () => {
 
         it('ReadableStream(1, 2, 3, 4, 5, 6, 7).resume() should emit Error', () =>
             assert.rejects(
-                createTest(ReadableStream(1, 2, 3, 4, 5, 6, 7).resume(), '[1,2,3,4,5,6,7]')(),
+                createTest(new TestStream(1, 2, 3, 4, 5, 6, 7).resume(), '[1,2,3,4,5,6,7]')(),
                 (err) => {
                     assert.strictEqual(err.message, 'Readable Stream is in flowing mode, data may have been lost. Trying to pause stream.');
                     return true;
@@ -289,7 +243,7 @@ describe('createJsonStringifyStream()', () => {
         );
 
         it('EndedReadableStream(1, 2, 3, 4, 5, 6, 7) should emit Error', () => {
-            const stream = ReadableStream(1, 2, 3, 4, 5, 6, 7);
+            const stream = new TestStream(1, 2, 3, 4, 5, 6, 7);
             return assert.rejects(
                 createTest(new Promise(resolve => stream.once('end', () => resolve(stream)).resume()), '[1,2,3,4,5,6,7]')(),
                 (err) => {
@@ -299,64 +253,83 @@ describe('createJsonStringifyStream()', () => {
                 }
             );
         });
+    });
 
-        it('{a:ReadableStream(1,2,3)} should be {"a":[1,2,3]}', createTest({
-            a: ReadableStream(1, 2, 3)
-        }, '{"a":[1,2,3]}'));
+    describe('replacer', () => {
+        const entries = [
+            [1, () => 2],
+            [{ a: undefined }, (k, v) => {
+                if (k) {
+                    assert.strictEqual(k, 'a');
+                    assert.strictEqual(v, undefined);
+                    return 1;
+                }
+                return v;
+            }],
+            [{ a: 1, b: 2 }, (k, v) => {
+                if (k === 'a' && v === 1) {
+                    return v;
+                }
+                if (k === 'b' && v === 2) {
+                    return undefined;
+                }
+                return v;
+            }],
 
-        it('ReadableStream(\'{\', \'"b":1\', \'}\') should be "{"b":1}"',
-            createTest(ReadableStream('{', '"b":1', '}'), '{"b":1}')
-        );
+            // replacer as a whitelist of keys
+            [{ a: 1, b: 2 }, ['b']],
+            [{ 1: 1, b: 2 }, [1]],
 
-        it('ReadableStream(\'{\', \'"b":1\', \'}\') should be "{"b":1}"', () => {
-            const stream = ReadableStreamTimeout('{', '"b":1', '}');
-            return createTest(stream, '{"b":1}')();
-        });
+            // toJSON/replacer order
+            [{
+                source: 'replacer',
+                toJSON: () => ({ source: 'toJSON' })
+            }, (_, value) => value.source]
+        ];
 
-        it('ReadableStream({}, \'a\', undefined, \'c\') should be [{},"a",null,"c"]', createTest(ReadableStream({}, 'a', undefined, 'c'), '[{},"a",null,"c"]'));
-
-        it(`{ a: ReadableStream({name: 'name', date: date }) } should be {"a":[{"name":"name","date":"${date.toJSON()}"}]}`, createTest({
-            a: ReadableStream({
-                name: 'name',
-                date
-            })
-        }, `{"a":[{"name":"name","date":"${date.toJSON()}"}]}`));
-
-        it(`{ a: ReadableStream({name: 'name', arr: [], date: date }) } should be {"a":[{"name":"name","arr":[],"date":"${date.toJSON()}"}]}`, createTest({
-            a: ReadableStream({
-                name: 'name',
-                arr: [],
-                obj: {},
-                date
-            })
-        }, `{"a":[{"name":"name","arr":[],"obj":{},"date":"${date.toJSON()}"}]}`));
-
-        it('It should not finish stream if source stream is pending',
-            createTest(
-                ReadableStreamTimeout({ foo: 1 }, { bar: 2 }, { baz: 3 }),
-                '[{"foo":1},{"bar":2},{"baz":3}]'
-            )
-        );
+        for (const [value, replacer] of entries) {
+            const expected = JSON.stringify(value, replacer);
+            it(`${inspect(value)} should be ${expected}`, createTest(value, expected, replacer));
+        }
     });
 
     describe('space option', () => {
-        it('{} should be {}', createTest({}, '{}', undefined, 2));
-        it('{ a: 1 } should be {\\n  "a": 1\\n}', createTest({ a: 1 }, '{\n  "a": 1\n}', undefined, 2));
-        it('{ a: 1, b: 2 } should be {\\n  "a": 1,\\n  "b": 2\\n}', createTest({ a: 1, b: 2 }, '{\n  "a": 1,\n  "b": 2\n}', undefined, 2));
+        const values = [
+            {},
+            { a: 1 },
+            { a: 1, b: 2 },
+            { a: 1, b: undefined, c: 2 },
+            { a: undefined },
+            [],
+            [1],
+            [1, 2],
+            [undefined],
+            [1, undefined, 3],
+            [{ a: 1 }, 'test', { b: [{ c: 3, d: 4 }]}]
+        ];
 
-        it('[] should be []', createTest([], '[]', undefined, 2));
-        it('[1] should be [\\n  1\\n]', createTest([1], '[\n  1\n]', undefined, 2));
-        it('[1,2] should be [\\n  1\\n  2\\n]', createTest([1, 2], '[\n  1,\n  2\n]', undefined, 2));
-        it('[1,[2,3],Promise,ReadableStream,ReadableStream] should be ...', createTest([
-            1,
-            [2, 3],
-            Promise.resolve(4),
-            ReadableStream(5),
-            ReadableStream('6')
-        ], '[\n  1,\n  [\n    2,\n    3\n  ],\n  4,\n  [\n    5\n  ],\n  6\n]', undefined, 2));
+        for (const spacer of [2, '  ', '\t', '_']) {
+            describe('spacer ' + JSON.stringify(spacer), () => {
+                for (const value of values) {
+                    it(inspect(value), createTest(value, JSON.stringify(value, null, spacer), null, spacer));
+                }
 
-        it('[1] should be [\\n_1\\n]', createTest([1], '[\n_1\n]', undefined, '_'));
-        it('[1,2] should be [\\n_1,\\n_2\\n]', createTest([1, 2], '[\n_1,\n_2\n]', undefined, '_'));
+                it('[Number, Array, Promise, ReadableStream, ReadableStream]',
+                    createTest(
+                        [
+                            1,
+                            [2, 3],
+                            Promise.resolve(4),
+                            new TestStream(5),
+                            new TestStream('6')
+                        ],
+                        JSON.stringify([1, [2, 3], 4, [5], 6], null, spacer),
+                        null,
+                        spacer
+                    )
+                );
+            });
+        }
     });
 
     describe('circular structure', () => {
@@ -385,20 +358,14 @@ describe('createJsonStringifyStream()', () => {
         );
 
         const cyclicData2 = {};
-        cyclicData2.a = ReadableStream(cyclicData2);
+        cyclicData2.a = new TestStream(cyclicData2);
         it('{ a: ReadableStream($) } should be emit error', () =>
             assert.rejects(
-                createTest(ReadableStream(cyclicData2), '')(),
+                createTest(new TestStream(cyclicData2), '')(),
                 (err) => {
                     assert.strictEqual(err.message, 'Converting circular structure to JSON');
                     return true;
                 }
             ));
-
-        const a = {
-            foo: 'bar'
-        };
-        const arr = [a, a];
-        it('decycle should not be active', createTest(arr, '[{"foo":"bar"},{"foo":"bar"}]'));
     });
 });
