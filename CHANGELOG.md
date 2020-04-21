@@ -1,3 +1,8 @@
+## 1.6.2 (21-04-2020)
+
+- Fixed JSON stringifying of streams when stream doesn't push `null` on end
+- Improved performance and memory consumption of JSON stringifying
+
 ## 1.6.1 (17-04-2020)
 
 - Server adds random style isolation marker to avoid mixing with style of other builds, e.g. JsonDiscovery browser plugin
