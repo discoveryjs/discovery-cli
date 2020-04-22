@@ -1,3 +1,7 @@
+## next
+
+- Fixed cache warmup
+
 ## 1.7.0 (22-04-2020)
 
 - Added `healthz` route to check server is alive
