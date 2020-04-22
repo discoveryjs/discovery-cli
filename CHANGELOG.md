@@ -1,3 +1,8 @@
+## 1.7.0 (22-04-2020)
+
+- Added `healthz` route to check server is alive
+- Added `readyz` route to check server warmup is done
+
 ## 1.6.2 (21-04-2020)
 
 - Fixed JSON stringifying of streams when stream doesn't push `null` on end
