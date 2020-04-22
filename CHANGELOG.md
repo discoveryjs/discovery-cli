@@ -1,4 +1,4 @@
-## next
+## 1.7.1 (22-04-2020)
 
 - Fixed cache warmup
 
