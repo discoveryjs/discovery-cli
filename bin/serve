@@ -13,8 +13,8 @@ const command = clap.command('discovery', '[config]')
     .option(...commonOptions.cache)
     .option('--dev', 'Enable developer mode')
     .option('--prebuild [path]', 'Prebuild model\'s static in path (path is optional, `build` by default)',
-        (value = 'build') => path.resolve(process.cwd(), value),
-        'build'
+        (value = 'build') => value ? path.resolve(process.cwd(), value) : value,
+        false
     )
     .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',

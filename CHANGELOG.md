@@ -1,3 +1,7 @@
+## next
+
+- Fixed `--prebuild` option for server to not prebuild when option is not set
+
 ## 1.8.0 (22-04-2020)
 
 - Added `--prebuild` option for server
