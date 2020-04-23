@@ -1,3 +1,8 @@
+## next
+
+- Added `--prebuild` option for server
+- Improved data passing to model
+
 ## 1.7.1 (22-04-2020)
 
 - Fixed cache warmup
