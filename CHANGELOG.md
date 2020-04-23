@@ -1,4 +1,4 @@
-## next
+## 1.8.0 (22-04-2020)
 
 - Added `--prebuild` option for server
 - Improved data passing to model
