@@ -367,5 +367,15 @@ describe('createJsonStringifyStream()', () => {
                     return true;
                 }
             ));
+
+        const obj = {};
+        const obj2 = { a: 1 };
+        const arr = [];
+        const arr2 = [1];
+        const noCycle = {
+            o1: obj, o2: obj, o3: obj2, o4: obj2,
+            a1: arr, a2: arr, a3: arr2, a4: arr2
+        };
+        it('should not fail on reuse empty object/array', createTest(noCycle, JSON.stringify(noCycle)));
     });
 });
