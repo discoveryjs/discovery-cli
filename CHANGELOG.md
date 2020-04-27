@@ -1,3 +1,7 @@
+## next
+
+- Fixed CSS bundling to parse and process value of custom properties as regular properties
+
 ## 1.8.2 (24-04-2020)
 
 - Fixed wrong "Converting circular structure to JSON" error when empty object or array is reused in object to stringify
