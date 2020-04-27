@@ -1,4 +1,4 @@
-## next
+## 1.8.3 (27-04-2020)
 
 - Fixed CSS bundling to parse and process value of custom properties as regular properties
 
