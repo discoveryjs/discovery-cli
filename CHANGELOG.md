@@ -2,7 +2,7 @@
 
 - Added striping off source map references in JavaScript assets to avoid warnings
 - Added the same routing to model's slug in single mode as in multi model mode for urls persistence between modes
-Added the same routing to model's slug in single mode to compliment urls with multi model mode urls
+- Improved server stability on warmup, a crash of warmup task doesn't prevent server starting
 
 ## 1.8.3 (27-04-2020)
 
