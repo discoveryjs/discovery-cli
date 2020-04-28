@@ -1,4 +1,4 @@
-## next
+## 1.9.0 (28-04-2020)
 
 - Added striping off source map references in JavaScript assets to avoid warnings
 - Added the same routing to model's slug in single mode as in multi model mode for urls persistence between modes
