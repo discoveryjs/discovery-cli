@@ -1,3 +1,7 @@
+## next
+
+- Fixed `/gen/setup.js` loading failure when server in modelfree mode
+
 ## 1.9.0 (28-04-2020)
 
 - Added striping off source map references in JavaScript assets to avoid warnings
