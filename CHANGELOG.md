@@ -1,4 +1,4 @@
-## next
+## 1.9.1 (07-05-2020)
 
 - Fixed `/gen/setup.js` loading failure when server in modelfree mode
 
