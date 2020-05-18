@@ -9,7 +9,7 @@
 
 CLI tools to serve & build projects based on [Discovery.js](https://github.com/discoveryjs/discovery)
 
-<!-- TOC depthFrom:2 -->
+<!-- TOC depthfrom:2 -->
 
 - [Install](#install)
 - [Commands](#commands)
@@ -161,6 +161,7 @@ Config should provide JSON or exports an object with following properties:
 
 * `name` - name of discovery instance (used in page title)
 * `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
+* `extendRouter` - a function to extend app routers
 * `favicon` – path to favicon image
 * `viewport` – value for `<meta name="viewport">`
 * `plugins` – a list of plugin files for every model; list is prepending to a list defined in a model
@@ -174,6 +175,21 @@ module.exports = {
     models: {
         one: 'path/to/model/config',
         two: { /* model config */ }
+    },
+    extendRouter: function(app, config, options) {
+        const bodyParser = require('body-parser');
+
+        app.use(bodyParser.json());
+        app.post('/echo', function(req, res) {
+            // Request from browser:
+            // fetch('/echo', {
+            //     method: 'POST', 
+            //     body: JSON.stringify({ test: 'ok' }),
+            //     headers: { 'Content-Type': 'application/json'}
+            // })
+            // will response with 200 {"echo":{"test":"ok"}}
+            res.send({ echo: req.body });
+        });
     },
     favicon: 'path/to/favicon.png',
     plugins: [
