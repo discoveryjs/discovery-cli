@@ -1,4 +1,4 @@
-## next
+## 1.10.2 (18-05-2020)
 
 - Fixed server routing in single mode with `--prebuild` option enabled
 - Fixed edge cases with custom properties and empty values when bundling CSS
