@@ -1,6 +1,7 @@
 ## next
 
 - Added `extendRouter` setting which provide router customization on application level
+- Added `meta` field support in model's config to pass extra setup values
 
 ## 1.9.1 (07-05-2020)
 

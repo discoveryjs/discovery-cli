@@ -118,6 +118,7 @@ You may explicitly specify config file by using `--config` option. When no confi
 Model config consists of the following fields (all fields are optional):
 
 * `name` – name of model (used in title)
+* `meta` – any data (should be serializable to JSON) that will be available in model's `setup.js`
 * `data` – function which returns `any|Promise<any>`. Result of this function must be serializable to JSON (i.e. have no cyclic references)
 * `prepare` – path to a script with additional initialization logic (e.g. add cyclic links and relations, mark objects, add annotations or extensions for query engine etc)
 * `plugins` – list of plugins (paths to `.js` and `.css` files); relative paths or package name and path are supported; concating to parent's plugin list
