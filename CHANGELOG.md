@@ -1,3 +1,7 @@
+## next
+
+- Fixed regression `The requested module './gen/model-libs.js' does not provide an export named 'plugins'`
+
 ## 1.10.0 (18-05-2020)
 
 - Added `extendRouter` setting which provide router customization on application level
