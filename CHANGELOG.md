@@ -2,6 +2,7 @@
 
 - Added `extendRouter` setting which provide router customization on application level
 - Added `meta` field support in model's config to pass extra setup values
+- Added `view` field support in multi mode config (i.e. for index page)
 
 ## 1.9.1 (07-05-2020)
 

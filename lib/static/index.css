@@ -1,6 +1,10 @@
 @import url('./common.css');
 @import url('./@discoveryjs/discovery/lib.css');
 
+/* generated file (index specific) */
+@import url('./gen/index-libs.css');
+@import url('./gen/index-view.css');
+
 h1::before {
     display: inline-block;
     vertical-align: middle;

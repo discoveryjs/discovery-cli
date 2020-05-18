@@ -22,6 +22,7 @@ CLI tools to serve & build projects based on [Discovery.js](https://github.com/d
 - [Configuration](#configuration)
     - [Model config](#model-config)
     - [Multi-model config](#multi-model-config)
+    - [Configure view](#configure-view)
 - [License](#license)
 
 <!-- /TOC -->
@@ -124,11 +125,7 @@ Model config consists of the following fields (all fields are optional):
 * `plugins` – list of plugins (paths to `.js` and `.css` files); relative paths or package name and path are supported; concating to parent's plugin list
 * `favicon` – path to favicon image; inherits from parent config when not set
 * `viewport` – value for `<meta name="viewport">`; inherits from parent config when not set
-* `view` – object with following fields:
-    * `basedir` – directory to resolve relative path in `assets` and `libs`
-    * `libs` – path to libs, where key is a local name available in asset's scope and value is a path to library file or an array of files (`.js` or `.css`)
-    * `assets` – array of path to `.js` and `.css` files
-    > js files has own scope (as modules) with a reference `discovery` that points to discovery instance
+* `view` – setup model's views (see [Configure view](#configure-view))
 * `extendRouter` – `function(router, modelConfig, options)`
 * `cache`
 * `cacheTtl`
@@ -172,7 +169,8 @@ Config should provide JSON or exports an object with following properties:
 * `extendRouter` - a function to extend app routers
 * `favicon` – path to favicon image
 * `viewport` – value for `<meta name="viewport">`
-* `plugins` – a list of plugin files for every model; list is prepending to a list defined in a model
+* `view` – setup index page views (see [Configure view](#configure-view))
+* `plugins` – a list of plugin files for every model (but not for index page); list is prepending to a list defined in a model
 * `cache`
 
 Example:
@@ -205,6 +203,35 @@ module.exports = {
         '@discoveryjs/view-plugin-highcharts/index.css',
         './relative-path-to-plugin.js'
     ]
+};
+```
+
+### Configure view
+
+* `basedir` – directory to resolve relative path in `assets` and `libs`
+* `libs` – path to libs, where key is a local name available in asset's scope and value is a path to library file or an array of files (`.js` or `.css`)
+* `assets` – array of path to `.js` and `.css` files
+> js files has own scope (as modules) with a reference `discovery` that points to discovery instance
+
+```js
+const path = require('path');
+
+module.exports = {
+    ...
+    view: {
+        basedir: __dirname,
+        libs: {
+            common: '../path/to/common.js',
+            moment: path.resolve(__dirname, '../../../node_modules/moment/min/moment.min.js'),
+        },
+        assets: [
+            'ui/page/default.js',
+            'ui/view/model-custom-view.css',
+            'ui/view/model-custom-view.js',
+            'ui/sidebar.css',
+            'ui/sidebar.js'
+        ]
+    }
 };
 ```
 
