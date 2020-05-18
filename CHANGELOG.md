@@ -1,3 +1,7 @@
+## next
+
+- Fixed server routing in single mode with `--prebuild` option enabled
+
 ## 1.10.1 (18-05-2020)
 
 - Fixed regression `The requested module './gen/model-libs.js' does not provide an export named 'plugins'`
