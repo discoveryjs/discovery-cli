@@ -1,7 +1,68 @@
 ## next
 
-- Change server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
 - Added `extendRouter` setting which provide router customization on application level
+
+## 1.9.1 (07-05-2020)
+
+- Fixed `/gen/setup.js` loading failure when server in modelfree mode
+
+## 1.9.0 (28-04-2020)
+
+- Added striping off source map references in JavaScript assets to avoid warnings
+- Added the same routing to model's slug in single mode as in multi model mode for urls persistence between modes
+- Improved server stability on warmup, a crash of warmup task doesn't prevent server starting
+
+## 1.8.3 (27-04-2020)
+
+- Fixed CSS bundling to parse and process value of custom properties as regular properties
+
+## 1.8.2 (24-04-2020)
+
+- Fixed wrong "Converting circular structure to JSON" error when empty object or array is reused in object to stringify
+
+## 1.8.1 (23-04-2020)
+
+- Fixed `--prebuild` option for server to not prebuild when option is not set
+
+## 1.8.0 (22-04-2020)
+
+- Added `--prebuild` option for server
+- Improved data passing to model
+
+## 1.7.1 (22-04-2020)
+
+- Fixed cache warmup
+
+## 1.7.0 (22-04-2020)
+
+- Added `healthz` route to check server is alive
+- Added `readyz` route to check server warmup is done
+
+## 1.6.2 (21-04-2020)
+
+- Fixed JSON stringifying of streams when stream doesn't push `null` on end
+- Improved performance and memory consumption of JSON stringifying
+
+## 1.6.1 (17-04-2020)
+
+- Server adds random style isolation marker to avoid mixing with style of other builds, e.g. JsonDiscovery browser plugin
+- Fixed JSON stringifying of streams in object mode
+- Added output in console about cache file writing time
+
+## 1.6.0 (03-04-2020)
+
+- Reworked data fetching to use streams between processes
+- Added support for Promise and Readable streams as values in generated data
+- Fixed libs asset generation in ES5 mode to parity ES6 mode
+
+## 1.5.0 (25-03-2020)
+
+- Changed server to ensure model root route has a trailing slash (i.e. `/model` will be redirected to `/model/`)
+- Improved child process error output in server, now it returns stderr output if any
+- Tweaked server log output
+- Reworked CSS style isolation
+- Added `--isolate-styles` option for builder
+- Exposed `bundleCss()` as `build.bundleCss`
 
 ## 1.4.1 (17-12-2019)
 

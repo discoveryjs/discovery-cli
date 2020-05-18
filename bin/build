@@ -14,6 +14,8 @@ const command = clap.command('discovery-build', '[config]')
         'build'
     )
     .option('-s, --single-file', 'Output a model build as a single file')
+    .option('--no-data', 'Exclude data in build')
+    .option('--isolate-styles [postfix]', 'Isolate generated CSS with specific postfix, when [postfix] is not specified it\'s generating as hash from CSS content', value => value || true)
     .option('--pretty-data [indent]', 'Pretty print of data.json', (value = 4) => Number(value) || false, false)
     .option('--cleanup', 'Delete all files of output path before saving a result to it')
     .version(require('../package.json').version)
@@ -23,7 +25,11 @@ const command = clap.command('discovery-build', '[config]')
             configFile
         });
 
-        build(options);
+        build(options).then(() => {
+            if (typeof process.send === 'function') {
+                process.send('OK');
+            }
+        });
     });
 
 // run command

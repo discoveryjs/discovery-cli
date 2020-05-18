@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const path = require('path');
 const clap = require('clap');
 const commonOptions = require('../lib/cli');
 const createServer = require('../lib/serve');
@@ -11,6 +12,10 @@ const command = clap.command('discovery', '[config]')
     .option(...commonOptions.model)
     .option(...commonOptions.cache)
     .option('--dev', 'Enable developer mode')
+    .option('--prebuild [path]', 'Prebuild model\'s static in path (path is optional, `build` by default)',
+        (value = 'build') => value ? path.resolve(process.cwd(), value) : value,
+        false
+    )
     .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
