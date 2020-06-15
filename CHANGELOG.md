@@ -1,6 +1,7 @@
 ## next
 
 - Fixed exceptions when no config found (#49)
+- Improved error location in prepare module
 
 ## 1.10.2 (18-05-2020)
 
