@@ -1,4 +1,4 @@
-## next
+## 1.11.0 (16-06-2020)
 
 - Added support for humanize durations for cacheTtl and cacheBgUpdate in config, e.g. `5mins` or `1h 30m` (see [parse-duration](https://www.npmjs.com/package/parse-duration) for format support)
 - Disabled async/await transformations on build
