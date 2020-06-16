@@ -1,3 +1,7 @@
+## next
+
+- Disabled async/await transformations on build
+
 ## 1.10.3 (15-06-2020)
 
 - Fixed exceptions when no config found (#49)
