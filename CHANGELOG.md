@@ -1,3 +1,7 @@
+## next
+
+- Fixed issue when common router extension doesn't apply in single model mode (i.e. when `--model` option is used)
+
 ## 1.11.0 (16-06-2020)
 
 - Added support for humanize durations for cacheTtl and cacheBgUpdate in config, e.g. `5mins` or `1h 30m` (see [parse-duration](https://www.npmjs.com/package/parse-duration) for format support)
@@ -5,7 +9,7 @@
 
 ## 1.10.3 (15-06-2020)
 
-- Fixed exceptions when no config found (#49)
+- Fixed exceptions when no config found
 - Improved error location in prepare module
 
 ## 1.10.2 (18-05-2020)
