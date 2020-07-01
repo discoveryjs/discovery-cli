@@ -1,5 +1,6 @@
 ## next
 
+- Added warmup task list with details on `readyz`
 - Fixed issue when common router extension doesn't apply in single model mode (i.e. when `--model` option is used)
 
 ## 1.11.0 (16-06-2020)
