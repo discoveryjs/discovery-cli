@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const clap = require('clap');
+const fs = require('fs');
+const commonOptions = require('../lib/cli');
+const buildStatic = require('../lib/static');
+
+// define command
+const command = clap.command('discovery-static', '[config]')
+    .option(...commonOptions.config)
+    .option(...commonOptions.model)
+    .version(require('../package.json').version)
+    .action(function(args) {
+        const configFile = this.values.config || args[0];
+        const options = Object.assign({}, this.values, {
+            configFile
+        });
+
+        buildStatic(options).then(stream => {
+            if (typeof process.send === 'function') {
+                process.send('stream');
+                stream.pipe(fs.createWriteStream(null, { fd: 4 }));
+                return;
+            }
+        });
+    });
+
+// run command
+try {
+    command.run();
+} catch (e) {
+    // output user frendly message if cli error
+    if (e instanceof clap.Error) {
+        console.error(e.message || e);
+        process.exit(2);
+    }
+
+    // otherwise re-throw exception
+    throw e;
+}
