@@ -2,6 +2,7 @@
 
 const clap = require('clap');
 const fs = require('fs');
+const path = require('path');
 const commonOptions = require('../lib/cli');
 const buildStatic = require('../lib/static');
 
@@ -9,6 +10,8 @@ const buildStatic = require('../lib/static');
 const command = clap.command('discovery-static', '[config]')
     .option(...commonOptions.config)
     .option(...commonOptions.model)
+    .option('-d, --dir <dirname>', 'Directory with already prebuilded models',
+        (value = '') => path.resolve(process.cwd(), value))
     .version(require('../package.json').version)
     .action(function(args) {
         const configFile = this.values.config || args[0];
