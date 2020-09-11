@@ -17,6 +17,7 @@ const command = clap.command('discovery', '[config]')
         false
     )
     .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
+    .option('--bail', 'Exit immediately on first warmup task failure')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
     )

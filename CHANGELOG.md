@@ -1,6 +1,8 @@
 ## next
 
 - Used `@discoveryjs/json-ext` for JSON stream stringifying instead of custom solution
+- Fixed suppression of errors when warming up a model data, which cause to treat the model as successful, despite that it is broken
+- Added `--bail` option for server to exit on first warmup task failure
 
 ## 1.12.0 (01-07-2020)
 
