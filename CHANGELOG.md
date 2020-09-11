@@ -1,3 +1,7 @@
+## next
+
+- Used `@discoveryjs/json-ext` for JSON stream stringifying instead of custom solution
+
 ## 1.12.0 (01-07-2020)
 
 - Added warmup task list with details on `readyz`
