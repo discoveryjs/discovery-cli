@@ -13,7 +13,7 @@ const command = clap.command('data', '[config] [model]')
     .option(...commonOptions.cache)
     .option('--rewrite-cache', 'Ignore existing cache')
     .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default)', (value = 4) => Number(value) || false, false)
-    .option('--background', 'Run as background process, no output')
+    .option('--background', 'Update/warmup data cache in background, no output')
     .option('-o, --output <filename>', 'Output file',
         (value = '') => path.resolve(process.cwd(), value)
     )
@@ -32,6 +32,7 @@ const command = clap.command('data', '[config] [model]')
             model,
             cache,
             rewriteCache,
+            warmup: background,
             pretty
         };
 
