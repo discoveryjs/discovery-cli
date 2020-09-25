@@ -50,7 +50,7 @@ const command = clap.command('data', '[config] [model]')
                     return;
                 }
 
-                process.send(JSON.stringify({ message: 'stream', size }));
+                process.send({ payload: 'stream', size });
                 stream.pipe(fs.createWriteStream(null, { fd: 4 }));
                 return;
             }
