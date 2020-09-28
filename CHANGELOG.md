@@ -5,6 +5,7 @@
 - Added `--bail` option for server to exit on first warmup task failure
 - Fixed model's warming up task to wait until data is written to disk before next warmup task
 - Changed server's warming up to schedule data cache background update after all other warmup tasks is finished
+- Send `Content-Length` header for `data.json` when available
 
 ## 1.12.0 (01-07-2020)
 

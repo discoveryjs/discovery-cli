@@ -36,7 +36,7 @@ const command = clap.command('data', '[config] [model]')
             pretty
         };
 
-        getData(options).then(stream => {
+        getData(options).then(({ stream, size } = {}) => {
             if (outputFile) {
                 stream.pipe(fs.createWriteStream(outputFile));
                 return;
@@ -50,7 +50,7 @@ const command = clap.command('data', '[config] [model]')
                     return;
                 }
 
-                process.send('stream');
+                process.send({ payload: 'stream', size });
                 stream.pipe(fs.createWriteStream(null, { fd: 4 }));
                 return;
             }
