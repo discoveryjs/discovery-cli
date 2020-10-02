@@ -1,4 +1,4 @@
-## next
+## 1.13.0 (02-10-2020)
 
 - Used `@discoveryjs/json-ext` for JSON stream stringifying instead of custom solution
 - Fixed suppression of errors when warming up a model data, which cause to treat the model as successful, despite that it is broken
@@ -6,6 +6,8 @@
 - Fixed model's warming up task to wait until data is written to disk before next warmup task
 - Changed server's warming up to schedule data cache background update after all other warmup tasks is finished
 - Send `Content-Length` header for `data.json` when available
+- Added support for model downloading (enabled by default, to disable use `download: false` in main config or model's config)
+- Improved model building when a big JSON data is injecting to build
 
 ## 1.12.0 (01-07-2020)
 
