@@ -32,6 +32,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@discoveryjs/json-ext": "^0.3.0",
+    "archiver": "^5.0.0",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
     "chalk": "^3.0.0",
