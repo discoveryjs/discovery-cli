@@ -1,3 +1,7 @@
+## next
+
+- Added `x-file-size` header to server's `data.json` response to specify original size of content when size is known
+
 ## 1.13.0 (02-10-2020)
 
 - Used `@discoveryjs/json-ext` for JSON stream stringifying instead of custom solution
