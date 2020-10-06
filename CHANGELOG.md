@@ -1,4 +1,4 @@
-## next
+## 1.13.1 (06-10-2020)
 
 - Added `x-file-size` header to server's `data.json` response to specify original size of content when size is known
 
