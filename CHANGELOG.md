@@ -1,3 +1,8 @@
+## next
+
+- Fixed static reports building issues when you got "Download" and "Reload without cache" buttons on static built reports.
+- Cache system reworked. Now cache dir `.discoveryjs-cache` set by default.
+
 ## 1.13.1 (06-10-2020)
 
 - Added `x-file-size` header to server's `data.json` response to specify original size of content when size is known
