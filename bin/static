@@ -10,7 +10,7 @@ const buildStatic = require('../lib/static');
 const command = clap.command('discovery-static', '[config]')
     .option(...commonOptions.config)
     .option(...commonOptions.model)
-    .option('-d, --dir <dirname>', 'Directory with already prebuilded models',
+    .option('-d, --dir <dirname>', 'Directory with already prebuilt models',
         (value = '') => path.resolve(process.cwd(), value))
     .version(require('../package.json').version)
     .action(function(args) {
