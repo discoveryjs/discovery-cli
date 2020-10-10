@@ -8,6 +8,7 @@ const genAsset = require('../lib/asset');
 
 // define command
 const command = clap.command('asset', '[config]')
+    .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option('-t, --type <type>', 'Specify a type of asset (prepare, js, css, libs-js or libs-css)')
@@ -15,7 +16,6 @@ const command = clap.command('asset', '[config]')
     .option('-o, --output <filename>', 'Output file',
         (value = '') => path.resolve(process.cwd(), value)
     )
-    .version(require('../package.json').version)
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const modelName = this.values.model || args[1];

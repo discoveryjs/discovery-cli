@@ -1,57 +1,49 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const fs = require('fs');
 const clap = require('clap');
-const { stringifyInfo, stringifyStream } = require('@discoveryjs/json-ext');
 const commonOptions = require('../lib/cli');
-const getData = require('../lib/data');
+const getCache = require('../lib/cache');
+const modes = ['default', 'readonly', 'force'];
 
 // define command
 const command = clap.command('data', '[config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
-    .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default when enabled)', (value = 4) => Number(value) || false, false)
-    .option('-o, --output <filename>', 'Output file',
-        (value = '') => path.resolve(process.cwd(), value)
+    .option(...commonOptions.cache)
+    .option(
+        '--mode <mode>',
+        'Mode: default (get actual or generate it not exists), readonly (get actual only, generate nothing) and force (always generate)',
+        (value, current) => modes.includes(value) ? value : current,
+        'default'
     )
+    .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default)', (value = 4) => Number(value) || false, false)
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const model = this.values.model || args[1];
-        const outputFile = this.values.output || null;
+        const cache = this.values.cache || false;
+        const mode = this.values.mode;
         const pretty = this.values.pretty;
 
         const options = {
             configFile,
             model,
+            cache,
+            mode,
             pretty
         };
 
-        getData(options).then(payload => {
-            const stream = stringifyStream(payload, null, pretty);
-
-            if (outputFile) {
-                stream.pipe(fs.createWriteStream(outputFile));
-                return;
-            }
-
+        getCache(options).then(info => {
             // send data to parent process if run as a child process
             if (typeof process.send === 'function') {
-                const payloadInfo = stringifyInfo(payload);
-                let size;
-
-                if (!payloadInfo.async.length && !payloadInfo.circular.length) {
-                    size = payloadInfo.minLength;
-                }
-
-                process.send({ payload: 'stream', size });
-                stream.pipe(fs.createWriteStream(null, { fd: 4 }));
+                process.send(info);
                 return;
             }
 
             // otherwise write to stdout
-            stream.pipe(process.stdout);
+            if (info) {
+                process.stdout.write(info.file);
+            }
         }).catch(error => {
             console.error(error);
             process.exit(2);

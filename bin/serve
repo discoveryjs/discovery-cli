@@ -8,6 +8,7 @@ const DEFAULT_PORT = 8123;
 
 // define command
 const command = clap.command('discovery', '[config]')
+    .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.cache)
@@ -21,7 +22,6 @@ const command = clap.command('discovery', '[config]')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
     )
-    .version(require('../package.json').version)
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const port = [

@@ -1,7 +1,8 @@
 ## next
 
-- Fixed static reports building issues when you got "Download" and "Reload without cache" buttons on static built reports.
-- Cache system reworked. Now cache dir `.discoveryjs-cache` set by default.
+- Fixed building to avoid "Download" and "Reload without cache" buttons in built result
+- Changed `--cache` option default to `.discoveryjs-cache`
+- Reworked cache subsystem
 
 ## 1.13.1 (06-10-2020)
 

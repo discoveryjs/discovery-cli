@@ -7,6 +7,7 @@ const build = require('../lib/build');
 
 // define command
 const command = clap.command('discovery-build', '[config]')
+    .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option('-o, --output <path>', 'Path for a build result (`build` by default)',
@@ -19,7 +20,6 @@ const command = clap.command('discovery-build', '[config]')
     .option('--isolate-styles [postfix]', 'Isolate generated CSS with specific postfix, when [postfix] is not specified it\'s generating as hash from CSS content', value => value || true)
     .option('--pretty-data [indent]', 'Pretty print of data.json', (value = 4) => Number(value) || false, false)
     .option('--cleanup', 'Delete all files of output path before saving a result to it')
-    .version(require('../package.json').version)
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const options = Object.assign({}, this.values, {
