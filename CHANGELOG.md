@@ -3,6 +3,10 @@
 - Fixed building to avoid "Download" and "Reload without cache" buttons in built result
 - Changed `--cache` option default to `.discoveryjs-cache`
 - Reworked cache subsystem
+    - Introduced `cache` command
+    - Introduced cache dispatcher to manage cache, all related logic was moved to it
+    - Removed cache logic and options from `data` command
+    - Added ETag header in server when cache is using (response with 304 when data is not changed)
 
 ## 1.13.1 (06-10-2020)
 
