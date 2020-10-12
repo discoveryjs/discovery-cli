@@ -10,7 +10,7 @@ const command = clap.command('data', '[config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
-    .option(...commonOptions.cache)
+    .option(...commonOptions.cacheDir)
     .option(
         '--mode <mode>',
         'Mode: default (get actual or generate it not exists), readonly (get actual only, generate nothing) and force (always generate)',
@@ -21,14 +21,14 @@ const command = clap.command('data', '[config] [model]')
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const model = this.values.model || args[1];
-        const cache = this.values.cache || false;
+        const cacheDir = this.values.cacheDir || false;
         const mode = this.values.mode;
         const pretty = this.values.pretty;
 
         const options = {
             configFile,
             model,
-            cache,
+            cacheDir,
             mode,
             pretty
         };
