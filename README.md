@@ -44,14 +44,16 @@ Usage:
 
 Options:
 
-        --cache [dir]          Enable data caching and specify path to store cache files (using a
-                               working directory if dir is not set)
-    -c, --config <filename>    Path to config (JavaScript or JSON file), if not specified then looking
-                               for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
-                               section in package.json in the listed order
+        --bail                 Exit immediately on first warmup task failure
+        --cache-dir [dir]      Enable data caching and specify path to store cache files (using a .discoveryjs-cache
+                               directory if not set)
+    -c, --config <filename>    Path to config (JavaScript or JSON file), if not specified then looking for
+                               .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery" section in package.json
+                               in the listed order
         --dev                  Enable developer mode
     -h, --help                 Output usage information
     -m, --model <name>         Specify a model (multi-model mode only)
+        --no-cache             Disable data caching
         --no-warmup            Disable model's data cache warm up on server start
     -p, --port <n>             Listening port (default: 8123)
         --prebuild [path]      Prebuild model's static in path (path is optional, `build` by default)
@@ -67,16 +69,19 @@ Usage:
 
 Options:
 
+        --cache-dir [dir]             Enable data caching and specify path to store cache files (using a
+                                      .discoveryjs-cache directory if not set)
         --cleanup                     Delete all files of output path before saving a result to it
-    -c, --config <filename>           Path to config (JavaScript or JSON file), if not specified then
-                                      looking for .discoveryrc.js, .discoveryrc.json, .discoveryrc or
-                                      "discovery" section in package.json in the listed order
+    -c, --config <filename>           Path to config (JavaScript or JSON file), if not specified then looking for
+                                      .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery" section in
+                                      package.json in the listed order
     -h, --help                        Output usage information
-        --isolate-styles [postfix]    Isolate generated CSS with specific postfix, when [postfix] is
-                                      not specified it's generating as hash from CSS content
+        --isolate-styles [postfix]    Isolate generated CSS with specific postfix, when [postfix] is not specified
+                                      it's generating as hash from CSS content
     -m, --model <name>                Specify a model (multi-model mode only)
         --no-data                     Exclude data in build
     -o, --output <path>               Path for a build result (`build` by default)
+        --prebuild                    Prebuild mode
         --pretty-data [indent]        Pretty print of data.json
     -s, --single-file                 Output a model build as a single file
     -v, --version                     Output version
