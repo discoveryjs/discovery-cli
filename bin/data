@@ -8,7 +8,7 @@ const commonOptions = require('../lib/cli');
 const getData = require('../lib/data');
 
 // define command
-const command = clap.command('data', '[config] [model]')
+const command = clap.command('discovery-data', '[config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)

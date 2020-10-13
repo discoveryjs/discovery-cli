@@ -11,6 +11,7 @@ const command = clap.command('discovery-build', '[config]')
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.cacheDir)
+    .option(...commonOptions.noCache)
     .option('-o, --output <path>', 'Path for a build result (`build` by default)',
         (value = '') => path.resolve(process.cwd(), value),
         'build'
@@ -23,9 +24,11 @@ const command = clap.command('discovery-build', '[config]')
     .option('--cleanup', 'Delete all files of output path before saving a result to it')
     .action(function(args) {
         const configFile = this.values.config || args[0];
-        const options = Object.assign({}, this.values, {
+
+        const options = {
+            ...this.values,
             configFile
-        });
+        };
 
         build(options).then(() => {
             if (typeof process.send === 'function') {

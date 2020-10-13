@@ -6,7 +6,7 @@ const getCache = require('../lib/cache');
 const modes = ['default', 'readonly', 'force'];
 
 // define command
-const command = clap.command('data', '[config] [model]')
+const command = clap.command('discovery-cache', '[config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
@@ -22,8 +22,7 @@ const command = clap.command('data', '[config] [model]')
         const configFile = this.values.config || args[0];
         const model = this.values.model || args[1];
         const cacheDir = this.values.cacheDir || false;
-        const mode = this.values.mode;
-        const pretty = this.values.pretty;
+        const { mode, pretty } = this.values;
 
         const options = {
             configFile,

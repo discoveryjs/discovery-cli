@@ -20,8 +20,8 @@ const command = clap.command('asset', '[config]')
         const configFile = this.values.config || args[0];
         const modelName = this.values.model || args[1];
         const outputFile = this.values.output || null;
-        const type = this.values.type;
-        const es5LibsJs = this.values.es5LibsJs;
+        const { type, es5LibsJs } = this.values;
+
         const options = {
             configFile,
             modelName,

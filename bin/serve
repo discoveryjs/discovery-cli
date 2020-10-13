@@ -30,10 +30,12 @@ const command = clap.command('discovery', '[config]')
             process.env.PORT,
             DEFAULT_PORT
         ].filter(value => !isNaN(value))[0];
-        const options = Object.assign({}, this.values, {
+
+        const options = {
+            ...this.values,
             configFile,
             port
-        });
+        };
 
         createServer(options);
     });

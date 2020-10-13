@@ -12,13 +12,16 @@ const command = clap.command('discovery-static', '[config]')
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.cacheDir)
+    .option(...commonOptions.noCache)
     .option('-d, --dir <dirname>', 'Directory with already prebuilt models',
         (value = '') => path.resolve(process.cwd(), value))
     .action(function(args) {
         const configFile = this.values.config || args[0];
-        const options = Object.assign({}, this.values, {
+
+        const options = {
+            ...this.values,
             configFile
-        });
+        };
 
         buildStatic(options).then(stream => {
             if (typeof process.send === 'function') {
