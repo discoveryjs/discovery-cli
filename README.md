@@ -13,8 +13,8 @@ CLI tools to serve & build projects based on [Discovery.js](https://github.com/d
 
 - [Install](#install)
 - [Commands](#commands)
-    - [discovery (serve)](#discovery-serve)
-    - [discovery-build (build)](#discovery-build-build)
+    - [discovery serve](#discovery-serve)
+    - [discovery-build build](#discovery-build-build)
 - [Modes](#modes)
     - [Single model](#single-model)
     - [Multiple models](#multiple-models)
@@ -45,7 +45,7 @@ Usage:
 Options:
 
         --bail                 Exit immediately on first warmup task failure
-        --cache-dir [dir]      Enable data caching and specify path to store cache files (using a .discoveryjs-cache
+        --cachedir [dir]       Enable data caching and specify path to store cache files (using a .discoveryjs-cache
                                directory if not set)
     -c, --config <filename>    Path to config (JavaScript or JSON file), if not specified then looking for
                                .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery" section in package.json
@@ -69,7 +69,7 @@ Usage:
 
 Options:
 
-        --cache-dir [dir]             Enable data caching and specify path to store cache files (using a
+        --cachedir [dir]              Enable data caching and specify path to store cache files (using a
                                       .discoveryjs-cache directory if not set)
         --cleanup                     Delete all files of output path before saving a result to it
     -c, --config <filename>           Path to config (JavaScript or JSON file), if not specified then looking for

@@ -10,7 +10,7 @@ const command = clap.command('discovery-build', '[config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
-    .option(...commonOptions.cacheDir)
+    .option(...commonOptions.cachedir)
     .option(...commonOptions.noCache)
     .option('-o, --output <path>', 'Path for a build result (`build` by default)',
         (value = '') => path.resolve(process.cwd(), value),

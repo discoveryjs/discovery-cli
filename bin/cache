@@ -10,7 +10,7 @@ const command = clap.command('discovery-cache', '[config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
-    .option(...commonOptions.cacheDir)
+    .option(...commonOptions.cachedir)
     .option(
         '--mode <mode>',
         'Mode: default (get actual or generate it not exists), readonly (get actual only, generate nothing) and force (always generate)',
@@ -21,13 +21,13 @@ const command = clap.command('discovery-cache', '[config] [model]')
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const model = this.values.model || args[1];
-        const cacheDir = this.values.cacheDir || false;
+        const cachedir = this.values.cachedir || false;
         const { mode, pretty } = this.values;
 
         const options = {
             configFile,
             model,
-            cacheDir,
+            cachedir,
             mode,
             pretty
         };

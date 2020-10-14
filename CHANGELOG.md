@@ -1,14 +1,15 @@
 ## next
 
 - Fixed building to avoid "Download" and "Reload without cache" buttons in built result
-- Changed `--cache` option default to `.discoveryjs-cache`
 - Added default `favicon.ico` to server
 - Reworked cache subsystem
     - Added `cache` command
     - Added `/cachez` server route with details about cache
     - Added `ETag` header in server when cache is using (response with 304 when data is not changed)
+    - Replaced `--cache` option with `--no-cache` and `--cachedir`
+    - Changed `--cachedir` (former `--cache` option) default to `.discoveryjs-cache`
     - Improved background data cache updating
-    - Fixed issues with corrupted data responding due to read from a cache that's not fully written or failed to write
+    - Fixed issues with corrupted data responding due to read from a cache that's not fully written or uncomplete because of
     - Introduced cache dispatcher that encapsulates cache related logic
     - Removed cache logic and options from `data` command
 
