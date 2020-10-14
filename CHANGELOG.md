@@ -2,6 +2,7 @@
 
 - Fixed building to avoid "Download" and "Reload without cache" buttons in built result
 - Changed `--cache` option default to `.discoveryjs-cache`
+- Added default `favicon.ico` to server
 - Reworked cache subsystem
     - Added `cache` command
     - Added `/cachez` server route with details about cache
