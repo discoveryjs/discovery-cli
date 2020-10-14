@@ -13,8 +13,8 @@ CLI tools to serve & build projects based on [Discovery.js](https://github.com/d
 
 - [Install](#install)
 - [Commands](#commands)
-    - [discovery serve](#discovery-serve)
-    - [discovery-build build](#discovery-build-build)
+    - [discovery (serve)](#discovery-serve)
+    - [discovery-build (build)](#discovery-build-build)
 - [Modes](#modes)
     - [Single model](#single-model)
     - [Multiple models](#multiple-models)
@@ -79,6 +79,7 @@ Options:
         --isolate-styles [postfix]    Isolate generated CSS with specific postfix, when [postfix] is not specified
                                       it's generating as hash from CSS content
     -m, --model <name>                Specify a model (multi-model mode only)
+        --no-cache                    Disable data caching
         --no-data                     Exclude data in build
     -o, --output <path>               Path for a build result (`build` by default)
         --prebuild                    Prebuild mode
