@@ -1,6 +1,7 @@
 ## next
 
 - Fixed building to avoid "Download" and "Reload without cache" buttons in built result
+- Fixed streaming data to client (not through cache) when data contains async values
 - Added default `favicon.ico` to server
 - Reworked cache subsystem
     - Added `cache` command

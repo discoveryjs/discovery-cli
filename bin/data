@@ -38,7 +38,7 @@ const command = clap.command('discovery-data', '[config] [model]')
 
             // send data to parent process if run as a child process
             if (typeof process.send === 'function') {
-                const payloadInfo = stringifyInfo(payload);
+                const payloadInfo = stringifyInfo(payload, null, null, { async: true });
                 let size;
 
                 if (!payloadInfo.async.length && !payloadInfo.circular.length) {
@@ -46,8 +46,13 @@ const command = clap.command('discovery-data', '[config] [model]')
                 }
 
                 process.send({ payload: 'stream', size });
-                stream.pipe(fs.createWriteStream(null, { fd: 4 }));
-                return;
+                return new Promise((resolve, reject) => {
+                    stream
+                        .on('error', reject)
+                        .pipe(fs.createWriteStream(null, { fd: 4 }))
+                        .on('finish', resolve)
+                        .on('error', reject);
+                });
             }
 
             // otherwise write to stdout
