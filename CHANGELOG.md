@@ -1,4 +1,4 @@
-## next
+## 1.14.0 (20-10-2020)
 
 - Added default `favicon.ico` to server
 - Added support for `darkmode` option in config (for index and model)
