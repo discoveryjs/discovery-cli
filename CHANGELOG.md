@@ -1,3 +1,7 @@
+## next
+
+- Fixed modelfree mode client side setup
+
 ## 1.14.0 (20-10-2020)
 
 - Added default `favicon.ico` to server
