@@ -1,4 +1,4 @@
-## next
+## 1.14.1 (22-10-2020)
 
 - Fixed resource inlining on CSS build to avoid corruption of external and hash references
 - Fixed modelfree mode client side setup
