@@ -1,4 +1,4 @@
-## next
+## 1.14.2 (23-10-2020)
 
 - Fixed missed `darkmodePersistent` option for index page
 
