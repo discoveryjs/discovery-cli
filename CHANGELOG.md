@@ -1,4 +1,4 @@
-## next
+## 1.14.3 (04-11-2020)
 
 - Replaced local patched version of `css-tree` for release version 1.0.0
 
