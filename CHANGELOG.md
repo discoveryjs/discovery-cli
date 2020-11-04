@@ -1,3 +1,7 @@
+## next
+
+- Replaced local patched version of `css-tree` for release version 1.0.0
+
 ## 1.14.2 (23-10-2020)
 
 - Fixed missed `darkmodePersistent` option for index page
