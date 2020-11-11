@@ -1,4 +1,4 @@
-## next
+## 1.15.0 (11-11-2020)
 
 - Added `--no-bg-update` option for server
 - Fixed issue with broken Custom Properties in CSS
