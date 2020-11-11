@@ -1,3 +1,7 @@
+## next
+
+- Added `--no-bg-update` option for server
+
 ## 1.14.3 (04-11-2020)
 
 - Replaced local patched version of `css-tree` for release version 1.0.0
