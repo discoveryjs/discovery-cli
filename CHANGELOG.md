@@ -1,6 +1,7 @@
 ## next
 
 - Added `--no-bg-update` option for server
+- Fixed issue with broken Custom Properties in CSS
 
 ## 1.14.3 (04-11-2020)
 
