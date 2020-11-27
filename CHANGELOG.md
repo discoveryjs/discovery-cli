@@ -1,6 +1,6 @@
 ## next
 
-- Added `--no-cors` option for server to disable CORS, i.e. allow data fetching for any origin
+- Added `--cors` option for server to disable CORS, i.e. allow data fetching for any origin
 
 ## 1.15.0 (11-11-2020)
 
