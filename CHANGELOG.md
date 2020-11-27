@@ -1,3 +1,7 @@
+## next
+
+- Added `--no-cors` option for server to disable CORS, i.e. allow data fetching for any origin
+
 ## 1.15.0 (11-11-2020)
 
 - Added `--no-bg-update` option for server
