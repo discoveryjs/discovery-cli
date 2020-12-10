@@ -1,5 +1,5 @@
 @import url('./common.css');
-@import url('./gen/lib.css');
+@import url('./@discoveryjs/discovery/lib.css');
 
 /* generated file (index specific) */
 @import url('./gen/index-libs.css');
