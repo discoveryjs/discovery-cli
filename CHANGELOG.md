@@ -1,5 +1,20 @@
 ## next
 
+- Added `--cors` option for server to disable CORS, i.e. allow data fetching for any origin
+- Fixed `darkmode` default value for index page when option is not set up in config
+- Fixed selector isolation for rules in `@keyframes`
+
+## 1.15.0 (11-11-2020)
+
+- Added `--no-bg-update` option for server
+- Fixed issue with broken Custom Properties in CSS
+
+## 1.14.3 (04-11-2020)
+
+- Replaced local patched version of `css-tree` for release version 1.0.0
+
+## 1.14.2 (23-10-2020)
+
 - Fixed missed `darkmodePersistent` option for index page
 
 ## 1.14.1 (22-10-2020)

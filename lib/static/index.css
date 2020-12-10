@@ -5,7 +5,10 @@
 @import url('./gen/index-libs.css');
 @import url('./gen/index-view.css');
 
-h1::before {
+.view-h1 {
+    margin-top: 0;
+}
+.view-h1::before {
     display: inline-block;
     vertical-align: middle;
     position: relative;

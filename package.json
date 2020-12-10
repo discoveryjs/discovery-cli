@@ -1,6 +1,6 @@
 {
   "name": "@discoveryjs/cli",
-  "version": "1.14.1",
+  "version": "1.15.0",
   "description": "CLI tools to serve & build projects based on Discovery.js",
   "author": "Roman Dvornov <rdvornov@gmail.com> (https://github.com/lahmatiy)",
   "license": "MIT",
@@ -35,7 +35,7 @@
     "archiver": "^5.0.0",
     "chalk": "^3.0.0",
     "clap": "^2.0.1",
-    "css-tree": "^1.0.0-alpha.39",
+    "css-tree": "^1.0.1",
     "esbuild": "^0.7.21",
     "express": "^4.17.1",
     "mime": "^2.4.4",
