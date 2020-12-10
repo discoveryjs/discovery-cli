@@ -2,6 +2,7 @@
 
 - Added `--cors` option for server to disable CORS, i.e. allow data fetching for any origin
 - Fixed `darkmode` default value for index page when option is not set up in config
+- Fixed selector isolation for rules in `@keyframes`
 
 ## 1.15.0 (11-11-2020)
 
