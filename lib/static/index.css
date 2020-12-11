@@ -2,8 +2,7 @@
 @import url('./@discoveryjs/discovery/lib.css');
 
 /* generated file (index specific) */
-@import url('./gen/index-libs.css');
-@import url('./gen/index-view.css');
+@import url('./gen/extensions.css');
 
 .view-h1 {
     margin-top: 0;

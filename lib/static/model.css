@@ -2,5 +2,4 @@
 @import url('../@discoveryjs/discovery/lib.css');
 
 /* generated file (model specific) */
-@import url('./gen/model-libs.css');
-@import url('./gen/model-view.css');
+@import url('./gen/extensions.css');
