@@ -1,5 +1,5 @@
 @import url('./common.css');
-@import url('../../node_modules/@discoveryjs/discovery/dist/discovery.raw.css');
+@import url('@discoveryjs/discovery/src/lib.css');
 
 /* generated file (model specific) */
 @import url('discovery-cli:extensions');
