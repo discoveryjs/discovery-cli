@@ -76,8 +76,6 @@ Options:
                                       .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery" section in
                                       package.json in the listed order
     -h, --help                        Output usage information
-        --isolate-styles [postfix]    Isolate generated CSS with specific postfix, when [postfix] is not specified
-                                      it's generating as hash from CSS content
     -m, --model <name>                Specify a model (multi-model mode only)
         --no-cache                    Disable data caching
         --no-data                     Exclude data in build
