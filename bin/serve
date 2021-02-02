@@ -18,6 +18,8 @@ const command = clap.command('discovery', '[config]')
         (value = 'build') => value ? path.resolve(process.cwd(), value) : value,
         false
     )
+    .option('--no-model-download', 'Enable model download feature')
+    .option('--no-model-reset-cache', 'Enable model cache reset feature')
     .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
     .option('--no-bg-update', 'Disable background data cache updates')
     .option('--cors', 'Enable CORS, i.e. allows data fetching for any origin')

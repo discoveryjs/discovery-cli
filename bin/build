@@ -21,6 +21,8 @@ const command = clap.command('discovery-build', '[config]')
     .option('--no-data', 'Exclude data in build')
     .option('--pretty-data [indent]', 'Pretty print of data.json', (value = 4) => Number(value) || false, false)
     .option('--cleanup', 'Delete all files of output path before saving a result to it')
+    .option('--model-download', 'Enable model download feature')
+    .option('--model-reset-cache', 'Enable model cache reset feature')
     .action(function(args) {
         const configFile = this.values.config || args[0];
 
