@@ -18,18 +18,20 @@ const command = clap.command('discovery-cache', '[config] [model]')
         'default'
     )
     .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default)', (value = 4) => Number(value) || false, false)
+    .option('--hash [hash]', 'Use checksum for persistent cache')
     .action(function(args) {
         const configFile = this.values.config || args[0];
         const model = this.values.model || args[1];
         const cachedir = this.values.cachedir || false;
-        const { mode, pretty } = this.values;
+        const { mode, pretty, hash } = this.values;
 
         const options = {
             configFile,
             model,
             cachedir,
             mode,
-            pretty
+            pretty,
+            hash
         };
 
         getCache(options).then(info => {

@@ -24,6 +24,7 @@ const command = clap.command('discovery', '[config]')
     .option('--no-bg-update', 'Disable background data cache updates')
     .option('--cors', 'Enable CORS, i.e. allows data fetching for any origin')
     .option('--bail', 'Exit immediately on first warmup task failure')
+    .option('--cache-persistent', 'Use persistent caches system')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
     )
