@@ -3,10 +3,10 @@
 const clap = require('clap');
 const fs = require('fs');
 const commonOptions = require('../lib/cli');
-const buildStatic = require('../lib/static');
+const buildStatic = require('../lib/archive');
 
 // define command
-const command = clap.command('discovery-static', '[config]')
+const command = clap.command('discovery-archive', '[config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
