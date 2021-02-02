@@ -23,9 +23,12 @@ const command = clap.command('discovery-static', '[config]')
             configFile
         };
 
-        buildStatic(options).then(stream => {
+        buildStatic(options).then(({ filename, stream }) => {
             if (typeof process.send === 'function') {
-                process.send({ payload: 'stream' });
+                process.send({
+                    payload: 'stream',
+                    filename
+                });
                 stream.pipe(fs.createWriteStream(null, { fd: 4 }));
                 return;
             }
