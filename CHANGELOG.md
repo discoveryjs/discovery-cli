@@ -1,8 +1,12 @@
-## next
+## 2.0.0-beta.1 (05-02-2021)
 
+- Boosted build by using `esbuild` and streaming writing
+- Improved and simplified serve
+- Improved cache subsystem
 - Added `--cors` option for server to disable CORS, i.e. allow data fetching for any origin
 - Fixed `darkmode` default value for index page when option is not set up in config
 - Fixed selector isolation for rules in `@keyframes`
+- TBD
 
 ## 1.15.0 (11-11-2020)
 
