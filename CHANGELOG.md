@@ -1,3 +1,7 @@
+## 2.0.0-beta.3 (05-02-2021)
+
+- Fix bundling in `@discoveryjs/discovery` itself
+
 ## 2.0.0-beta.2 (05-02-2021)
 
 - Boosted build by using `esbuild` and streaming writing
