@@ -1,4 +1,4 @@
-## 2.0.0-beta.1 (05-02-2021)
+## 2.0.0-beta.2 (05-02-2021)
 
 - Boosted build by using `esbuild` and streaming writing
 - Improved and simplified serve
