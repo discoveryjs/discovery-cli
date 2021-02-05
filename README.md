@@ -38,26 +38,26 @@ npm install @discoveryjs/cli
 ### discovery (serve)
 
 ```
-Usage:
-
-    discovery [config] [options]
-
 Options:
-
-        --bail                 Exit immediately on first warmup task failure
-        --cachedir [dir]       Enable data caching and specify path to store cache files (using a .discoveryjs-cache
-                               directory if not set)
-    -c, --config <filename>    Path to config (JavaScript or JSON file), if not specified then looking for
-                               .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery" section in package.json
-                               in the listed order
-        --dev                  Enable developer mode
-    -h, --help                 Output usage information
-    -m, --model <name>         Specify a model (multi-model mode only)
-        --no-cache             Disable data caching
-        --no-warmup            Disable model's data cache warm up on server start
-    -p, --port <n>             Listening port (default: 8123)
-        --prebuild [path]      Prebuild model's static in path (path is optional, `build` by default)
-    -v, --version              Output version
+        --bail                    Exit immediately on first warmup task failure
+        --cache-persistent        Use persistent caches system
+        --cachedir [dir]          Enable data caching and specify path to store cache files (using a
+                                  .discoveryjs-cache directory if not set)
+    -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
+                                  for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
+                                  section in package.json in the listed order
+        --cors                    Enable CORS, i.e. allows data fetching for any origin
+        --dev                     Enable developer mode
+    -h, --help                    Output usage information
+    -m, --model <name>            Specify a model (multi-model mode only)
+        --no-bg-update            Disable background data cache updates
+        --no-cache                Disable data caching
+        --no-model-download       Enable model download feature
+        --no-model-reset-cache    Enable model cache reset feature
+        --no-warmup               Disable model's data cache warm up on server start
+    -p, --port <n>                Listening port (default: 8123)
+        --prebuild [path]         Prebuild model's static in path (path is optional, `build` by default)
+    -v, --version                 Output version
 ```
 
 ### discovery-build (build)
@@ -69,23 +69,22 @@ Usage:
 
 Options:
 
-        --cachedir [dir]              Enable data caching and specify path to store cache files (using a
-                                      .discoveryjs-cache directory if not set)
-        --cleanup                     Delete all files of output path before saving a result to it
-    -c, --config <filename>           Path to config (JavaScript or JSON file), if not specified then looking for
-                                      .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery" section in
-                                      package.json in the listed order
-    -h, --help                        Output usage information
-        --isolate-styles [postfix]    Isolate generated CSS with specific postfix, when [postfix] is not specified
-                                      it's generating as hash from CSS content
-    -m, --model <name>                Specify a model (multi-model mode only)
-        --no-cache                    Disable data caching
-        --no-data                     Exclude data in build
-    -o, --output <path>               Path for a build result (`build` by default)
-        --prebuild                    Prebuild mode
-        --pretty-data [indent]        Pretty print of data.json
-    -s, --single-file                 Output a model build as a single file
-    -v, --version                     Output version
+        --cachedir [dir]          Enable data caching and specify path to store cache files (using
+                                  .discoveryjs-cache by default when [dir] is not set)
+        --cleanup                 Delete all files of output path before saving a result to it
+    -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
+                                  for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
+                                  section in package.json in the listed order
+    -h, --help                    Output usage information
+    -m, --model <name>            Specify a model (multi-model mode only)
+        --model-download          Enable model download feature
+        --model-reset-cache       Enable model cache reset feature
+        --no-cache                Disable data caching
+        --no-data                 Exclude data in build
+    -o, --output <path>           Path for a build result (`build` by default)
+        --pretty-data [indent]    Pretty print of data.json
+    -s, --single-file             Output a model build as a single file
+    -v, --version                 Output version
 ```
 
 ## Modes
@@ -126,16 +125,17 @@ Model config consists of the following fields (all fields are optional):
 
 * `name` – name of model (used in title)
 * `meta` – any data (should be serializable to JSON) that will be available in model's `setup.js`
-* `data` – function which returns `any|Promise<any>`. Result of this function must be serializable to JSON (i.e. have no cyclic references)
-* `prepare` – path to a script with additional initialization logic (e.g. add cyclic links and relations, mark objects, add annotations or extensions for query engine etc)
-* `plugins` – list of plugins (paths to `.js` and `.css` files); relative paths or package name and path are supported; concating to parent's plugin list
+* `data` – function which returns `any|Promise<any>` or path to a module that exports such a function. Result of the function is using for a model; must be serializable to JSON (i.e. have no cyclic references for now)
+* `prepare` – path to a module with a function right after data is loaded but before is used (e.g. add cyclic references and relations in darta, mark data objects, add annotations and/or helpers for query engine etc)
 * `favicon` – path to favicon image; inherits from parent config when not set
 * `viewport` – value for `<meta name="viewport">`; inherits from parent config when not set
+* `darkmode` – setup darkmode feature; inherits from parent config when not set
+* `download` – default value for download feature; inherits from parent config when not set
 * `view` – setup model's views (see [Configure view](#configure-view))
-* `extendRouter` – `function(router, modelConfig, options)`
-* `cache`
-* `cacheTtl`
-* `cacheBgUpdate`
+* `routers` – an array of paths to modules which exports a function (`function(router, modelConfig, options): void`) that extends model router
+* `cache` – enables caching for data
+* `cacheTtl` – specify time to live of data cache. When data cache become too old, new data will be generated on next request. Value might be a number (milliseconds) or a string (e.g. `"1m"`, `"1 hour 30 mins"` etc; see [parse-duration](https://www.npmjs.com/package/parse-duration) description for possible values)
+* `cacheBgUpdate` – specify a time period from a moment of previous cache was generated to update it. Once new cache is generated, it will be used for upcoming requests. Value might be a number (milliseconds) or a string (e.g. `"1m"`, `"1 hour 30 mins"` etc; see [parse-duration](https://www.npmjs.com/package/parse-duration) description for possible values)
 
 Example:
 
@@ -148,11 +148,6 @@ module.exports = {
     prepare: path.join(__dirname, 'path/to/prepare.js'),
     favicon: 'path/to/favicon.png',
     viewport: 'width=device-width, initial-scale=1',
-    plugins: [
-        '@discoveryjs/view-plugin-highcharts',
-        '@discoveryjs/view-plugin-highcharts/index.css',
-        './relative-path-to-plugin.js'
-    ],
     view: {
         basedir: __dirname,
         assets: [
@@ -172,50 +167,31 @@ Config should provide JSON or exports an object with following properties:
 
 * `name` - name of discovery instance (used in page title)
 * `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
-* `extendRouter` - a function to extend app routers
+* `modelBaseConfig` – the same as model's config, using as a base for a model config
+* `routers` – an array of paths to modules which exports a function (`function(router, modelConfig, options): void`) that extends app routers
 * `favicon` – path to favicon image
 * `viewport` – value for `<meta name="viewport">`
+* `darkmode` – setup darkmode feature (default `"auto"`)
+* `download` – default value for download feature (default `true`)
 * `view` – setup index page views (see [Configure view](#configure-view))
-* `plugins` – a list of plugin files for every model (but not for index page); list is prepending to a list defined in a model
-* `cache`
 
 Example:
 
 ```js
 module.exports = {
     name: 'My cool dashboards',
+    favicon: 'path/to/favicon.png',
     models: {
         one: 'path/to/model/config',
-        two: { /* model config */ }
-    },
-    extendRouter: function(app, config, options) {
-        const bodyParser = require('body-parser');
-
-        app.use(bodyParser.json());
-        app.post('/echo', function(req, res) {
-            // Request from browser:
-            // fetch('/echo', {
-            //     method: 'POST', 
-            //     body: JSON.stringify({ test: 'ok' }),
-            //     headers: { 'Content-Type': 'application/json'}
-            // })
-            // will response with 200 {"echo":{"test":"ok"}}
-            res.send({ echo: req.body });
-        });
-    },
-    favicon: 'path/to/favicon.png',
-    plugins: [
-        '@discoveryjs/view-plugin-highcharts',
-        '@discoveryjs/view-plugin-highcharts/index.css',
-        './relative-path-to-plugin.js'
-    ]
+        two: require('./path/to/model/config'),
+        three: { /* model config */ }
+    }
 };
 ```
 
 ### Configure view
 
 * `basedir` – directory to resolve relative path in `assets` and `libs`
-* `libs` – path to libs, where key is a local name available in asset's scope and value is a path to library file or an array of files (`.js` or `.css`)
 * `assets` – array of path to `.js` and `.css` files
 > js files has own scope (as modules) with a reference `discovery` that points to discovery instance
 

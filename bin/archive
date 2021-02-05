@@ -2,19 +2,16 @@
 
 const clap = require('clap');
 const fs = require('fs');
-const path = require('path');
 const commonOptions = require('../lib/cli');
-const buildStatic = require('../lib/static');
+const buildStatic = require('../lib/archive');
 
 // define command
-const command = clap.command('discovery-static', '[config]')
+const command = clap.command('discovery-archive', '[config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.cachedir)
     .option(...commonOptions.noCache)
-    .option('-d, --dir <dirname>', 'Directory with already prebuilt models',
-        (value = '') => path.resolve(process.cwd(), value))
     .action(function(args) {
         const configFile = this.values.config || args[0];
 
@@ -23,9 +20,12 @@ const command = clap.command('discovery-static', '[config]')
             configFile
         };
 
-        buildStatic(options).then(stream => {
+        buildStatic(options).then(({ filename, stream }) => {
             if (typeof process.send === 'function') {
-                process.send({ payload: 'stream' });
+                process.send({
+                    payload: 'stream',
+                    filename
+                });
                 stream.pipe(fs.createWriteStream(null, { fd: 4 }));
                 return;
             }

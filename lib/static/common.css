@@ -6,4 +6,6 @@ body {
     padding: 0;
     border: none;
     -webkit-text-size-adjust: 100%;
+
+    font-size: 200px;
 }
