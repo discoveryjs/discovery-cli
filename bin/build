@@ -11,6 +11,7 @@ const command = clap.command('discovery-build', '[config]')
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.cachedir)
+    .option(...commonOptions.tmpdir)
     .option(...commonOptions.noCache)
     .option('-o, --output <path>', 'Path for a build result (`build` by default)',
         (value = '') => path.resolve(process.cwd(), value),
