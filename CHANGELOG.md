@@ -1,3 +1,7 @@
+## 2.0.0-beta.4 (08-02-2021)
+
+- Add `--tmpdir` option to customise a dir for data cache temp files
+
 ## 2.0.0-beta.3 (05-02-2021)
 
 - Fix bundling in `@discoveryjs/discovery` itself
