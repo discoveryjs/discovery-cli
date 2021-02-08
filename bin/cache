@@ -11,6 +11,7 @@ const command = clap.command('discovery-cache', '[config] [model]')
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.cachedir)
+    .option(...commonOptions.tmpdir)
     .option(
         '--mode <mode>',
         'Mode: default (get actual or generate it not exists), readonly (get actual only, generate nothing) and force (always generate)',
@@ -23,12 +24,14 @@ const command = clap.command('discovery-cache', '[config] [model]')
         const configFile = this.values.config || args[0];
         const model = this.values.model || args[1];
         const cachedir = this.values.cachedir || false;
+        const tmpdir = this.values.tmpdir;
         const { mode, pretty, hash } = this.values;
 
         const options = {
             configFile,
             model,
             cachedir,
+            tmpdir,
             mode,
             pretty,
             hash
