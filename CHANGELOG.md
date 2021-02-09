@@ -1,6 +1,11 @@
 ## next
 
-- Fixed crash on temporary files cleanup and related improvements
+- Fixed crash on temporary cache files cleanup and related improvements
+- Reworked model data cache settings:
+    - `cacheTtl` can take a cron expression as a value
+    - `cacheBgUpdate` can take a boolean (enabled or disabled) and `"only"` value. When `"only"` is specified, manual cache reset is not available
+    - Background updates are scheduling based on `cacheTtl` setting
+- Added `warnings` field on model config normalization, which contain all issues around config if any
 
 ## 2.0.0-beta.4 (08-02-2021)
 
