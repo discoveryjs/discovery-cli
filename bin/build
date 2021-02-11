@@ -20,7 +20,7 @@ const command = clap.command('discovery-build', '[config]')
     .option('-s, --single-file', 'Output a model build as a single file')
     .option('--no-data', 'Exclude data in build')
     .option('--pretty-data [indent]', 'Pretty print of data.json', (value = 4) => Number(value) || false, false)
-    .option('--cleanup', 'Delete all files of output path before saving a result to it')
+    .option('--clean', 'Clean the output directory before emit a build files')
     .option('--model-download', 'Enable model download feature')
     .option('--model-reset-cache', 'Enable model cache reset feature')
     .action(function(args) {
