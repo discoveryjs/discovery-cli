@@ -7,6 +7,8 @@
     - Background updates are scheduling based on `cacheTtl` setting
 - Added `warnings` field on model config normalization, which contain all issues around config if any
 - Renamed `--cleanup` build option into `--clean`
+- Added `--cache-check-ttl` option for build and archive commands
+- Added passing `meta` from model's config to model's context
 
 ## 2.0.0-beta.4 (08-02-2021)
 

@@ -10,8 +10,9 @@ const command = clap.command('discovery-archive', '[config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
-    .option(...commonOptions.cachedir)
     .option(...commonOptions.noCache)
+    .option(...commonOptions.cachedir)
+    .option(...commonOptions.checkCacheTtl)
     .action(function(args) {
         const configFile = this.values.config || args[0];
 
