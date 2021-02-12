@@ -2,6 +2,7 @@
 
 - Fixed config processing in model-free mode
 - Improved timings info in `/cachez`
+- Added `--no-check-cache-ttl` option for server
 
 ## 2.0.0-beta.5 (11-02-2021)
 
