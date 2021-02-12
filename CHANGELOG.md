@@ -1,4 +1,4 @@
-## next
+## 2.0.0-beta.6 (12-02-2021)
 
 - Fixed config processing in model-free mode
 - Improved timings info in `/cachez`
