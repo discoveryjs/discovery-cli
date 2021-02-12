@@ -1,3 +1,7 @@
+## next
+
+- Fixed config processing in model-free mode
+
 ## 2.0.0-beta.5 (11-02-2021)
 
 - Fixed crash on temporary cache files cleanup and related improvements
