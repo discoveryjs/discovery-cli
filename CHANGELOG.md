@@ -1,4 +1,4 @@
-## next
+## 2.0.0-beta.7 (17-02-2021)
 
 - Fixed edge case when `runScript` promise remains unresolved, e.g. on unexpected child process termination. This cause to prevent cache updates
 - Reworked style processing for preloader
