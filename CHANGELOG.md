@@ -1,6 +1,7 @@
 ## next
 
 - Fixed edge case when `runScript` promise remains unresolved, e.g. on unexpected child process termination. This cause to prevent cache updates
+- Reworked style processing for preloader
 
 ## 2.0.0-beta.6 (12-02-2021)
 

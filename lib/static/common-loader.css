@@ -1,0 +1,23 @@
+@import '@discoveryjs/discovery/src/preloader.css';
+@import '@discoveryjs/discovery/src/views/button.css';
+
+:host {
+    box-sizing: border-box;
+    max-width: 100vw;
+}
+
+:host > .error {
+    margin: 20px 0;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 14px;
+    color: #d85a5a;
+    background: #ff00002e;
+    text-shadow: 1px 1px var(--discovery-background-color);
+    white-space: pre-wrap;
+}
+
+.view-button {
+    font-size: 14px;
+}
