@@ -1,3 +1,7 @@
+## next
+
+- Fixed bundling failure due to changes on absolute path resolving in [esbuild 0.8.51](https://github.com/evanw/esbuild/releases/tag/v0.8.51)
+
 ## 2.0.0-beta.7 (17-02-2021)
 
 - Fixed edge case when `runScript` promise remains unresolved, e.g. on unexpected child process termination. This cause to prevent cache updates
