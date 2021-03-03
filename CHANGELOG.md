@@ -1,3 +1,7 @@
+## next
+
+- Add `inspector` and `router` options in model's `view` config
+
 ## 2.0.0-beta.8 (01-03-2021)
 
 - Fixed bundling failure due to changes on absolute path resolving in [esbuild 0.8.51](https://github.com/evanw/esbuild/releases/tag/v0.8.51)
