@@ -2,6 +2,7 @@
 
 - Added `inspector` and `router` options in model's `view` config
 - Changed `prepare` modules handling. Now a `prepare` module should export a function instead of calling `discovery.setPrepare()` method and no more `discovery` (a reference to `App` or `Widget` instance) injected into module's scope.
+- Added support for a common `prepare` function. When `modelBaseConfig.prepare` is set it invokes for every model, right before model's `prepare` if any.
 
 ## 2.0.0-beta.8 (01-03-2021)
 
