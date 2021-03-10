@@ -1,3 +1,7 @@
+## 2.0.0-beta.10 (10-03-2021)
+
+- Added support for `view.bundles`
+
 ## 2.0.0-beta.9 (04-03-2021)
 
 - Added `inspector` and `router` options in model's `view` config
