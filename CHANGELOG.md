@@ -1,3 +1,7 @@
+## next
+
+- Fixed "no such file or directory" crash in server that occurs when main process is reading caches folder and a child process is moving temporary file at this moment
+
 ## 2.0.0-beta.10 (10-03-2021)
 
 - Added support for `view.bundles`
