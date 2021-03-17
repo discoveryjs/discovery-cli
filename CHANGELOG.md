@@ -1,4 +1,4 @@
-## next
+## 2.0.0-beta.11 (16-03-2021)
 
 - Fixed "no such file or directory" crash in server that occurs when main process is reading caches folder and a child process is moving temporary file at this moment
 - Fixed broken source maps
