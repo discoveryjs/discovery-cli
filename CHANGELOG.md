@@ -2,6 +2,7 @@
 
 - Fixed "no such file or directory" crash in server that occurs when main process is reading caches folder and a child process is moving temporary file at this moment
 - Fixed broken source maps
+- Fixed build output paths for `modelfree` and `single` modes
 
 ## 2.0.0-beta.10 (10-03-2021)
 
