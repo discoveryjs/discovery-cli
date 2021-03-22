@@ -1,3 +1,7 @@
+## next
+
+- Fixed paths in source maps for models assets to be consistent with others
+
 ## 2.0.0-beta.11 (16-03-2021)
 
 - Fixed "no such file or directory" crash in server that occurs when main process is reading caches folder and a child process is moving temporary file at this moment
