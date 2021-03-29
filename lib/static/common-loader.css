@@ -4,6 +4,7 @@
 :host {
     box-sizing: border-box;
     max-width: 100vw;
+    z-index: 1;
 }
 
 :host > .error {

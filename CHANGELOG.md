@@ -1,6 +1,7 @@
 ## next
 
 - Fixed paths in source maps for models assets to be consistent with others
+- Fixed interface disabling on error during loading, due to an invisible layer overlaping error block
 
 ## 2.0.0-beta.11 (16-03-2021)
 
