@@ -1,7 +1,9 @@
 ## next
 
+- Bumped esbuild to 0.11.2 and simplified bundling
 - Fixed paths in source maps for models assets to be consistent with others
 - Fixed interface disabling on error during loading, due to an invisible layer overlaping error block
+- Added darkmode toggle to index page (when darkmode is not disabled)
 
 ## 2.0.0-beta.11 (16-03-2021)
 
