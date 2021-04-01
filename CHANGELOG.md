@@ -1,4 +1,4 @@
-## next
+## 2.0.0-beta.12 (31-03-2021)
 
 - Bumped esbuild to 0.11.2 and simplified bundling
 - Fixed paths in source maps for models assets to be consistent with others
