@@ -5,6 +5,7 @@
 - Fixed interface disabling on error during loading, due to an invisible layer overlaping error block
 - Added darkmode toggle to index page (when darkmode is not disabled)
 - Fixed download feature regression that was introduced in a recent release
+- Fixed model cache update rescheduling, previously model cache stops to update in background when cache generation has been failure
 
 ## 2.0.0-beta.11 (16-03-2021)
 
