@@ -1,9 +1,9 @@
 ## 2.0.0-beta.12 (31-03-2021)
 
-- Bumped esbuild to 0.11.2 and simplified bundling
+- Bumped `esbuild` to 0.11.2 and simplified bundling
 - Fixed paths in source maps for models assets to be consistent with others
-- Fixed interface disabling on error during loading, due to an invisible layer overlaping error block
-- Added darkmode toggle to index page (when darkmode is not disabled)
+- Fixed interface disabling on error during loading, due to an invisible layer overlapping error block
+- Added dark mode toggle to index page (when dark mode is not disabled)
 - Fixed download feature regression that was introduced in a recent release
 - Fixed model cache update rescheduling, previously model cache stops to update in background when cache generation has been failure
 
