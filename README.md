@@ -5,7 +5,7 @@
 # CLI Tools for Discovery.js
 
 [![NPM version](https://img.shields.io/npm/v/@discoveryjs/cli.svg)](https://www.npmjs.com/package/@discoveryjs/cli)
-[![Twitter](https://img.shields.io/badge/Twitter-@js_discovery-blue.svg)](https://twitter.com/js_discovery)
+[![Twitter](https://badgen.net/badge/follow/@js_discovery?icon=twitter)](https://twitter.com/js_discovery)
 
 CLI tools to serve & build projects based on [Discovery.js](https://github.com/discoveryjs/discovery)
 
