@@ -1,3 +1,7 @@
+## next
+
+- Fixed `prepare` wrapper to return modified data (#14)
+
 ## 2.0.0-beta.12 (31-03-2021)
 
 - Bumped `esbuild` to 0.11.2 and simplified bundling
