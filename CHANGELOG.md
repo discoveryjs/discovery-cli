@@ -1,5 +1,6 @@
 ## next
 
+- Added support for CSS source maps
 - Fixed `prepare` wrapper to return modified data (#14)
 - Fixed `prepare` wrapper to support a promise as a result
 - Fixed server launch in model-free mode
