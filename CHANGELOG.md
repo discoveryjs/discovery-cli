@@ -5,6 +5,7 @@
 - Fixed `prepare` wrapper to return modified data (#14)
 - Fixed `prepare` wrapper to support a promise as a result
 - Fixed server launch in model-free mode
+- Fixed crash with "No model is found" when `--no-cache` is using
 
 ## 2.0.0-beta.12 (31-03-2021)
 
