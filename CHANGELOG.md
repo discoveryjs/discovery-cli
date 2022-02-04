@@ -2,6 +2,9 @@
 
 - Added support for CSS source maps
 - Added support for `upload` option in model config
+- Changed approach to inline styles and data:
+    - Use `<style type="discovery/style">` for styles instead of `<template>`
+    - Use `<script type="discovery/chunk-data">` for data chunks instead of `<template id="[chunk-id]"><script>`
 - Fixed `prepare` wrapper to return modified data (#14)
 - Fixed `prepare` wrapper to support a promise as a result
 - Fixed server launch in model-free mode
