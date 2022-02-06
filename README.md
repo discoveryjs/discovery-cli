@@ -39,10 +39,11 @@ npm install @discoveryjs/cli
 
 ```
 Options:
+
         --bail                    Exit immediately on first warmup task failure
         --cache-persistent        Use persistent caches system
-        --cachedir [dir]          Enable data caching and specify path to store cache files (using a
-                                  .discoveryjs-cache directory if not set)
+        --cachedir [dir]          Enable data caching and specify path to store cache files (using
+                                  .discoveryjs-cache by default when [dir] is not set)
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
                                   section in package.json in the listed order
@@ -52,11 +53,14 @@ Options:
     -m, --model <name>            Specify a model (multi-model mode only)
         --no-bg-update            Disable background data cache updates
         --no-cache                Disable data caching
-        --no-model-download       Enable model download feature
-        --no-model-reset-cache    Enable model cache reset feature
+        --no-check-cache-ttl      Disable data cache TTL checking before using it
+        --no-model-data-upload    Disable model data upload feature
+        --no-model-download       Disable model download feature
+        --no-model-reset-cache    Disable model cache reset feature
         --no-warmup               Disable model's data cache warm up on server start
     -p, --port <n>                Listening port (default: 8123)
         --prebuild [path]         Prebuild model's static in path (path is optional, `build` by default)
+        --tmpdir [dir]            Temporary directory for caches
     -v, --version                 Output version
 ```
 
@@ -71,19 +75,23 @@ Options:
 
         --cachedir [dir]          Enable data caching and specify path to store cache files (using
                                   .discoveryjs-cache by default when [dir] is not set)
-        --cleanup                 Delete all files of output path before saving a result to it
+        --check-cache-ttl         Check data cache TTL before using it, option enforces to used actual
+                                  (according to TTL) data only
+        --clean                   Clean the output directory before emit a build files
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
                                   section in package.json in the listed order
     -h, --help                    Output usage information
     -m, --model <name>            Specify a model (multi-model mode only)
+        --model-data-upload       Accept model data upload feature setup in config
         --model-download          Enable model download feature
         --model-reset-cache       Enable model cache reset feature
         --no-cache                Disable data caching
-        --no-data                 Exclude data in build
+        --no-data                 Don't include data into a model build
     -o, --output <path>           Path for a build result (`build` by default)
-        --pretty-data [indent]    Pretty print of data.json
+        --pretty-data [indent]    Pretty print of model data if any
     -s, --single-file             Output a model build as a single file
+        --tmpdir [dir]            Temporary directory for caches
     -v, --version                 Output version
 ```
 
@@ -130,6 +138,7 @@ Model config consists of the following fields (all fields are optional):
 * `favicon` – path to favicon image; inherits from parent config when not set
 * `viewport` – value for `<meta name="viewport">`; inherits from parent config when not set
 * `darkmode` – setup darkmode feature; inherits from parent config when not set
+* `upload` – settings for upload data feature; inherits from parent config when not set
 * `download` – default value for download feature; inherits from parent config when not set
 * `view` – setup model's views (see [Configure view](#configure-view))
 * `routers` – an array of paths to modules which exports a function (`function(router, modelConfig, options): void`) that extends model router
@@ -167,11 +176,12 @@ Config should provide JSON or exports an object with following properties:
 
 * `name` - name of discovery instance (used in page title)
 * `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
-* `modelBaseConfig` – the same as model's config, using as a base for a model config
+* `modelBaseConfig` – the same as model's config, using as a base for a model config, i.e. `{ ...modelBaseConfig, ...modelConfig }` will be used
 * `routers` – an array of paths to modules which exports a function (`function(router, modelConfig, options): void`) that extends app routers
 * `favicon` – path to favicon image
 * `viewport` – value for `<meta name="viewport">`
 * `darkmode` – setup darkmode feature (default `"auto"`)
+* `upload` – default value for upload data feature (default `false`)
 * `download` – default value for download feature (default `true`)
 * `view` – setup index page views (see [Configure view](#configure-view))
 
@@ -192,8 +202,8 @@ module.exports = {
 ### Configure view
 
 * `basedir` – directory to resolve relative path in `assets` and `libs`
-* `assets` – array of path to `.js` and `.css` files
-> js files has own scope (as modules) with a reference `discovery` that points to discovery instance
+* `assets` – array of paths to `.js`, `.ts` and `.css` files
+> js files has own scope (as modules) with a reference `discovery` that points to an `App` instance from `@discoveryjs/discovery`
 
 ```js
 const path = require('path');

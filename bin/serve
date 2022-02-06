@@ -19,8 +19,9 @@ const command = clap.command('discovery', '[config]')
         (value = 'build') => value ? path.resolve(process.cwd(), value) : value,
         false
     )
-    .option('--no-model-download', 'Enable model download feature')
-    .option('--no-model-reset-cache', 'Enable model cache reset feature')
+    .option('--no-model-download', 'Disable model download feature')
+    .option('--no-model-data-upload', 'Disable model data upload feature')
+    .option('--no-model-reset-cache', 'Disable model cache reset feature')
     .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
     .option('--no-bg-update', 'Disable background data cache updates')
     .option('--no-check-cache-ttl', 'Disable data cache TTL checking before using it')

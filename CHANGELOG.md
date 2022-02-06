@@ -2,6 +2,8 @@
 
 - Added support for CSS source maps
 - Added support for `upload` option in model config
+- Added `--no-model-data-upload` for `serve` command
+- Added `--model-data-upload` for `build` command
 - Changed approach to inline styles and data:
     - Use `<style type="discovery/style">` for styles instead of `<template>`
     - Use `<script type="discovery/chunk-data">` for data chunks instead of `<template id="[chunk-id]"><script>`
