@@ -201,9 +201,12 @@ module.exports = {
 
 ### Configure view
 
-* `basedir` – directory to resolve relative path in `assets` and `libs`
+* `basedir` – directory to resolve relative paths
 * `assets` – array of paths to `.js`, `.ts` and `.css` files
 > js files has own scope (as modules) with a reference `discovery` that points to an `App` instance from `@discoveryjs/discovery`
+* `inspector` – option to disable view inspector (default `true`)
+* `router` – option to disable default router (default `true`)
+* `bundles`
 
 ```js
 const path = require('path');
@@ -212,10 +215,6 @@ module.exports = {
     ...
     view: {
         basedir: __dirname,
-        libs: {
-            common: '../path/to/common.js',
-            moment: path.resolve(__dirname, '../../../node_modules/moment/min/moment.min.js'),
-        },
         assets: [
             'ui/page/default.js',
             'ui/view/model-custom-view.css',
