@@ -1,4 +1,4 @@
-## next
+## 2.0.0-beta.13 (07-02-2022)
 
 - Added support for CSS source maps
 - Added support for `upload` option in model config
