@@ -155,16 +155,16 @@ module.exports = {
     name: 'My dashboard',
     data: () => ({ hello: 'world' }),
     prepare: path.join(__dirname, 'path/to/prepare.js'),
-    favicon: 'path/to/favicon.png',
+    favicon: './path/to/favicon.png',
     viewport: 'width=device-width, initial-scale=1',
     view: {
         basedir: __dirname,
         assets: [
-            'ui/page/default.js',
-            'ui/view/model-custom-view.css',
-            'ui/view/model-custom-view.js',
-            'ui/sidebar.css',
-            'ui/sidebar.js'
+            './ui/page/default.js',
+            './ui/view/model-custom-view.css',
+            './ui/view/model-custom-view.js',
+            './ui/sidebar.css',
+            './ui/sidebar.js'
         ]
     }
 };
@@ -190,9 +190,9 @@ Example:
 ```js
 module.exports = {
     name: 'My cool dashboards',
-    favicon: 'path/to/favicon.png',
+    favicon: './path/to/favicon.png',
     models: {
-        one: 'path/to/model/config',
+        one: './path/to/model/config',
         two: require('./path/to/model/config'),
         three: { /* model config */ }
     }
@@ -206,7 +206,7 @@ module.exports = {
 > js files has own scope (as modules) with a reference `discovery` that points to an `App` instance from `@discoveryjs/discovery`
 * `inspector` – option to disable view inspector (default `true`)
 * `router` – option to disable default router (default `true`)
-* `bundles`
+* `bundles` – additional bundles
 
 ```js
 const path = require('path');
@@ -216,12 +216,16 @@ module.exports = {
     view: {
         basedir: __dirname,
         assets: [
-            'ui/page/default.js',
-            'ui/view/model-custom-view.css',
-            'ui/view/model-custom-view.js',
-            'ui/sidebar.css',
-            'ui/sidebar.js'
-        ]
+            './ui/page/default.js',
+            './ui/view/model-custom-view.css',
+            './ui/view/model-custom-view.js',
+            './ui/sidebar.css',
+            './ui/sidebar.js'
+        ],
+        bundles: {
+            'worker.js': './path/to/entry/point.js',
+            'some-styles.css': './path/to/entry/point.css'
+        }
     }
 };
 ```
