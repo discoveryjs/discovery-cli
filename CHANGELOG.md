@@ -1,3 +1,7 @@
+## next
+
+- Improved CSS styles loading by removing `fetch()` since Discovery can load stylesheets via `<link>` without FOUC
+
 ## 2.0.0-beta.13 (07-02-2022)
 
 - Added support for CSS source maps
