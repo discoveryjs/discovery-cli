@@ -1,4 +1,4 @@
-## next
+## 2.0.0-beta.14 (15-02-2022)
 
 - Improved CSS styles loading by removing `fetch()` since Discovery can load stylesheets via `<link>` without FOUC
 - Added preload hints (`<link rel="preload">`) for CSS styles and the main module for a page
