@@ -3,6 +3,7 @@
 - Improved CSS styles loading by removing `fetch()` since Discovery can load stylesheets via `<link>` without FOUC
 - Added preload hints (`<link rel="preload">`) for CSS styles and the main module for a page
 - Fixed exposing a path to the cache file in client side options, expose a boolean flag instead
+- Replaced `--model-data-upload` option for `--no-model-data-upload` for `build` command
 
 ## 2.0.0-beta.13 (07-02-2022)
 

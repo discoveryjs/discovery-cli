@@ -23,7 +23,7 @@ const command = clap.command('discovery-build', '[config]')
     .option('--no-data', 'Don\'t include data into a model build')
     .option('--pretty-data [indent]', 'Pretty print of model data if any', (value = 4) => Number(value) || false, false)
     .option('--model-download', 'Enable model download feature')
-    .option('--model-data-upload', 'Accept model data upload feature setup in config')
+    .option('--no-model-data-upload', 'Ignore model data upload feature setup in config')
     .option('--model-reset-cache', 'Enable model cache reset feature')
     .action(function(args) {
         const configFile = this.values.config || args[0];

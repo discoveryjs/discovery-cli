@@ -83,11 +83,11 @@ Options:
                                   section in package.json in the listed order
     -h, --help                    Output usage information
     -m, --model <name>            Specify a model (multi-model mode only)
-        --model-data-upload       Accept model data upload feature setup in config
         --model-download          Enable model download feature
         --model-reset-cache       Enable model cache reset feature
         --no-cache                Disable data caching
         --no-data                 Don't include data into a model build
+        --no-model-data-upload    Ignore model data upload feature setup in config
     -o, --output <path>           Path for a build result (`build` by default)
         --pretty-data [indent]    Pretty print of model data if any
     -s, --single-file             Output a model build as a single file
