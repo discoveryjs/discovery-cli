@@ -1,3 +1,7 @@
+## next
+
+- Fixed path processing issues for serve and build on Windows
+
 ## 2.0.0-beta.14 (15-02-2022)
 
 - Improved CSS styles loading by removing `fetch()` since Discovery can load stylesheets via `<link>` without FOUC
