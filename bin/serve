@@ -7,7 +7,7 @@ const createServer = require('../lib/serve');
 const DEFAULT_PORT = 8123;
 
 // define command
-const command = clap.command('discovery', '[config]')
+const command = clap.command('discovery [config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
@@ -31,21 +31,19 @@ const command = clap.command('discovery', '[config]')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
     )
-    .action(function(args) {
-        const configFile = this.values.config || args[0];
+    .action(function({ options, args }) {
+        const configFile = options.config || args[0];
         const port = [
-            this.values.port,
+            options.port,
             process.env.PORT,
             DEFAULT_PORT
         ].filter(value => !isNaN(value))[0];
 
-        const options = {
-            ...this.values,
+        createServer({
+            ...options,
             configFile,
             port
-        };
-
-        createServer(options);
+        });
     });
 
 // run command

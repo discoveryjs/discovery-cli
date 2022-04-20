@@ -6,31 +6,27 @@ const commonOptions = require('../lib/cli');
 const buildStatic = require('../lib/archive');
 
 // define command
-const command = clap.command('discovery-archive', '[config]')
+const command = clap.command('discovery-archive [config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
     .option(...commonOptions.noCache)
     .option(...commonOptions.cachedir)
     .option(...commonOptions.checkCacheTtl)
-    .action(function(args) {
-        const configFile = this.values.config || args[0];
-
-        const options = {
-            ...this.values,
+    .action(async function({ options, args }) {
+        const configFile = options.config || args[0];
+        const { filename, stream } = await buildStatic({
+            ...options,
             configFile
-        };
-
-        buildStatic(options).then(({ filename, stream }) => {
-            if (typeof process.send === 'function') {
-                process.send({
-                    payload: 'stream',
-                    filename
-                });
-                stream.pipe(fs.createWriteStream(null, { fd: 4 }));
-                return;
-            }
         });
+
+        if (typeof process.send === 'function') {
+            process.send({
+                payload: 'stream',
+                filename
+            });
+            stream.pipe(fs.createWriteStream(null, { fd: 4 }));
+        }
     });
 
 // run command

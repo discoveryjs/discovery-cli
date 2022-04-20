@@ -6,7 +6,7 @@ const getCache = require('../lib/cache');
 const modes = ['default', 'readonly', 'force'];
 
 // define command
-const command = clap.command('discovery-cache', '[config] [model]')
+const command = clap.command('discovery-cache [config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
@@ -20,14 +20,14 @@ const command = clap.command('discovery-cache', '[config] [model]')
     )
     .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default)', (value = 4) => Number(value) || false, false)
     .option('--hash [hash]', 'Use checksum for persistent cache')
-    .action(function(args) {
-        const configFile = this.values.config || args[0];
-        const model = this.values.model || args[1];
-        const cachedir = this.values.cachedir || false;
-        const tmpdir = this.values.tmpdir;
-        const { mode, pretty, hash } = this.values;
+    .action(async function({ options, args }) {
+        const configFile = options.config || args[0];
+        const model = options.model || args[1];
+        const cachedir = options.cachedir || false;
+        const tmpdir = options.tmpdir;
+        const { mode, pretty, hash } = options;
 
-        const options = {
+        const info = await getCache({
             configFile,
             model,
             cachedir,
@@ -35,23 +35,18 @@ const command = clap.command('discovery-cache', '[config] [model]')
             mode,
             pretty,
             hash
-        };
-
-        getCache(options).then(info => {
-            // send data to parent process if run as a child process
-            if (typeof process.send === 'function') {
-                process.send(info);
-                return;
-            }
-
-            // otherwise write to stdout
-            if (info) {
-                process.stdout.write(info.file);
-            }
-        }).catch(error => {
-            console.error(error);
-            process.exit(2);
         });
+
+        // send data to parent process if run as a child process
+        if (typeof process.send === 'function') {
+            process.send(info);
+            return;
+        }
+
+        // otherwise write to stdout
+        if (info) {
+            process.stdout.write(info.file);
+        }
     });
 
 // run command

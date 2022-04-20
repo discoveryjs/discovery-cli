@@ -1,5 +1,6 @@
 ## next
 
+- Changed Node.js support for `^12.20.0 || ^14.13.0 || >=15.0.0`
 - Fixed path processing issues for serve and build on Windows
 - Fixed crash on error serialization when no `HOME` env variable is available
 - Fixed `fs.rmdir(path, { recursive: true })` deprecation warning on build with `--clean` option on Node.js 14.14+

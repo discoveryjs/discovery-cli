@@ -6,7 +6,7 @@ const commonOptions = require('../lib/cli');
 const build = require('../lib/build');
 
 // define command
-const command = clap.command('discovery-build', '[config]')
+const command = clap.command('discovery-build [config]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
@@ -25,19 +25,17 @@ const command = clap.command('discovery-build', '[config]')
     .option('--model-download', 'Enable model download feature')
     .option('--no-model-data-upload', 'Ignore model data upload feature setup in config')
     .option('--model-reset-cache', 'Enable model cache reset feature')
-    .action(function(args) {
-        const configFile = this.values.config || args[0];
+    .action(async function({ options, args }) {
+        const configFile = options.config || args[0];
 
-        const options = {
-            ...this.values,
+        await build({
+            ...options,
             configFile
-        };
-
-        build(options).then(() => {
-            if (typeof process.send === 'function') {
-                process.send('OK');
-            }
         });
+
+        if (typeof process.send === 'function') {
+            process.send('OK');
+        }
     });
 
 // run command
