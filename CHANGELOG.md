@@ -1,6 +1,7 @@
 ## next
 
 - Fixed path processing issues for serve and build on Windows
+- Fixed crash on error serialization when no `HOME` env variable is available
 - Fixed `fs.rmdir(path, { recursive: true })` deprecation warning on build with `--clean` option on Node.js 14.14+
 
 ## 2.0.0-beta.14 (15-02-2022)
