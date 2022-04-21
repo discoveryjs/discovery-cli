@@ -40,8 +40,7 @@
     "express": "^4.17.1",
     "mime": "^3.0.0",
     "parse-duration": "^1.0.2",
-    "pretty-ms": "^7.0.0",
-    "resolve": "^1.20.0"
+    "pretty-ms": "^7.0.0"
   },
   "devDependencies": {
     "eslint": "^8.4.0",
