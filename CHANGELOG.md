@@ -1,4 +1,4 @@
-## next
+## 2.0.0 (21-04-2022)
 
 - Changed Node.js support for `^12.20.0 || ^14.13.0 || >=15.0.0`
 - Added `--no-minify` option for `serve`, `build` and `archive` commands
