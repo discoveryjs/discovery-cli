@@ -38,30 +38,36 @@ npm install @discoveryjs/cli
 ### discovery (serve)
 
 ```
+Usage:
+
+    discovery [config] [options]
+
 Options:
 
         --bail                    Exit immediately on first warmup task failure
+        --no-bg-update            Disable background data cache updates
+        --no-cache                Disable data caching
         --cache-persistent        Use persistent caches system
-        --cachedir [dir]          Enable data caching and specify path to store cache files (using
-                                  .discoveryjs-cache by default when [dir] is not set)
+        --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when
+                                  [dir] is not set)
+        --no-check-cache-ttl      Disable data cache TTL checking before using it
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
                                   section in package.json in the listed order
         --cors                    Enable CORS, i.e. allows data fetching for any origin
         --dev                     Enable developer mode
     -h, --help                    Output usage information
+        --no-minify               Disable JS and CSS minification
     -m, --model <name>            Specify a model (multi-model mode only)
-        --no-bg-update            Disable background data cache updates
-        --no-cache                Disable data caching
-        --no-check-cache-ttl      Disable data cache TTL checking before using it
         --no-model-data-upload    Disable model data upload feature
         --no-model-download       Disable model download feature
         --no-model-reset-cache    Disable model cache reset feature
-        --no-warmup               Disable model's data cache warm up on server start
     -p, --port <n>                Listening port (default: 8123)
         --prebuild [path]         Prebuild model's static in path (path is optional, `build` by default)
-        --tmpdir [dir]            Temporary directory for caches
+        --tmpdir <dir>            Path to directory of temporary cache files which are generating before
+                                  committing to cache directory
     -v, --version                 Output version
+        --no-warmup               Disable model's data cache warm up on server start
 ```
 
 ### discovery-build (build)
@@ -73,25 +79,30 @@ Usage:
 
 Options:
 
-        --cachedir [dir]          Enable data caching and specify path to store cache files (using
-                                  .discoveryjs-cache by default when [dir] is not set)
-        --check-cache-ttl         Check data cache TTL before using it, option enforces to used actual
+        --no-cache                Disable data caching
+        --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when
+                                  [dir] is not set)
+        --check-cache-ttl         Check data cache TTL before using it, option enforces to use actual
                                   (according to TTL) data only
         --clean                   Clean the output directory before emit a build files
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
                                   section in package.json in the listed order
+        --no-data                 Don't include data into a model build
     -h, --help                    Output usage information
+        --no-minify               Disable JS and CSS minification
     -m, --model <name>            Specify a model (multi-model mode only)
+        --no-model-data-upload    Ignore model data upload feature setup in config
         --model-download          Enable model download feature
         --model-reset-cache       Enable model cache reset feature
-        --no-cache                Disable data caching
-        --no-data                 Don't include data into a model build
-        --no-model-data-upload    Ignore model data upload feature setup in config
     -o, --output <path>           Path for a build result (`build` by default)
         --pretty-data [indent]    Pretty print of model data if any
     -s, --single-file             Output a model build as a single file
-        --tmpdir [dir]            Temporary directory for caches
+        --sourcemap [mode]        Enable source map generation, optional "mode" can be: linked (default,
+                                  when [mode] is omitted), external or inline (see
+                                  https://esbuild.github.io/api/#sourcemap for detail)
+        --tmpdir <dir>            Path to directory of temporary cache files which are generating before
+                                  committing to cache directory
     -v, --version                 Output version
 ```
 
