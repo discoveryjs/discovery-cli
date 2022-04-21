@@ -13,6 +13,8 @@ const command = clap.command('discovery-archive [config]')
     .option(...commonOptions.noCache)
     .option(...commonOptions.cachedir)
     .option(...commonOptions.checkCacheTtl)
+    .option(...commonOptions.minify)
+    .option(...commonOptions.sourcemap)
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
         const { filename, stream } = await buildStatic({
