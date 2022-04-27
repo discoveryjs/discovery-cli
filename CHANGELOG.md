@@ -1,3 +1,7 @@
+## next
+
+- Added `/modelz` server route with a list of available models
+
 ## 2.0.0 (21-04-2022)
 
 - Changed Node.js support for `^12.20.0 || ^14.13.0 || >=15.0.0`
