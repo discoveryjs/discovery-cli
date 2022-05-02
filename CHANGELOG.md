@@ -1,4 +1,4 @@
-## next
+## 2.1.0 (02-05-2022)
 
 - Added `/modelz` server route with a list of available models
 - Fixed server crash on temporary files clean up when `tmpdir` doesn't exist
