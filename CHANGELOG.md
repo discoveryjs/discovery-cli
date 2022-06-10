@@ -1,4 +1,4 @@
-## Next
+## 2.1.1 (10-06-2022)
 
 - Fixed override of `target` property from host project's `tsconfig.json`
 
