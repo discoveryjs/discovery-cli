@@ -1,3 +1,7 @@
+## next
+
+- Added displaying of data generation log (console output) on model's loading screen for long awaited data requests
+
 ## 2.1.1 (10-06-2022)
 
 - Fixed override of `target` property from host project's `tsconfig.json`

@@ -4,7 +4,18 @@
 :host {
     box-sizing: border-box;
     max-width: 100vw;
+    height: 100%;
     z-index: 1;
+}
+
+:host > .view-progress {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: none;
+}
+:host > .view-progress > .progress {
+    max-width: 300px;
 }
 
 :host > .error {
@@ -21,4 +32,42 @@
 
 .view-button {
     font-size: 14px;
+}
+
+.data-status {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 15px -20px -15px;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    transition: opacity .15s;
+    pointer-events: all;
+}
+.data-status.init {
+    opacity: 0;
+}
+.data-status.finished {
+    opacity: 0;
+    transition-duration: .5s;
+}
+
+.data-status .header {
+    padding: 10px 20px 10px;
+    background-color: rgba(205, 205, 205, .1);
+    margin-bottom: 1px;
+    opacity: .8;
+}
+
+.data-status > .output {
+    flex: 1;
+    padding: 10px 20px;
+    overflow: scroll;
+    white-space: pre-wrap;
+    background-color: rgba(205, 205, 205, .1);
+}
+
+.data-status > .output > .stderr {
+    color: #d85a5a;
 }
