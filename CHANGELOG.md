@@ -1,6 +1,7 @@
 ## next
 
-- Added displaying of data generation log (console output) on model's loading screen for long awaited data requests
+- Added an experimental API to define data generation (a tree-like pipeline)
+- Added displaying of data generation log (console output) or pipeline plan on model's loading screen for long awaited data requests
 - Improved path sanitizing in error messages sending to client side
 
 ## 2.1.1 (10-06-2022)
