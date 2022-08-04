@@ -2,7 +2,7 @@
      alt="Discovery.js project logo"
      src="https://user-images.githubusercontent.com/270491/48985803-1563ae80-f11d-11e8-92c0-e07fbf0bcd94.png"/>
 
-# CLI Tools for Discovery.js
+# Tools for Discovery.js
 
 [![NPM version](https://img.shields.io/npm/v/@discoveryjs/cli.svg)](https://www.npmjs.com/package/@discoveryjs/cli)
 [![Twitter](https://badgen.net/badge/follow/@js_discovery?icon=twitter)](https://twitter.com/js_discovery)
@@ -68,6 +68,17 @@ Options:
                                   committing to cache directory
     -v, --version                 Output version
         --no-warmup               Disable model's data cache warm up on server start
+```
+
+To create and launch a server in your script, use `createServer()` method which returns [`express`'s application](https://expressjs.com/en/api.html#app):
+
+```js
+const discovery = require('@discoveryjs/cli');
+const PORT = 1234;
+
+discovery.createServer({ /* options */ }).listen(PORT, function() {
+    console.log(`Server listen on http://localhost:${this.address().port}`);
+});
 ```
 
 ### discovery-build (build)

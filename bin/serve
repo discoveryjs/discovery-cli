@@ -2,6 +2,7 @@
 
 const path = require('path');
 const clap = require('clap');
+const chalk = require('chalk');
 const commonOptions = require('../lib/cli');
 const createServer = require('../lib/serve');
 const DEFAULT_PORT = 8123;
@@ -42,8 +43,11 @@ const command = clap.command('discovery [config]')
 
         createServer({
             ...options,
-            configFile,
-            port
+            configFile
+        }).listen(port, function() {
+            console.log();
+            console.log(`Server listen on ${chalk.green(`http://localhost:${this.address().port}`)}`);
+            console.log();
         });
     });
 

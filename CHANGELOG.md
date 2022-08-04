@@ -3,6 +3,7 @@
 - Added an experimental API to define data generation (a tree-like pipeline)
 - Added displaying of data generation log (console output) or pipeline plan on model's loading screen for long awaited data requests
 - Improved path sanitizing in error messages sending to client side
+- Changed `createServer()` to return an express app and don't listen by default (i.e. `listen()` should be explicitly called on a receiver side)
 
 ## 2.1.1 (10-06-2022)
 
