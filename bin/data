@@ -6,6 +6,7 @@ const clap = require('clap');
 const { stringifyInfo, stringifyStream } = require('@discoveryjs/json-ext');
 const commonOptions = require('../lib/cli');
 const getData = require('../lib/data');
+const { createPipelineEventHandler } = require('../lib/shared/data-pipeline');
 
 // define command
 const command = clap.command('discovery-data [config] [model]')
@@ -21,8 +22,15 @@ const command = clap.command('discovery-data [config] [model]')
         const model = options.model || args[1];
         const outputFile = options.output || null;
         const pretty = options.pretty;
+        const sendMessageToParent = typeof process.send === 'function'
+            ? message => process.send(message)
+            : undefined;
+        const createPlanEventHandler = sendMessageToParent
+            ? (fn) => createPipelineEventHandler(fn, sendMessageToParent)
+            : undefined;
 
         const payload = await getData({
+            createPlanEventHandler,
             configFile,
             model,
             pretty
@@ -35,7 +43,7 @@ const command = clap.command('discovery-data [config] [model]')
         }
 
         // send data to parent process if run as a child process
-        if (typeof process.send === 'function') {
+        if (typeof sendMessageToParent === 'function') {
             const payloadInfo = stringifyInfo(payload, null, null, { async: true });
             let size;
 
@@ -43,7 +51,8 @@ const command = clap.command('discovery-data [config] [model]')
                 size = payloadInfo.minLength;
             }
 
-            process.send({ payload: 'stream', size });
+            sendMessageToParent({ payload: 'stream', size });
+
             return new Promise((resolve, reject) => {
                 stream
                     .on('error', reject)

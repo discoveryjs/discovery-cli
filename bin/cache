@@ -3,6 +3,7 @@
 const clap = require('clap');
 const commonOptions = require('../lib/cli');
 const getCache = require('../lib/cache');
+const { createPipelineEventHandler } = require('../lib/shared/data-pipeline');
 const modes = ['default', 'readonly', 'force'];
 
 // define command
@@ -26,26 +27,33 @@ const command = clap.command('discovery-cache [config] [model]')
         const cachedir = options.cachedir || false;
         const tmpdir = options.tmpdir;
         const { mode, pretty, hash } = options;
+        const sendToParent = typeof process.send === 'function'
+            ? message => process.send(message)
+            : undefined;
+        const createPlanEventHandler = sendToParent
+            ? (fn) => createPipelineEventHandler(fn, sendToParent)
+            : undefined;
 
-        const info = await getCache({
+        const cacheInfo = await getCache({
+            createPlanEventHandler,
             configFile,
             model,
             cachedir,
             tmpdir,
-            mode,
             pretty,
-            hash
+            hash,
+            mode
         });
 
         // send data to parent process if run as a child process
-        if (typeof process.send === 'function') {
-            process.send(info);
+        if (typeof sendToParent === 'function') {
+            sendToParent(cacheInfo);
             return;
         }
 
         // otherwise write to stdout
-        if (info) {
-            process.stdout.write(info.file);
+        if (cacheInfo) {
+            process.stdout.write(cacheInfo.file);
         }
     });
 
