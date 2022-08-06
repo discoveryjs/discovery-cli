@@ -3,6 +3,10 @@
 /* generated file (index specific) */
 @import url('discovery-cli:extensions');
 
+:host(.init) {
+    opacity: 1; /* disable entry transition for index page */
+}
+
 .view-h1 {
     margin-top: 0;
 }
