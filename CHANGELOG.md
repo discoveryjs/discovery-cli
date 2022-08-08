@@ -1,4 +1,4 @@
-## next
+## 2.2.0 (09-08-2022)
 
 - Changed Node.js support for `^14.13.0 || >=16.0.0`
 - Changed `@discoveryjs/discovery` version to `^1.0.0-beta.67`
