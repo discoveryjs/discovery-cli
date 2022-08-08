@@ -125,7 +125,6 @@ Discovery CLI allows to define a single or multiple predefined models. A model i
 * `multi` – multiple models mode, a set of models and index page that lists models. Enables when config contains `models` field and no `--model` option is used;
 * `modlefree` – model free mode, when no any model is specified. Enables when no config is specified
 
-
 ### Single model
 
 This mode uses when you need to serve or to build just a single model. To enable this mode, your config must no contain `models` field or command should be lauched with `--model` option (i.e. `discovery --model model-slug`). In this mode the root route will lead to model's default page.
@@ -140,14 +139,14 @@ In this mode there is no any predefined models. However, you can upload any data
 
 ## Configuration
 
-Discovery CLI supports configuration files in several formats (only one will be used in the priority listed below):
+Configuration files are supported in several formats (only one will be used in the priority listed below):
 
 * `.discoveryrc.js` (JavaScript)
 * `.discoveryrc.json` (JSON)
 * `.discoveryrc` (the same as `.discoveryrc.json`)
 * `discovery` property in `package.json` (JSON)
 
-You may explicitly specify config file by using `--config` option. When no config found, `modelfree` mode is using.
+The config file can be explicitly specified by `--config` option. When the config is not found, `modelfree` mode is using.
 
 ### Model config
 
