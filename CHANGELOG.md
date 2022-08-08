@@ -1,6 +1,7 @@
 ## next
 
 - Changed Node.js support for `^14.13.0 || >=16.0.0`
+- Changed `@discoveryjs/discovery` version to `^1.0.0-beta.67`
 - Added an experimental API to define data generation (a tree-like pipeline)
 - Added displaying of data generation log (console output) or pipeline plan on model's loading screen for long awaited data requests
 - Improved path sanitizing in error messages sending to client side
