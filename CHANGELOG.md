@@ -1,3 +1,7 @@
+## next
+
+- Bumped `esbuild` to `~0.16.7`
+
 ## 2.2.0 (09-08-2022)
 
 - Changed Node.js support for `^14.13.0 || >=16.0.0`
