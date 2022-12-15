@@ -1,6 +1,7 @@
 ## next
 
 - Bumped `esbuild` to `~0.16.7`
+- Bumped `express` to `^4.18.2`
 
 ## 2.2.0 (09-08-2022)
 
