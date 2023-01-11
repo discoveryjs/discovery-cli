@@ -15,12 +15,13 @@ const command = clap.command('discovery-build [config]')
     .option(...commonOptions.tmpdir)
     .option(...commonOptions.checkCacheTtl)
     .option(...commonOptions.minify)
+    .option(...commonOptions.dataCompression)
     .option(...commonOptions.sourcemap)
     .option('-o, --output <path>', 'Path for a build result (`build` by default)',
         (value = '') => path.resolve(process.cwd(), value),
         'build'
     )
-    .option('-s, --single-file', 'Output a model build as a single file')
+    .option('-s, --single-file', 'Output a model build as a single HTML file per model')
     .option('--clean', 'Clean the output directory before emit a build files')
     .option('--no-data', 'Don\'t include data into a model build')
     .option('--pretty-data [indent]', 'Pretty print of model data if any', (value = 4) => Number(value) || false, false)

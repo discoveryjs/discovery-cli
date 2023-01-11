@@ -100,6 +100,7 @@ Options:
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
                                   section in package.json in the listed order
         --no-data                 Don't include data into a model build
+        --no-data-compression     Disable HTML embedded data compression, when --single-file option is used
     -h, --help                    Output usage information
         --no-minify               Disable JS and CSS minification
     -m, --model <name>            Specify a model (multi-model mode only)
@@ -108,7 +109,7 @@ Options:
         --model-reset-cache       Enable model cache reset feature
     -o, --output <path>           Path for a build result (`build` by default)
         --pretty-data [indent]    Pretty print of model data if any
-    -s, --single-file             Output a model build as a single file
+    -s, --single-file             Output a model build as a single HTML file per model
         --sourcemap [mode]        Enable source map generation, optional "mode" can be: linked (default,
                                   when [mode] is omitted), external or inline (see
                                   https://esbuild.github.io/api/#sourcemap for detail)

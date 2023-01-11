@@ -14,6 +14,7 @@ const command = clap.command('discovery-archive [config]')
     .option(...commonOptions.cachedir)
     .option(...commonOptions.checkCacheTtl)
     .option(...commonOptions.minify)
+    .option(...commonOptions.dataCompression)
     .option(...commonOptions.sourcemap)
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];

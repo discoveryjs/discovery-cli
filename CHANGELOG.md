@@ -1,3 +1,8 @@
+## next
+
+- Added HTML embeded data compression (deflate + base64) on a single file per model build (`--single-file` option enabled)
+- Added `--no-data-compression` option for `build` and `archive` commands to disable HTML embeded data compression
+
 ## 2.2.1 (15-12-2022)
 
 - Bumped `esbuild` to `~0.16.7`
