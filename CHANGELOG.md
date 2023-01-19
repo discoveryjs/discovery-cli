@@ -1,6 +1,6 @@
-## next
+## 2.3.0 (19-01-2023)
 
-- Added HTML embeded data compression (deflate + base64) on a single file per model build (`--single-file` option enabled)
+- Added HTML embeded data compression (deflate + base64) on a single file per model build (`--single-file` option enabled), which enabled by default
 - Added `--no-data-compression` option for `build` and `archive` commands to disable HTML embeded data compression
 
 ## 2.2.1 (15-12-2022)
