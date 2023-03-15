@@ -16,6 +16,7 @@ const command = clap.command('discovery-archive [config]')
     .option(...commonOptions.minify)
     .option(...commonOptions.dataCompression)
     .option(...commonOptions.sourcemap)
+    .option(...commonOptions.embed)
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
         const { filename, stream } = await buildStatic({

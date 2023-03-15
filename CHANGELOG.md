@@ -1,3 +1,8 @@
+## next
+
+- Added support for `embed` option in config
+- Added `--embed` option for `serve`, `build` and `archive` commands
+
 ## 2.3.0 (19-01-2023)
 
 - Added HTML embeded data compression (deflate + base64) on a single file per model build (`--single-file` option enabled), which enabled by default

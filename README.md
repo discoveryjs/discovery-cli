@@ -50,6 +50,8 @@ Options:
         --cache-persistent        Use persistent caches system
         --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when
                                   [dir] is not set)
+        --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
+                                  or disable
         --no-check-cache-ttl      Disable data cache TTL checking before using it
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
@@ -101,6 +103,8 @@ Options:
                                   section in package.json in the listed order
         --no-data                 Don't include data into a model build
         --no-data-compression     Disable HTML embedded data compression, when --single-file option is used
+        --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
+                                  or disable
     -h, --help                    Output usage information
         --no-minify               Disable JS and CSS minification
     -m, --model <name>            Specify a model (multi-model mode only)

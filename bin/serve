@@ -16,6 +16,7 @@ const command = clap.command('discovery [config]')
     .option(...commonOptions.tmpdir)
     .option(...commonOptions.noCache)
     .option(...commonOptions.minify)
+    .option(...commonOptions.embed)
     .option('--dev', 'Enable developer mode')
     .option('--prebuild [path]', 'Prebuild model\'s static in path (path is optional, `build` by default)',
         (value = 'build') => value ? path.resolve(process.cwd(), value) : value,
