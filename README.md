@@ -52,6 +52,8 @@ Options:
                                   [dir] is not set)
         --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
                                   or disable
+        --entry-names [pattern]   Specify the file names of the output HTML files corresponding to each
+                                  model
         --no-check-cache-ttl      Disable data cache TTL checking before using it
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"

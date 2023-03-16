@@ -2,6 +2,7 @@
 
 - Added support for `embed` option in config
 - Added `--embed` option for `serve`, `build` and `archive` commands
+- Added `--entry-names` option for `build` command
 
 ## 2.3.0 (19-01-2023)
 
