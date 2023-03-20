@@ -115,6 +115,7 @@ Options:
         --model-reset-cache       Enable model cache reset feature
     -o, --output <path>           Path for a build result (`build` by default)
         --pretty-data [indent]    Pretty print of model data if any
+        --serve-only-assets       Include server only assets
     -s, --single-file             Output a model build as a single HTML file per model
         --sourcemap [mode]        Enable source map generation, optional "mode" can be: linked (default,
                                   when [mode] is omitted), external or inline (see
@@ -210,6 +211,7 @@ Config should provide JSON or exports an object with following properties:
 * `viewport` – value for `<meta name="viewport">`
 * `darkmode` – setup darkmode feature (default `"auto"`)
 * `upload` – default value for upload data feature (default `false`)
+* `embed` – explicitly enable or disable embed feature (default `false`)
 * `download` – default value for download feature (default `true`)
 * `view` – setup index page views (see [Configure view](#configure-view))
 
@@ -232,6 +234,7 @@ module.exports = {
 * `basedir` – directory to resolve relative paths
 * `assets` – array of paths to `.js`, `.ts` and `.css` files
 > js files has own scope (as modules) with a reference `discovery` that points to an `App` instance from `@discoveryjs/discovery`
+* `serveOnlyAssets` – the same as `assets`, but such assets are included into a model only when the model is serving with `serve` command, or when the model is built with `--serve-only-assets` option (disabled by default)
 * `inspector` – option to disable view inspector (default `true`)
 * `router` – option to disable default router (default `true`)
 * `bundles` – additional bundles

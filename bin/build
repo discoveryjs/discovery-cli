@@ -30,6 +30,7 @@ const command = clap.command('discovery-build [config]')
     .option('--model-download', 'Enable model download feature')
     .option('--no-model-data-upload', 'Ignore model data upload feature setup in config')
     .option('--model-reset-cache', 'Enable model cache reset feature')
+    .option('--serve-only-assets', 'Include server only assets into build')
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
 
