@@ -1,10 +1,10 @@
-## next
+## 2.4.0 (20-03-2023)
 
 - Added support for `embed` option in config
-- Added support for `serveOnlyAssets` option in `view` section of model config. These assets are included into a model only when the model is serving with `serve` command, or when the model is built with `--serve-only-assets` option (disabled by default)
 - Added `--embed` option for `serve`, `build` and `archive` commands
-- Added `--entry-names` option for `build` command
+- Added support for `serveOnlyAssets` option in `view` section of model config. These assets are included into a model only when the model is serving with `serve` command, or when the model is built with `--serve-only-assets` option (disabled by default)
 - Added `--serve-only-assets` option for `build` command
+- Added `--entry-names` option for `build` command
 
 ## 2.3.0 (19-01-2023)
 
