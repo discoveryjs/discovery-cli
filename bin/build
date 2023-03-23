@@ -18,6 +18,7 @@ const command = clap.command('discovery-build [config]')
     .option(...commonOptions.dataCompression)
     .option(...commonOptions.sourcemap)
     .option(...commonOptions.embed)
+    .option(...commonOptions.experimentalJsonxl)
     .option('-o, --output <path>', 'Path for a build result (`build` by default)',
         (value = '') => path.resolve(process.cwd(), value),
         'build'

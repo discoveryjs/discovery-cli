@@ -13,6 +13,7 @@ const command = clap.command('discovery-cache [config] [model]')
     .option(...commonOptions.model)
     .option(...commonOptions.cachedir)
     .option(...commonOptions.tmpdir)
+    .option(...commonOptions.experimentalJsonxl)
     .option(
         '--mode <mode>',
         'Mode: default (get actual or generate it not exists), readonly (get actual only, generate nothing) and force (always generate)',
@@ -24,6 +25,7 @@ const command = clap.command('discovery-cache [config] [model]')
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
         const model = options.model || args[1];
+        const experimentalJsonxl = options.experimentalJsonxl;
         const cachedir = options.cachedir || false;
         const tmpdir = options.tmpdir;
         const { mode, pretty, hash } = options;
@@ -38,6 +40,7 @@ const command = clap.command('discovery-cache [config] [model]')
             createPlanEventHandler,
             configFile,
             model,
+            experimentalJsonxl,
             cachedir,
             tmpdir,
             pretty,

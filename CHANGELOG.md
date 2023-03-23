@@ -1,3 +1,8 @@
+## next
+
+- Added experimental binary data encoding (codename JSONXL)
+- Added `--experimental-jsonxl` option for all the commands
+
 ## 2.4.0 (20-03-2023)
 
 - Added support for `embed` option in config

@@ -60,6 +60,7 @@ Options:
                                   section in package.json in the listed order
         --cors                    Enable CORS, i.e. allows data fetching for any origin
         --dev                     Enable developer mode
+        --experimental-jsonxl     Enable experimental binary data encoding (codename JSONXL)
     -h, --help                    Output usage information
         --no-minify               Disable JS and CSS minification
     -m, --model <name>            Specify a model (multi-model mode only)
@@ -107,6 +108,7 @@ Options:
         --no-data-compression     Disable HTML embedded data compression, when --single-file option is used
         --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
                                   or disable
+        --experimental-jsonxl     Enable experimental binary data encoding (codename JSONXL)
     -h, --help                    Output usage information
         --no-minify               Disable JS and CSS minification
     -m, --model <name>            Specify a model (multi-model mode only)

@@ -2,8 +2,10 @@
 
 const path = require('path');
 const fs = require('fs');
+const { Readable } = require('stream');
 const clap = require('clap');
 const { stringifyInfo, stringifyStream } = require('@discoveryjs/json-ext');
+const { encode: encodeJsonxl } = require('../lib/tmp/jsonxl-snapshot9');
 const commonOptions = require('../lib/cli');
 const getData = require('../lib/data');
 const { createPipelineEventHandler } = require('../lib/shared/data-pipeline');
@@ -13,6 +15,7 @@ const command = clap.command('discovery-data [config] [model]')
     .version(require('../package.json').version)
     .option(...commonOptions.config)
     .option(...commonOptions.model)
+    .option(...commonOptions.experimentalJsonxl)
     .option('--pretty [indent]', 'Pretty print with optionally specified indentation (4 spaces by default when enabled)', (value = 4) => Number(value) || false, false)
     .option('-o, --output <filename>', 'Output file',
         (value = '') => path.resolve(process.cwd(), value)
@@ -35,7 +38,11 @@ const command = clap.command('discovery-data [config] [model]')
             model,
             pretty
         });
-        const stream = stringifyStream(payload, null, pretty);
+
+        const isJsonxl = options.experimentalJsonxl;
+        const stream = isJsonxl
+            ? Readable.from(encodeJsonxl(payload))
+            : stringifyStream(payload, null, pretty);
 
         if (outputFile) {
             stream.pipe(fs.createWriteStream(outputFile));
@@ -44,10 +51,12 @@ const command = clap.command('discovery-data [config] [model]')
 
         // send data to parent process if run as a child process
         if (typeof sendMessageToParent === 'function') {
-            const payloadInfo = stringifyInfo(payload, null, null, { async: true });
-            let size;
+            let size = isJsonxl ? payload.byteLength : undefined;
+            const payloadInfo = isJsonxl
+                ? false
+                : stringifyInfo(payload, null, null, { async: true });
 
-            if (!payloadInfo.async.length && !payloadInfo.circular.length) {
+            if (payloadInfo && !payloadInfo.async.length && !payloadInfo.circular.length) {
                 size = payloadInfo.minLength;
             }
 
