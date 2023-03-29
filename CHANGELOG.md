@@ -3,7 +3,7 @@
 - Added experimental binary data encoding (codename JSONXL)
 - Added `--experimental-jsonxl` option for all the commands
 - Changed `data` and `cache` to return raw data without wrapping into `{ name, createdAt, elapsed, data: ... }`
-- Added `X-File-Created-At` header in server's response to provide data birth time when possible
+- Added `X-File-Created-At` and `Last-Modified` headers in server's response to provide data birth time when possible
 
 ## 2.4.0 (20-03-2023)
 
