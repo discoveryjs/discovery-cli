@@ -6,6 +6,7 @@
 - Added `X-File-Created-At` and `Last-Modified` headers in server's response to provide data birth time when possible
 - Added `model` as is to model's app context
 - Removed `meta` from model's app context (use `#.model.meta` instead)
+- Changed `build` command to output writing model files when `--single-file` is specified
 
 ## 2.4.0 (20-03-2023)
 
