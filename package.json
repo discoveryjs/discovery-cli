@@ -26,7 +26,7 @@
     "node": "^14.13.0 || >=16.0.0"
   },
   "peerDependencies": {
-    "@discoveryjs/discovery": "^1.0.0-beta.71"
+    "@discoveryjs/discovery": "^1.0.0-beta.72"
   },
   "dependencies": {
     "@discoveryjs/json-ext": "^0.5.6",

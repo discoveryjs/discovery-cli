@@ -7,6 +7,7 @@
 - Added `model` as is to model's app context
 - Removed `meta` from model's app context (use `#.model.meta` instead)
 - Changed `build` command to output writing model files when `--single-file` is specified
+- Bumped minimal version of `@discoveryjs/discovery` to `^1.0.0-beta.72`
 
 ## 2.4.0 (20-03-2023)
 
@@ -15,6 +16,7 @@
 - Added support for `serveOnlyAssets` option in `view` section of model config. These assets are included into a model only when the model is serving with `serve` command, or when the model is built with `--serve-only-assets` option (disabled by default)
 - Added `--serve-only-assets` option for `build` command
 - Added `--entry-names` option for `build` command
+- Set minimal version for `@discoveryjs/discovery` as `^1.0.0-beta.71`
 
 ## 2.3.0 (19-01-2023)
 

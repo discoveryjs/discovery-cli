@@ -49,9 +49,11 @@ const command = clap.command('discovery-data [config] [model]')
             pretty
         });
 
-        const isJsonxl = options.experimentalJsonxl;
-        const stream = isJsonxl
-            ? Readable.from(encodeJsonxl(payload))
+        const jsonxlEncoded = options.experimentalJsonxl
+            ? encodeJsonxl(payload)
+            : null;
+        const stream = jsonxlEncoded !== null
+            ? Readable.from(jsonxlEncoded)
             : stringifyStream(payload, null, pretty);
 
         if (outputFile) {
@@ -64,8 +66,8 @@ const command = clap.command('discovery-data [config] [model]')
             sendMessageToParent({
                 payload: 'stream',
                 createdAt: new Date(),
-                size: isJsonxl
-                    ? payload.byteLength
+                size: jsonxlEncoded !== null
+                    ? jsonxlEncoded.byteLength
                     : estimateJSONSize(payload)
             });
 
