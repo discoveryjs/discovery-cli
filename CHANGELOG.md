@@ -1,4 +1,4 @@
-## next
+## 2.5.0 (05-04-2023)
 
 - Added experimental binary data encoding (codename JSONXL)
 - Added `--experimental-jsonxl` option for all the commands
