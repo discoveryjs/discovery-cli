@@ -1,3 +1,7 @@
+## next
+
+- Fixed model init when no data is specified
+
 ## 2.5.0 (05-04-2023)
 
 - Added experimental binary data encoding (codename JSONXL)
