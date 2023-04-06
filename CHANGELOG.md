@@ -1,4 +1,4 @@
-## next
+## 2.5.1 (06-04-2023)
 
 - Fixed model init when no data is specified
 
