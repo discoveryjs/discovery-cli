@@ -1,6 +1,6 @@
-## next
+## 2.6.0 (28-07-2023)
 
-- Added `view.noscript` option to specify a function or path to module which returns a function to generate content for `<noscript>` tag
+- Added `view.noscript` option to define a function, or specify a path to a module that returns a function, for generating content to be displayed within the `<noscript>` tag
 
 ## 2.5.1 (06-04-2023)
 
