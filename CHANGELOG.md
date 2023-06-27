@@ -1,3 +1,7 @@
+## next
+
+- Added `view.noscript` option to specify a function or path to module which returns a function to generate content for `<noscript>` tag
+
 ## 2.5.1 (06-04-2023)
 
 - Fixed model init when no data is specified

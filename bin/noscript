@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+const clap = require('clap');
+const commonOptions = require('../lib/cli');
+const getNoscriptContent = require('../lib/noscript');
+
+// define command
+const command = clap.command('discovery-noscript [config] [model]')
+    .version(require('../package.json').version)
+    .option(...commonOptions.config)
+    .option(...commonOptions.model)
+    .option(...commonOptions.cachedir)
+    .option(...commonOptions.tmpdir)
+    .option(...commonOptions.noCache)
+    .option(...commonOptions.experimentalJsonxl)
+    .action(async function({ options, args }) {
+        const configFile = options.config || args[0];
+        const model = options.model || args[1];
+        const cachedir = options.cachedir;
+        const tmpdir = options.tmpdir;
+        const cache = options.cache;
+        const experimentalJsonxl = options.experimentalJsonxl;
+        const noscriptContent = await getNoscriptContent({
+            configFile,
+            model,
+            cachedir,
+            tmpdir,
+            cache,
+            experimentalJsonxl
+        });
+
+        // send data to parent process if run as a child process
+        if (typeof process.send === 'function') {
+            return process.send(String(noscriptContent));
+        }
+
+        // otherwise write to stdout
+        process.stdout.write(noscriptContent);
+    });
+
+// run command
+try {
+    command.run();
+} catch (e) {
+    // output user frendly message if cli error
+    if (e instanceof clap.Error) {
+        console.error(e.message || e);
+        process.exit(2);
+    }
+
+    // otherwise re-throw exception
+    throw e;
+}

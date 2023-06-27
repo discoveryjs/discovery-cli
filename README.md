@@ -237,6 +237,7 @@ module.exports = {
 * `assets` – array of paths to `.js`, `.ts` and `.css` files
 > js files has own scope (as modules) with a reference `discovery` that points to an `App` instance from `@discoveryjs/discovery`
 * `serveOnlyAssets` – the same as `assets`, but such assets are included into a model only when the model is serving with `serve` command, or when the model is built with `--serve-only-assets` option (disabled by default)
+* `noscript` – function or path to a module which exports a function to generate content for `<noscript>` tag; the function can take two arguments: `getData` an async function returns data, and `setup` object
 * `inspector` – option to disable view inspector (default `true`)
 * `router` – option to disable default router (default `true`)
 * `bundles` – additional bundles
