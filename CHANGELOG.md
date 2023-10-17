@@ -1,3 +1,9 @@
+## 2.6.1 (17-10-2023)
+
+- Bumped `esbuild` to `^0.19.5`
+- Fixed path processing when config is a single model
+- Fixed on loading error text output
+
 ## 2.6.0 (28-07-2023)
 
 - Added `view.noscript` option to define a function, or specify a path to a module that returns a function, for generating content to be displayed within the `<noscript>` tag
