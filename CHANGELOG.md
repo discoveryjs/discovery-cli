@@ -1,3 +1,7 @@
+## next
+
+- Changed the data handler to seamlessly pass Node.js streams, TypedArrays, and Buffers to the consuming side without any alterations. Both JSON and JSONXL payloads are supported. The `--experimental-jsonxl` option currently has no impact for such a payload.
+
 ## 2.6.1 (17-10-2023)
 
 - Bumped `esbuild` to `^0.19.5`

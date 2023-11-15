@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const { EventEmitter } = require('events');
 const { Readable } = require('stream');
 const clap = require('clap');
 const { stringifyInfo, stringifyStream } = require('@discoveryjs/json-ext');
@@ -10,14 +11,61 @@ const commonOptions = require('../lib/cli');
 const getData = require('../lib/data');
 const { createPipelineEventHandler } = require('../lib/shared/data-pipeline');
 
-function estimateJSONSize(payload) {
-    const payloadInfo = stringifyInfo(payload, null, null, { async: true });
+function isReadableStream(value) {
+    return (
+        value instanceof EventEmitter &&
+        (typeof value.read === 'function' || typeof value._read === 'function') &&
+        typeof value.pipe === 'function' &&
+        value.readable !== false &&
+        value.readableObjectMode === false
+    );
+}
 
-    if (payloadInfo && !payloadInfo.async.length && !payloadInfo.circular.length) {
-        return payloadInfo.minLength;
+function parcelFromPayload(payload, options) {
+    if (isReadableStream(payload)) {
+        return {
+            stream: payload,
+            get size() {
+                if (payload.path) {
+                    try {
+                        return fs.statSync(payload.path).size;
+                    } catch {}
+                }
+
+                // return undefined when a size can't be estimated
+            }
+        };
     }
 
-    // return undefined when a size can't be estimated
+    if (ArrayBuffer.isView(payload)) {
+        return {
+            stream: Readable.from(payload),
+            size: payload.byteLength
+        };
+    }
+
+    if (options.experimentalJsonxl) {
+        // TODO: encode with jsonxl stream & buffer when meeded
+        const jsonxlEncoded = encodeJsonxl(payload);
+
+        return {
+            stream: Readable.from(jsonxlEncoded),
+            size: jsonxlEncoded.byteLength
+        };
+    }
+
+    return {
+        stream: stringifyStream(payload, null, options.pretty),
+        get size() {
+            const payloadInfo = stringifyInfo(payload, null, null, { async: true });
+
+            if (payloadInfo && !payloadInfo.async.length && !payloadInfo.circular.length) {
+                return payloadInfo.minLength;
+            }
+
+            // return undefined when a size can't be estimated
+        }
+    };
 }
 
 // define command
@@ -49,15 +97,10 @@ const command = clap.command('discovery-data [config] [model]')
             pretty
         });
 
-        const jsonxlEncoded = options.experimentalJsonxl
-            ? encodeJsonxl(payload)
-            : null;
-        const stream = jsonxlEncoded !== null
-            ? Readable.from(jsonxlEncoded)
-            : stringifyStream(payload, null, pretty);
+        const parcel = parcelFromPayload(payload, options);
 
         if (outputFile) {
-            stream.pipe(fs.createWriteStream(outputFile));
+            parcel.stream.pipe(fs.createWriteStream(outputFile));
             return;
         }
 
@@ -66,13 +109,11 @@ const command = clap.command('discovery-data [config] [model]')
             sendMessageToParent({
                 payload: 'stream',
                 createdAt: new Date(),
-                size: jsonxlEncoded !== null
-                    ? jsonxlEncoded.byteLength
-                    : estimateJSONSize(payload)
+                size: parcel.size
             });
 
             return new Promise((resolve, reject) => {
-                stream
+                parcel.stream
                     .on('error', reject)
                     .pipe(fs.createWriteStream(null, { fd: 4 }))
                     .on('finish', resolve)
@@ -81,7 +122,7 @@ const command = clap.command('discovery-data [config] [model]')
         }
 
         // otherwise write to stdout
-        stream.pipe(process.stdout);
+        parcel.stream.pipe(process.stdout);
     });
 
 // run command
