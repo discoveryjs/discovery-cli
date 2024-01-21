@@ -1,4 +1,4 @@
-## next
+## 2.7.0 (21-01-2024)
 
 - Changed the data handler to seamlessly pass Node.js streams, TypedArrays, and Buffers to the consuming side without any alterations. Both JSON and JSONXL payloads are supported. The `--experimental-jsonxl` option currently has no impact for such a payload.
 
