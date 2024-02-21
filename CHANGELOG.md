@@ -1,5 +1,6 @@
 ## next
 
+- Bumped `esbuild` to `^0.20.1`
 - Added support for `.ico` files in bundler
 
 ## 2.7.0 (21-01-2024)
