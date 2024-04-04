@@ -1,3 +1,7 @@
+## next
+
+- Added support for `encodings` option in configs to pass into Discovery.js when supported (added in version `1.0.0-beta.83`)
+
 ## 2.7.1 (21-02-2024)
 
 - Bumped `esbuild` to `^0.20.1`

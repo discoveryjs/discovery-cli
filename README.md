@@ -165,6 +165,7 @@ Model config consists of the following fields (all fields are optional):
 * `name` – name of model (used in title)
 * `meta` – any data (should be serializable to JSON) that will be available in model's `setup.js`
 * `data` – function which returns `any|Promise<any>` or path to a module that exports such a function. Result of the function is using for a model; must be serializable to JSON (i.e. have no cyclic references for now)
+* `encodings` – path to a module that exposes an array of encoding configurations for transforming payload data on loading into JavaScript values. This option has an effect only if supported by Discovery.js (added in version `1.0.0-beta.83`).
 * `prepare` – path to a module with a function right after data is loaded but before is used (e.g. add cyclic references and relations in darta, mark data objects, add annotations and/or helpers for query engine etc)
 * `favicon` – path to favicon image; inherits from parent config when not set
 * `viewport` – value for `<meta name="viewport">`; inherits from parent config when not set
@@ -185,6 +186,7 @@ const path = require('path');
 module.exports = {
     name: 'My dashboard',
     data: () => ({ hello: 'world' }),
+    encodings: path.join(__dirname, 'path/to/encodings.js'),
     prepare: path.join(__dirname, 'path/to/prepare.js'),
     favicon: './path/to/favicon.png',
     viewport: 'width=device-width, initial-scale=1',
@@ -208,6 +210,7 @@ Config should provide JSON or exports an object with following properties:
 * `name` - name of discovery instance (used in page title)
 * `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
 * `modelBaseConfig` – the same as model's config, using as a base for a model config, i.e. `{ ...modelBaseConfig, ...modelConfig }` will be used
+* `encodings` – path to a module that exposes an array of encoding configurations for transforming payload data on loading into JavaScript values. This option has an effect only if supported by Discovery.js (added in version `1.0.0-beta.83`).
 * `routers` – an array of paths to modules which exports a function (`function(router, modelConfig, options): void`) that extends app routers
 * `favicon` – path to favicon image
 * `viewport` – value for `<meta name="viewport">`
