@@ -2,24 +2,14 @@
 
 const path = require('path');
 const fs = require('fs');
-const { EventEmitter } = require('events');
 const { Readable } = require('stream');
 const clap = require('clap');
-const { stringifyInfo, stringifyStream } = require('@discoveryjs/json-ext');
+const { stringifyInfo, stringifyChunked } = require('@discoveryjs/json-ext');
 const { encode: encodeJsonxl } = require('../lib/tmp/jsonxl-snapshot9');
 const commonOptions = require('../lib/cli');
 const getData = require('../lib/data');
 const { createPipelineEventHandler } = require('../lib/shared/data-pipeline');
-
-function isReadableStream(value) {
-    return (
-        value instanceof EventEmitter &&
-        (typeof value.read === 'function' || typeof value._read === 'function') &&
-        typeof value.pipe === 'function' &&
-        value.readable !== false &&
-        value.readableObjectMode === false
-    );
-}
+const { isReadableStream } = require('../lib/shared/utils');
 
 function parcelFromPayload(payload, options) {
     if (isReadableStream(payload)) {
@@ -45,7 +35,7 @@ function parcelFromPayload(payload, options) {
     }
 
     if (options.experimentalJsonxl) {
-        // TODO: encode with jsonxl stream & buffer when meeded
+        // TODO: encode with jsonxl stream & buffer when needed
         const jsonxlEncoded = encodeJsonxl(payload);
 
         return {
@@ -55,12 +45,12 @@ function parcelFromPayload(payload, options) {
     }
 
     return {
-        stream: stringifyStream(payload, null, options.pretty),
+        stream: Readable.from(stringifyChunked(payload, null, options.pretty)),
         get size() {
             const payloadInfo = stringifyInfo(payload, null, null, { async: true });
 
-            if (payloadInfo && !payloadInfo.async.length && !payloadInfo.circular.length) {
-                return payloadInfo.minLength;
+            if (payloadInfo && !payloadInfo.circular.length) {
+                return payloadInfo.bytes;
             }
 
             // return undefined when a size can't be estimated
