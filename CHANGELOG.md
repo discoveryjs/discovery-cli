@@ -1,3 +1,8 @@
+## 2.8.0 (03-07-2024)
+
+- Bumped `@discoveryjs/json-ext` to version [`^0.6.0`](https://github.com/discoveryjs/json-ext/releases/tag/v0.6.0). As a result, async values (Promises and Node.js Readable streams) are now stringified as regular objects due to changes in `@discoveryjs/json-ext`.
+- Bumped `esbuild` to `^0.23.0`
+
 ## 2.7.2 (03-04-2024)
 
 - Added support for `encodings` option in configs to pass into Discovery.js when supported (added in version `1.0.0-beta.83`)
