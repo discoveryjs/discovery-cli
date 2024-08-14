@@ -164,9 +164,10 @@ Model config consists of the following fields (all fields are optional):
 
 * `name` – name of model (used in title)
 * `meta` – any data (should be serializable to JSON) that will be available in model's `setup.js`
-* `data` – function which returns `any|Promise<any>` or path to a module that exports such a function. Result of the function is using for a model; must be serializable to JSON (i.e. have no cyclic references for now)
+* `data` – function which returns `any | Promise<any>` or path to a module (CommonJS or ESM) that exports such a function as default. Result of the function is using for a model; must be serializable to JSON (i.e. have no cyclic references for now)
 * `encodings` – path to a module that exposes an array of encoding configurations for transforming payload data on loading into JavaScript values. This option has an effect only if supported by Discovery.js (added in version `1.0.0-beta.83`).
-* `prepare` – path to a module with a function right after data is loaded but before is used (e.g. add cyclic references and relations in darta, mark data objects, add annotations and/or helpers for query engine etc)
+* `prepare` – (deprecated, use `setup` instead) path to a module (CommonJS or ESM) with a default export of a function that invokes right after data is loaded but before is used (e.g. add cyclic references and relations in data, mark data objects, add annotations and/or helpers for query engine etc)
+* `setup` – path to a module (CommonJS or ESM) with a function which call on model creation after all the extensions are applied
 * `favicon` – path to favicon image; inherits from parent config when not set
 * `viewport` – value for `<meta name="viewport">`; inherits from parent config when not set
 * `darkmode` – setup darkmode feature; inherits from parent config when not set

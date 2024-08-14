@@ -1,6 +1,7 @@
 ## next
 
 - Added a `setup` option for models, which is passed to the Discovery.js `App` instance config
+- Added support for ESM modules for `data` option in config
 
 ## 2.8.0 (03-07-2024)
 
