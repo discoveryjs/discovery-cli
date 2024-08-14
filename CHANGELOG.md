@@ -1,3 +1,7 @@
+## next
+
+- Added a `setup` option for models, which is passed to the Discovery.js `App` instance config
+
 ## 2.8.0 (03-07-2024)
 
 - Bumped `@discoveryjs/json-ext` to version [`^0.6.0`](https://github.com/discoveryjs/json-ext/releases/tag/v0.6.0). As a result, async values (Promises and Node.js Readable streams) are now stringified as regular objects due to changes in `@discoveryjs/json-ext`.
