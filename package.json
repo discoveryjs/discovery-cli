@@ -1,6 +1,6 @@
 {
   "name": "@discoveryjs/cli",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "CLI tools to serve & build projects based on Discovery.js",
   "author": "Roman Dvornov <rdvornov@gmail.com> (https://github.com/lahmatiy)",
   "license": "MIT",
