@@ -1,4 +1,4 @@
-## next
+## 2.9.1 (06-09-2024)
 
 - Enabled the use of top-level imports in `view.assets` modules (with the restriction that imports should be placed at the beginning of the module, despite JavaScript allowing imports at any location within the module's code)
 - Enabled `.cjs`, `.cjsx`, `.mjs`, `.mjsx`, `.cts`, `.ctsx`, `.mts` and `.mtsx` extensions for JavaScript/TypeScript modules in `view.assets`
