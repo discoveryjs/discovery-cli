@@ -1,3 +1,8 @@
+## next
+
+- Fixed bundling for `@discoveryjs/discovery` version `v1.0.0-beta.84` and above
+- Fixed to use source modules when used unpublished version of `@discoveryjs/discovery`
+
 ## 2.9.0 (05-09-2024)
 
 - Added a `setup` option for models, which is passed to the Discovery.js `App` instance config
