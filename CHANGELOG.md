@@ -1,6 +1,7 @@
 ## next
 
 - Enabled the use of top-level imports in `view.assets` modules (with the restriction that imports should be placed at the beginning of the module, despite JavaScript allowing imports at any location within the module's code)
+- Enabled `.cjs`, `.cjsx`, `.mjs`, `.mjsx`, `.cts`, `.ctsx`, `.mts` and `.mtsx` extensions for JavaScript/TypeScript modules in `view.assets`
 - Fixed bundling for `@discoveryjs/discovery` version `v1.0.0-beta.84` and above
 - Fixed to use source modules when used unpublished version of `@discoveryjs/discovery`
 
