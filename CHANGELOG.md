@@ -1,8 +1,12 @@
+## next
+
+- Fixed the display of the data loading status block for `@discoveryjs/discovery` version `1.0.0-beta.86` and above
+
 ## 2.9.1 (06-09-2024)
 
 - Enabled the use of top-level imports in `view.assets` modules (with the restriction that imports should be placed at the beginning of the module, despite JavaScript allowing imports at any location within the module's code)
 - Enabled `.cjs`, `.cjsx`, `.mjs`, `.mjsx`, `.cts`, `.ctsx`, `.mts` and `.mtsx` extensions for JavaScript/TypeScript modules in `view.assets`
-- Fixed bundling for `@discoveryjs/discovery` version `v1.0.0-beta.84` and above
+- Fixed bundling for `@discoveryjs/discovery` version `1.0.0-beta.84` and above
 - Fixed to use source modules when used unpublished version of `@discoveryjs/discovery`
 
 ## 2.9.0 (05-09-2024)
