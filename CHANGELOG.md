@@ -2,6 +2,7 @@
 
 - Fixed the display of the data loading status block for `@discoveryjs/discovery` version `1.0.0-beta.86` and above
 - Fixed the display of `stdout` and `stderr` output in the data loading status block when no data gathering plan is provided
+- Changed Node.js support for `>=16.0.0`
 
 ## 2.9.1 (06-09-2024)
 
