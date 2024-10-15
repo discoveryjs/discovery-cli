@@ -1,4 +1,4 @@
-## next
+## 2.10.0 (15-10-2024)
 
 - Enhanced the appearance of the data loading state block and improved the display of errors
 - Fixed the display of the data loading status block for `@discoveryjs/discovery` version `1.0.0-beta.86` and above
