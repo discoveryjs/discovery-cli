@@ -1,5 +1,6 @@
 ## next
 
+- Enhanced the appearance of the data loading state block and improved the display of errors
 - Fixed the display of the data loading status block for `@discoveryjs/discovery` version `1.0.0-beta.86` and above
 - Fixed the display of `stdout` and `stderr` output in the data loading status block when no data gathering plan is provided
 - Fixed sending of stderr output to the client by stripping ANSI codes and removing the unnecessary `Error:` prefix
