@@ -1,5 +1,6 @@
 ## next
 
+- Added support for optional `version` and `description` fields in the config, allowing specification of version and description for the model or index page to display in the app header. These fields are passed as options in `Discovery.js` class constructors
 - Fixed `ERR_UNSUPPORTED_ESM_URL_SCHEME` exception when importing the `data` module on Windows
 - Fixed URL generation for model's page and assets on Windows
 
