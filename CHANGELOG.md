@@ -1,3 +1,7 @@
+## next
+
+- Fixed `ERR_UNSUPPORTED_ESM_URL_SCHEME` exception when importing the `data` module on Windows
+
 ## 2.10.0 (15-10-2024)
 
 - Enhanced the appearance of the data loading state block and improved the display of errors
