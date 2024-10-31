@@ -4,6 +4,7 @@
 - View setup:
     - Added inspector, `Index` and `Discovery` buttons to index page by default
     - Updated `view.inspector` and `view.router` config options to have effect for index page, enabled by default
+    - Changed the extension application order so that model's `view.extensions` are applied after implicit extensions
 - Fixed `ERR_UNSUPPORTED_ESM_URL_SCHEME` exception when importing the `data` module on Windows
 - Fixed URL generation for model's page and assets on Windows
 
