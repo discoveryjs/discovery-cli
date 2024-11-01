@@ -35,7 +35,7 @@ const command = clap.command('discovery [config]')
     .option('-p, --port <n>', 'Listening port (default: ' + DEFAULT_PORT + ')',
         value => isNaN(value) ? 0 : Number(value)
     )
-    .action(function({ options, args }) {
+    .action(async function({ options, args }) {
         const configFile = options.config || args[0];
         const port = [
             options.port,
@@ -43,10 +43,12 @@ const command = clap.command('discovery [config]')
             DEFAULT_PORT
         ].filter(value => !isNaN(value))[0];
 
-        createServer({
+        const server = await createServer({
             ...options,
             configFile
-        }).listen(port, function() {
+        });
+
+        server.listen(port, function() {
             console.log();
             console.log(`Server listen on ${chalk.green(`http://localhost:${this.address().port}`)}`);
             console.log();
