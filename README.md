@@ -165,6 +165,7 @@ Model config consists of the following fields (all fields are optional):
 * `name` – name of the model (used in title)
 * `version` – version of the model, can be used in app header when specified
 * `description` – description of the model, can be used in app header when specified
+* `icon` – path to icon image of the model, can be used in app header when specified
 * `meta` – any data (should be serializable to JSON) that will be available in model's `setup.js`
 * `data` – function which returns `any | Promise<any>` or path to a module (CommonJS or ESM) that exports such a function as default. Result of the function is using for a model; must be serializable to JSON (i.e. have no cyclic references for now)
 * `encodings` – path to a module that exposes an array of encoding configurations for transforming payload data on loading into JavaScript values. This option has an effect only if supported by Discovery.js (added in version `1.0.0-beta.83`).
@@ -214,6 +215,7 @@ Multiple models are combine with a single entry point, a config which defines se
 * `name` - name of discovery instance (used in page title)
 * `version` – version for the index page, can be used in app header when specified
 * `description` – description for the index page, can be used in app header when specified
+* `icon` – path to icon image for the index page
 * `models` - object with model configurations, where for each entry the key used as a slug and the value as a config
 * `modelBaseConfig` – the same as model's config, using as a base for a model config, i.e. `{ ...modelBaseConfig, ...modelConfig }` will be used
 * `encodings` – path to a module that exposes an array of encoding configurations for transforming payload data on loading into JavaScript values. This option has an effect only if supported by Discovery.js (added in version `1.0.0-beta.83`).

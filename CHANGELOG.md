@@ -1,6 +1,6 @@
 ## next
 
-- Added support for optional `version` and `description` fields in the config, allowing specification of version and description for the model or index page to display in the app header. These fields are passed as options in `Discovery.js` class constructors
+- Added support for optional `version`, `description` and `icon` fields in the config, allowing to set version, description and icon for the model or index page to display in the app header. These fields are passed as options in `Discovery.js` class constructors
 - View setup:
     - Added inspector, `Index` and `Discovery` buttons to index page by default
     - Updated `view.inspector` and `view.router` config options to have effect for index page, enabled by default
