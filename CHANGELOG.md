@@ -7,6 +7,7 @@
     - Changed the extension application order so that model's `view.extensions` are applied after implicit extensions
 - Fixed `ERR_UNSUPPORTED_ESM_URL_SCHEME` exception when importing the `data` module on Windows
 - Fixed URL generation for model's page and assets on Windows
+- Fixed server crash occurring when a data request is aborted
 
 ## 2.10.0 (15-10-2024)
 
