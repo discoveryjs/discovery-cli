@@ -50,16 +50,15 @@ Options:
         --cache-persistent        Use persistent caches system
         --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when
                                   [dir] is not set)
-        --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
-                                  or disable
-        --entry-names [pattern]   Specify the file names of the output HTML files corresponding to each
-                                  model
         --no-check-cache-ttl      Disable data cache TTL checking before using it
     -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
                                   for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
                                   section in package.json in the listed order
         --cors                    Enable CORS, i.e. allows data fetching for any origin
-        --dev                     Enable developer mode
+        --no-dev                  Disable using Discovery.js "src" assets when available (disables
+                                  discovery-dev condition)
+        --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
+                                  or disable
         --experimental-jsonxl     Enable experimental binary data encoding (codename JSONXL)
     -h, --help                    Output usage information
         --no-minify               Disable JS and CSS minification
@@ -96,8 +95,8 @@ Usage:
 Options:
 
         --no-cache                Disable data caching
-        --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when
-                                  [dir] is not set)
+        --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when [dir]
+                                  is not set)
         --check-cache-ttl         Check data cache TTL before using it, option enforces to use actual
                                   (according to TTL) data only
         --clean                   Clean the output directory before emit a build files
@@ -106,8 +105,12 @@ Options:
                                   section in package.json in the listed order
         --no-data                 Don't include data into a model build
         --no-data-compression     Disable HTML embedded data compression, when --single-file option is used
+        --no-dev                  Disable using Discovery.js "src" assets when available (disables
+                                  discovery-dev condition)
         --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
                                   or disable
+        --entry-names [pattern]   Specify the file names of the output HTML files corresponding to each
+                                  model
         --experimental-jsonxl     Enable experimental binary data encoding (codename JSONXL)
     -h, --help                    Output usage information
         --no-minify               Disable JS and CSS minification
@@ -117,7 +120,7 @@ Options:
         --model-reset-cache       Enable model cache reset feature
     -o, --output <path>           Path for a build result (`build` by default)
         --pretty-data [indent]    Pretty print of model data if any
-        --serve-only-assets       Include server only assets
+        --serve-only-assets       Include server only assets into build
     -s, --single-file             Output a model build as a single HTML file per model
         --sourcemap [mode]        Enable source map generation, optional "mode" can be: linked (default,
                                   when [mode] is omitted), external or inline (see

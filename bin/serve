@@ -18,7 +18,6 @@ const command = clap.command('discovery [config]')
     .option(...commonOptions.minify)
     .option(...commonOptions.embed)
     .option(...commonOptions.experimentalJsonxl)
-    .option('--dev', 'Enable developer mode')
     .option('--prebuild [path]', 'Prebuild model\'s static in path (path is optional, `build` by default)',
         (value = 'build') => value ? path.resolve(process.cwd(), value) : value,
         false
@@ -29,6 +28,7 @@ const command = clap.command('discovery [config]')
     .option('--no-warmup', 'Disable model\'s data cache warm up on server start')
     .option('--no-bg-update', 'Disable background data cache updates')
     .option('--no-check-cache-ttl', 'Disable data cache TTL checking before using it')
+    .option('--no-dev', 'Disable using Discovery.js "src" assets when available (disables discovery-dev condition)')
     .option('--cors', 'Enable CORS, i.e. allows data fetching for any origin')
     .option('--bail', 'Exit immediately on first warmup task failure')
     .option('--cache-persistent', 'Use persistent caches system')

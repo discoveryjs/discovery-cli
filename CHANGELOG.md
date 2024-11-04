@@ -1,6 +1,7 @@
 ## next
 
 - Added support for optional `version`, `description` and `icon` fields in the config, allowing to set version, description and icon for the model or index page to display in the app header. These fields are passed as options in `Discovery.js` class constructors
+- Added `--no-dev` option for build and server to prevent using Discovery.js "src" assets when available (disables `discovery-dev` condition in build)
 - View setup:
     - Added inspector, `Index` and `Discovery` buttons to index page by default
     - Updated `view.inspector` and `view.router` config options to have effect for index page, enabled by default

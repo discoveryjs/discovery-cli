@@ -32,6 +32,7 @@ const command = clap.command('discovery-build [config]')
     .option('--no-model-data-upload', 'Ignore model data upload feature setup in config')
     .option('--model-reset-cache', 'Enable model cache reset feature')
     .option('--serve-only-assets', 'Include server only assets into build')
+    .option('--no-dev', 'Disable using Discovery.js "src" assets when available (disables discovery-dev condition)')
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
 
