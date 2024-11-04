@@ -7,10 +7,10 @@
     opacity: 1; /* disable entry transition for index page */
 }
 
-.view-h1 {
+.page-default > .view-h1.default-header {
     margin-top: 0;
 }
-.view-h1::before {
+.page-default > .view-h1.default-header::before {
     display: inline-block;
     vertical-align: middle;
     position: relative;

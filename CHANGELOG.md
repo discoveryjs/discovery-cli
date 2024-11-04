@@ -1,3 +1,8 @@
+## next
+
+- Fixed bundling
+- Fixed broken header on the index page
+
 ## 2.11.0 (04-11-2024)
 
 - Added support for optional `version`, `description` and `icon` fields in the config, allowing to set version, description and icon for the model or index page to display in the app header. These fields are passed as options in `Discovery.js` class constructors
