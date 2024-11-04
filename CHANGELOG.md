@@ -1,4 +1,4 @@
-## next
+## 2.11.0 (04-11-2024)
 
 - Added support for optional `version`, `description` and `icon` fields in the config, allowing to set version, description and icon for the model or index page to display in the app header. These fields are passed as options in `Discovery.js` class constructors
 - Added `--no-dev` option for build and server to prevent using Discovery.js "src" assets when available (disables `discovery-dev` condition in build)
