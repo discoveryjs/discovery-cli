@@ -1,3 +1,7 @@
+## next
+
+- Supported discoveryjs 1.0.0-beta.91 API updates
+
 ## 2.11.1 (04-11-2024)
 
 - Fixed bundling
