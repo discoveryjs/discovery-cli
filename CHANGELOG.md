@@ -1,6 +1,6 @@
-## next
+## 2.11.2 (24-11-2024)
 
-- Supported discoveryjs 1.0.0-beta.91 API updates
+- Supported discoveryjs [1.0.0-beta.91](https://github.com/discoveryjs/discovery/releases/tag/v1.0.0-beta.91) API updates
 
 ## 2.11.1 (04-11-2024)
 
