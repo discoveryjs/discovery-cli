@@ -1,3 +1,8 @@
+## next
+
+- Replaced `darkmode` option in config for `colorScheme`
+- Supported future changes `darkmode` -> `colorScheme` in discoveryjs
+
 ## 2.11.2 (24-11-2024)
 
 - Supported discoveryjs [1.0.0-beta.91](https://github.com/discoveryjs/discovery/releases/tag/v1.0.0-beta.91) API updates
