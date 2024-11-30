@@ -27,6 +27,7 @@ const command = clap.command('discovery-build [config]')
     .option('-s, --single-file', 'Output a model build as a single HTML file per model')
     .option('--clean', 'Clean the output directory before emit a build files')
     .option('--no-data', 'Don\'t include data into a model build')
+    .option('--exclude-model-on-data-fail', 'Exclude models from the result if their data generation fails, ignoring the failure instead of halting the build (exit code: 1)')
     .option('--pretty-data [indent]', 'Pretty print of model data if any', (value = 4) => Number(value) || false, false)
     .option('--model-download', 'Enable model download feature')
     .option('--no-model-data-upload', 'Ignore model data upload feature setup in config')
@@ -36,13 +37,17 @@ const command = clap.command('discovery-build [config]')
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
 
-        await build({
+        const { suppressedFailures } = await build({
             ...options,
             configFile
         });
 
         if (typeof process.send === 'function') {
-            process.send('OK');
+            process.send({ status: 'OK', suppressedFailures });
+        }
+
+        if (suppressedFailures) {
+            process.exit(1);
         }
     });
 

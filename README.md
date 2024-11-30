@@ -94,40 +94,41 @@ Usage:
 
 Options:
 
-        --no-cache                Disable data caching
-        --cachedir [dir]          Path to store cache files (using .discoveryjs-cache by default when [dir]
-                                  is not set)
-        --check-cache-ttl         Check data cache TTL before using it, option enforces to use actual
-                                  (according to TTL) data only
-        --clean                   Clean the output directory before emit a build files
-    -c, --config <filename>       Path to config (JavaScript or JSON file), if not specified then looking
-                                  for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
-                                  section in package.json in the listed order
-        --no-data                 Don't include data into a model build
-        --no-data-compression     Disable HTML embedded data compression, when --single-file option is used
-        --no-dev                  Disable using Discovery.js "src" assets when available (disables
-                                  discovery-dev condition)
-        --embed [mode]            Specify an embed API: by-config (default), enable (when [mode] omitted)
-                                  or disable
-        --entry-names [pattern]   Specify the file names of the output HTML files corresponding to each
-                                  model
-        --experimental-jsonxl     Enable experimental binary data encoding (codename JSONXL)
-    -h, --help                    Output usage information
-        --no-minify               Disable JS and CSS minification
-    -m, --model <name>            Specify a model (multi-model mode only)
-        --no-model-data-upload    Ignore model data upload feature setup in config
-        --model-download          Enable model download feature
-        --model-reset-cache       Enable model cache reset feature
-    -o, --output <path>           Path for a build result (`build` by default)
-        --pretty-data [indent]    Pretty print of model data if any
-        --serve-only-assets       Include server only assets into build
-    -s, --single-file             Output a model build as a single HTML file per model
-        --sourcemap [mode]        Enable source map generation, optional "mode" can be: linked (default,
-                                  when [mode] is omitted), external or inline (see
-                                  https://esbuild.github.io/api/#sourcemap for detail)
-        --tmpdir <dir>            Path to directory of temporary cache files which are generating before
-                                  committing to cache directory
-    -v, --version                 Output version
+        --no-cache                      Disable data caching
+        --cachedir [dir]                Path to store cache files (using .discoveryjs-cache by default when [dir]
+                                        is not set)
+        --check-cache-ttl               Check data cache TTL before using it, option enforces to use actual
+                                        (according to TTL) data only
+        --clean                         Clean the output directory before emit a build files
+    -c, --config <filename>             Path to config (JavaScript or JSON file), if not specified then looking
+                                        for .discoveryrc.js, .discoveryrc.json, .discoveryrc or "discovery"
+                                        section in package.json in the listed order
+        --no-data                       Don't include data into a model build
+        --no-data-compression           Disable HTML embedded data compression, when --single-file option is used
+        --no-dev                        Disable using Discovery.js "src" assets when available (disables
+                                        discovery-dev condition)
+        --embed [mode]                  Specify an embed API: by-config (default), enable (when [mode] omitted)
+                                        or disable
+        --entry-names [pattern]         Specify the file names of the output HTML files corresponding to each model
+        --exclude-model-on-data-fail    Exclude models from the result if their data generation fails, ignoring
+                                        the failure instead of halting the build (exit code: 1)
+        --experimental-jsonxl           Enable experimental binary data encoding (codename JSONXL)
+    -h, --help                          Output usage information
+        --no-minify                     Disable JS and CSS minification
+    -m, --model <name>                  Specify a model (multi-model mode only)
+        --no-model-data-upload          Ignore model data upload feature setup in config
+        --model-download                Enable model download feature
+        --model-reset-cache             Enable model cache reset feature
+    -o, --output <path>                 Path for a build result (`build` by default)
+        --pretty-data [indent]          Pretty print of model data if any
+        --serve-only-assets             Include server only assets into build
+    -s, --single-file                   Output a model build as a single HTML file per model
+        --sourcemap [mode]              Enable source map generation, optional "mode" can be: linked (default,
+                                        when [mode] is omitted), external or inline
+                                        (see https://esbuild.github.io/api/#sourcemap for detail)
+        --tmpdir <dir>                  Path to directory of temporary cache files which are generating before
+                                        committing to cache directory
+    -v, --version                       Output version
 ```
 
 ## Modes

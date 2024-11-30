@@ -3,7 +3,7 @@
 const clap = require('clap');
 const fs = require('fs');
 const commonOptions = require('../lib/cli');
-const buildStatic = require('../lib/archive');
+const buildArchive = require('../lib/archive');
 
 // define command
 const command = clap.command('discovery-archive [config]')
@@ -20,7 +20,7 @@ const command = clap.command('discovery-archive [config]')
     .option(...commonOptions.experimentalJsonxl)
     .action(async function({ options, args }) {
         const configFile = options.config || args[0];
-        const { filename, stream } = await buildStatic({
+        const { filename, stream } = await buildArchive({
             ...options,
             configFile
         });

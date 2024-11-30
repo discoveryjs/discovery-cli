@@ -1,5 +1,6 @@
 ## next
 
+- Added `--exclude-model-on-data-fail` option for build to exclude models from the result if their data generation fails, ignoring the failure instead of halting the build
 - Replaced `darkmode` option in config for `colorScheme`
 - Supported future changes `darkmode` -> `colorScheme` in discoveryjs
 
