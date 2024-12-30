@@ -1,4 +1,4 @@
-## next
+## 2.12.1 (29-12-2024)
 
 - Improved server performance for data responses when streaming from the `data` child process (up to a 2x speed increase)
 
