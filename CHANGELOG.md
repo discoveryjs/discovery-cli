@@ -1,3 +1,7 @@
+## next
+
+- Improved server performance for data responses when streaming from the `data` child process (up to a 2x speed increase)
+
 ## 2.12.0 (30-11-2024)
 
 - Added `--exclude-model-on-data-fail` option for build to exclude models from the result if their data generation fails, ignoring the failure instead of halting the build
