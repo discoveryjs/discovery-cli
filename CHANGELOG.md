@@ -2,6 +2,7 @@
 
 - Fixed build when a model has no cached data and no `--single-file` option is used (the regression was added in `2.12.1`)
 - Improved `runScript()` to output an error if the child process exits with a non-zero code or if `stderr` is not flushed after the result promise is resolved. This ensures error messages are not missed in cases where the child process crashes during model builds
+- Renamed the exposed model's data to `model.data` instead of `data.json`, reflecting that the data can be encoded in formats other than JSON
 
 ## 2.12.1 (29-12-2024)
 
