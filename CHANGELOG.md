@@ -1,4 +1,4 @@
-## next
+## 2.13.0 (18-01-2025)
 
 - Added `--asset-names` option for build command
 - Added `--single-file-data` option for build command
