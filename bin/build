@@ -27,6 +27,15 @@ const command = clap.command('discovery-build [config]')
     .option('--entry-names [pattern]', 'Specify a pattern for file names of the output HTML files corresponding to each model')
     .option('--asset-names [pattern]', 'Specify a pattern for file names of the asset files corresponding to each model')
     .option('-s, --single-file', 'Output a model build as a single HTML file per model')
+    .option('--single-file-data [side]', 'Used to specify where to locate data: external (default), inline (default when --single-file is used), both',
+        (value) => {
+            if (!dataSizeValues.includes(value)) {
+                throw new clap.Error('Bad value "' + value + '" for --single-file-data option. Allowed values: ' + dataSizeValues.join(', '));
+            }
+
+            return value;
+        }
+    )
     .option('--clean', 'Clean the output directory before emit a build files')
     .option('--no-data', 'Don\'t include data into a model build')
     .option('--exclude-model-on-data-fail', 'Exclude models from the result if their data generation fails, ignoring the failure instead of halting the build (exit code: 1)')

@@ -94,6 +94,8 @@ Usage:
 
 Options:
 
+        --asset-names [pattern]         Specify a pattern for file names of the asset files corresponding to each
+                                        model
         --no-cache                      Disable data caching
         --cachedir [dir]                Path to store cache files (using .discoveryjs-cache by default when [dir]
                                         is not set)
@@ -109,7 +111,8 @@ Options:
                                         discovery-dev condition)
         --embed [mode]                  Specify an embed API: by-config (default), enable (when [mode] omitted)
                                         or disable
-        --entry-names [pattern]         Specify the file names of the output HTML files corresponding to each model
+        --entry-names [pattern]         Specify a pattern for file names of the output HTML files corresponding to
+                                        each model
         --exclude-model-on-data-fail    Exclude models from the result if their data generation fails, ignoring
                                         the failure instead of halting the build (exit code: 1)
         --experimental-jsonxl           Enable experimental binary data encoding (codename JSONXL)
@@ -123,6 +126,8 @@ Options:
         --pretty-data [indent]          Pretty print of model data if any
         --serve-only-assets             Include server only assets into build
     -s, --single-file                   Output a model build as a single HTML file per model
+        --single-file-data [side]       Used to specify where to locate data: external (default), inline (default
+                                        when --single-file is used), both
         --sourcemap [mode]              Enable source map generation, optional "mode" can be: linked (default,
                                         when [mode] is omitted), external or inline
                                         (see https://esbuild.github.io/api/#sourcemap for detail)
