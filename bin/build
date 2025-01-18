@@ -4,6 +4,7 @@ const clap = require('clap');
 const path = require('path');
 const commonOptions = require('../lib/cli');
 const build = require('../lib/build');
+const dataSizeValues = ['external', 'inline', 'both'];
 
 // define command
 const command = clap.command('discovery-build [config]')
@@ -23,7 +24,8 @@ const command = clap.command('discovery-build [config]')
         (value = '') => path.resolve(process.cwd(), value),
         'build'
     )
-    .option('--entry-names [pattern]', 'Specify the file names of the output HTML files corresponding to each model', '[slug]/index')
+    .option('--entry-names [pattern]', 'Specify a pattern for file names of the output HTML files corresponding to each model')
+    .option('--asset-names [pattern]', 'Specify a pattern for file names of the asset files corresponding to each model')
     .option('-s, --single-file', 'Output a model build as a single HTML file per model')
     .option('--clean', 'Clean the output directory before emit a build files')
     .option('--no-data', 'Don\'t include data into a model build')
