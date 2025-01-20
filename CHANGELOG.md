@@ -1,3 +1,7 @@
+## next
+
+- Fixed crash on build when model's data is used from a cache file (a regression introduced in 2.13.0)
+
 ## 2.13.0 (18-01-2025)
 
 - Added `--asset-names` option for build command
