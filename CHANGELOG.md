@@ -1,4 +1,4 @@
-## next
+## 2.13.1 (20-01-2025)
 
 - Fixed crash on build when model's data is used from a cache file (a regression introduced in 2.13.0)
 
