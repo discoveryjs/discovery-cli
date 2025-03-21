@@ -24,8 +24,9 @@ const command = clap.command('discovery-build [config]')
         (value = '') => path.resolve(process.cwd(), value),
         'build'
     )
-    .option('--entry-names [pattern]', 'Specify a pattern for file names of the output HTML files corresponding to each model')
-    .option('--asset-names [pattern]', 'Specify a pattern for file names of the asset files corresponding to each model')
+    .option('--entry-names [pattern]', 'Pattern for file names of the output HTML files corresponding to each model')
+    .option('--asset-names [pattern]', 'Pattern for file names of the asset files corresponding to each model')
+    .option('--script-names [pattern]', 'Pattern for file names of the script files corresponding to each model')
     .option('-s, --single-file', 'Output a model build as a single HTML file per model')
     .option('--single-file-data [side]', 'Used to specify where to locate data: external (default), inline (default when --single-file is used), both',
         (value) => {
