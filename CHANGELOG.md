@@ -1,3 +1,18 @@
+## 2.14.0 (21-03-2025)
+
+- Added basic script mode build for models:
+    - Added support for `script` section in config, which enables model's script build
+      ```js
+      modelConfig = {
+        script: {
+          // script.modules is the same as view.assets
+          modules: ['path/to/module.js', ...]
+        }
+      }
+      ```
+    - Added new options for build: `--script-names`, `--script-format` and `--script-format`
+- Bumped `esbuild` to `^0.25.1`
+
 ## 2.13.1 (20-01-2025)
 
 - Fixed crash on build when model's data is used from a cache file (a regression introduced in 2.13.0)
