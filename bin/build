@@ -40,6 +40,8 @@ const command = clap.command('discovery-build [config]')
     .option('--script-names [pattern]', 'Pattern for file names of the script files corresponding to each model')
     .option('--script-format [format]', 'Output format for the script files: esm (default), cjs or both',
         enumValues(scriptFormatValues, '--script-format'), 'esm')
+    .option('--script-external [pattern]', 'Mark a file or a package as external to exclude it from script bundle (see https://esbuild.github.io/api/#external). Use "all" value (without quotes, a shorthand for "./node_modules/*") to disable all the npm packages from the bundle',
+        (value, prevValue) => [].concat(prevValue || [], value || []), [])
     .option('-s, --single-file', 'Output a model build as a single HTML file per model')
     .option('--single-file-data [side]', 'Used to specify where to locate data: external (default), inline (default when --single-file is used), both',
         enumValues(dataSizeValues, '--single-file-data'))
