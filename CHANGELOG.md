@@ -1,3 +1,7 @@
+## next
+
+- Fixed issue with loading `parse-duration` package, since it has no CJS support. The package was removed from dependencies.
+
 ## 2.14.1 (15-04-2025)
 
 - Bumped dependencies (fixes npm audit warnings)
