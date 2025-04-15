@@ -40,7 +40,7 @@
     "esbuild": "^0.25.1",
     "express": "^4.21.1",
     "mime": "^3.0.0",
-    "parse-duration": "^1.1.0",
+    "parse-duration": "^2.1.4",
     "pretty-ms": "^7.0.0"
   },
   "devDependencies": {

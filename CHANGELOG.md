@@ -1,3 +1,7 @@
+## next
+
+- Bumped dependencies (fixes npm audit warnings)
+
 ## 2.14.0 (21-03-2025)
 
 - Added basic script mode build for models:
