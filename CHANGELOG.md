@@ -1,4 +1,4 @@
-## next
+## 2.14.1 (15-04-2025)
 
 - Bumped dependencies (fixes npm audit warnings)
 
