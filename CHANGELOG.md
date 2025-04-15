@@ -1,4 +1,4 @@
-## next
+## 2.14.2 (15-04-2025)
 
 - Fixed issue with loading `parse-duration` package, since it has no CJS support. The package was removed from dependencies.
 
