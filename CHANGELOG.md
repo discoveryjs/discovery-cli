@@ -1,4 +1,4 @@
-## next
+## 2.14.3 (02-08-2025)
 
 - Fixed height for main container (`.discovery`) on mobile devices by using `dvh` unit instead of `vh`
 
