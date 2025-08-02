@@ -1,3 +1,7 @@
+## next
+
+- Fixed height for main container (`.discovery`) on mobile devices by using `dvh` unit instead of `vh`
+
 ## 2.14.2 (15-04-2025)
 
 - Fixed issue with loading `parse-duration` package, since it has no CJS support. The package was removed from dependencies.
