@@ -1,3 +1,9 @@
+## next
+
+- Updated JSONXL (`--experimental-jsonxl` option):
+    - Fixed an edge case for signed numbers in the range ±[MAX_SAFE_INTEGER/2 … MAX_SAFE_INTEGER].
+    - Removed the limitation that could trigger when the total encoded string length exceeded the maximum string length (~500 MB in V8)
+
 ## 2.14.3 (02-08-2025)
 
 - Fixed height for main container (`.discovery`) on mobile devices by using `dvh` unit instead of `vh`

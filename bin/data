@@ -36,7 +36,7 @@ function parcelFromPayload(payload, options) {
 
     if (options.experimentalJsonxl) {
         // TODO: encode with jsonxl stream & buffer when needed
-        const jsonxlEncoded = encodeJsonxl(payload);
+        const jsonxlEncoded = Buffer.from(encodeJsonxl(payload));
 
         return {
             stream: Readable.from(jsonxlEncoded),
