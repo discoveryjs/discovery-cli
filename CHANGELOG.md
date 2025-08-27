@@ -1,4 +1,4 @@
-## next
+## 2.14.5 (27-08-2025)
 
 - Fixed multi-model build on Windows
 
