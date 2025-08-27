@@ -1,3 +1,7 @@
+## next
+
+- Fixed multi-model build on Windows
+
 ## 2.14.4 (19-08-2025)
 
 - Updated JSONXL (`--experimental-jsonxl` option):
