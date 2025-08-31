@@ -1,4 +1,4 @@
-## next
+## 2.14.6 (31-08-2025)
 
 - Fixed JSONXL encoding of data in `cache` command
 
