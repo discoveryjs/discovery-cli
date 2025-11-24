@@ -1,4 +1,4 @@
-## next
+## 2.14.7 (24-11-2025)
 
 - Fixed embedding of data into HTML
 - Fixed rare crashing on loading of embedded into HTML data when compression is enabled
