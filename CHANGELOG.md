@@ -1,3 +1,9 @@
+## next
+
+- Fixed embedding of data into HTML
+- Fixed rare crashing on loading of embedded into HTML data when compression is enabled
+- Fixed handling of data embedding into HTML on build, previously build silently failed
+
 ## 2.14.6 (31-08-2025)
 
 - Fixed JSONXL encoding of data in `cache` command
