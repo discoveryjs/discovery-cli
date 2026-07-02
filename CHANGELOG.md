@@ -1,8 +1,12 @@
+## next
+
+- Bumped `esbuild` to `^0.28.1`
+
 ## 2.14.7 (24-11-2025)
 
-- Fixed embedding of data into HTML
-- Fixed rare crashing on loading of embedded into HTML data when compression is enabled
-- Fixed handling of data embedding into HTML on build, previously build silently failed
+- Fixed data embedding into HTML during build
+- Fixed a rare crash when loading HTML-embedded data with compression enabled
+- Fixed exception handling during data embedding into HTML on build — previously, build failures were silent
 
 ## 2.14.6 (31-08-2025)
 
