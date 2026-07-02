@@ -1,5 +1,6 @@
 ## next
 
+- Added experimental support for bundled source code imports via `with`, e.g. `import code from './path/to/module.js' with { type: 'text', bundle: 'esm' }`, which allows importing source code as text to use for Web Workers.
 - Bumped `esbuild` to `^0.28.1`
 - Changed Node.js support for `>=18.0.0`
 
