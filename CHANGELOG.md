@@ -1,6 +1,7 @@
 ## next
 
 - Bumped `esbuild` to `^0.28.1`
+- Changed Node.js support for `>=18.0.0`
 
 ## 2.14.7 (24-11-2025)
 
