@@ -1,4 +1,4 @@
-## next
+## 2.15.0 (09-07-2026)
 
 - Added experimental support for bundled source code imports via `with`, e.g. `import code from './path/to/module.js' with { type: 'text', bundle: 'esm' }`, which allows importing source code as text to use for Web Workers.
 - Bumped `esbuild` to `^0.28.1`
